@@ -44,6 +44,7 @@ public class Blast3 extends ActionSupport{
 	     if (path.indexOf("WEB-INF") > 0)
 	     {
 	        path = path.substring(0,path.indexOf("WEB-INF/classes"));
+	        path = path.replaceAll("%20", " ");
 	     }
 	     return path;
 	}
@@ -197,7 +198,7 @@ public class Blast3 extends ActionSupport{
 	}
 
 
-	LocalDateTime localdatetime=LocalDateTime.now();//ÐÂ½¨Ò»¸öLocalDateTime¶ÔÏó»ñÈ¡Ê±¼ä
+	LocalDateTime localdatetime=LocalDateTime.now();//ï¿½Â½ï¿½Ò»ï¿½ï¿½LocalDateTimeï¿½ï¿½ï¿½ï¿½ï¿½È¡Ê±ï¿½ï¿½
 	DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
 	String localTime = df.format(localdatetime);
 	String name = localTime;
@@ -205,7 +206,7 @@ public class Blast3 extends ActionSupport{
 		try{
 
 			 String filePath=getWebRoot();
-			 String textpath=filePath+"file/primerexample.input";//parameter.inputÂ·¾¶
+			 String textpath=filePath+"file/primerexample.input";//parameter.inputÂ·ï¿½ï¿½
 			 textpath=textpath.substring(1);
 			 textpath=textpath.replaceAll("\\/","\\\\");
 			 System.out.println(textpath);
@@ -252,22 +253,22 @@ public class Blast3 extends ActionSupport{
 				 b=("PRIMER_DEFAULT_PRODUCT="+defaultproduct+"\r\n=").getBytes();
 				 out.write(b);
 				 out.close();
-				 //System.out.println("Ð´ÈëÎÄ¼þÄÚÈÝ³É¹¦");
+				 //System.out.println("Ð´ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ý³É¹ï¿½");
 			 }
 
 		}catch (Exception e) {
-			System.out.println("Ð´ÈëÎÄ¼þÄÚÈÝ³ö´í");
+			System.out.println("Ð´ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½");
 			e.printStackTrace();
 		}
 		finally{}
 		try {
-			 // ¶ÁÈ¡ÅäÖÃÎÄ¼þpro.properties
+			 // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½pro.properties
 		    p.load(Test.class.getClassLoader().getResourceAsStream("pro.properties"));
-		    // »ñÈ¡ÅäÖÃÎÄ¼þÖÐµÄÏà¹ØÄÚÈÝ
+		    // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		    String primer3_core_path = p.getProperty("path_primer3_core");
 			Runtime rt1 = Runtime.getRuntime();
 			 String filePath=getWebRoot();
-			 filePath=filePath+"file/primerexample.input";//parameter.inputÂ·¾¶
+			 filePath=filePath+"file/primerexample.input";//parameter.inputÂ·ï¿½ï¿½
 			 filePath = filePath.substring(1,filePath.length());
 			 filePath = filePath.replaceAll("\\/","\\\\");
            Runtime rt3 = Runtime.getRuntime();
@@ -297,7 +298,7 @@ public class Blast3 extends ActionSupport{
 
 		try {
 		    p.load(Test.class.getClassLoader().getResourceAsStream("pro.properties"));
-		    // »ñÈ¡ÅäÖÃÎÄ¼þÖÐµÄÏà¹ØÄÚÈÝ
+		    // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		    String primerexample_path = p.getProperty("path_primerexample");
 			String filePath=getWebRoot();
             filePath = filePath+"file/";
@@ -319,7 +320,7 @@ public class Blast3 extends ActionSupport{
 		finally{}
 		try {
 		    p.load(Test.class.getClassLoader().getResourceAsStream("pro.properties"));
-		    // »ñÈ¡ÅäÖÃÎÄ¼þÖÐµÄÏà¹ØÄÚÈÝ
+		    // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		    String primerexample_path = p.getProperty("path_primerexample");
 			String filePath=getWebRoot();
             filePath = filePath+"file/";
@@ -340,7 +341,7 @@ public class Blast3 extends ActionSupport{
 		finally{}
 		try {
 		    p.load(Test.class.getClassLoader().getResourceAsStream("pro.properties"));
-		    // »ñÈ¡ÅäÖÃÎÄ¼þÖÐµÄÏà¹ØÄÚÈÝ
+		    // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		    String primerexample_path = p.getProperty("path_primerexample");
             Runtime rt1 = Runtime.getRuntime();
             String filePath=getWebRoot();
@@ -362,13 +363,13 @@ public class Blast3 extends ActionSupport{
 		try {
             String encoding="GBK";
             String filePath=getWebRoot();
-            filePath = filePath+"file/"+name+".for";//for¼þÂ·¾¶
+            filePath = filePath+"file/"+name+".for";//forï¿½ï¿½Â·ï¿½ï¿½
             filePath = filePath.substring(1,filePath.length());
             System.out.println(filePath);
             File file=new File(filePath);
-            	if(file.isFile() && file.exists()){ //ÅÐ¶ÏÎÄ¼þÊÇ·ñ´æÔÚ
+            	if(file.isFile() && file.exists()){ //ï¿½Ð¶ï¿½ï¿½Ä¼ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
             		InputStreamReader read = new InputStreamReader(
-            		new FileInputStream(file),encoding);//¿¼ÂÇµ½±àÂë¸ñÊ½
+            		new FileInputStream(file),encoding);//ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
             		BufferedReader bufferedReader = new BufferedReader(read);
             		String lineTxt = null;
             		int sum=0;
@@ -408,10 +409,10 @@ public class Blast3 extends ActionSupport{
 
             		read.close();
             	}else{
-            		System.out.println("ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼þ");
+            		System.out.println("ï¿½Ò²ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½");
             	}
 			} catch (Exception e) {
-				System.out.println("¶ÁÈ¡ÎÄ¼þÄÚÈÝ³ö´í");
+				System.out.println("ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½");
 				e.printStackTrace();
 			}
 		finally{}
@@ -419,12 +420,12 @@ public class Blast3 extends ActionSupport{
             String encoding="GBK";
 
             String filePath=getWebRoot();
-            filePath = filePath+"file/"+name+".int";//intÎÄ¼þÂ·¾¶
+            filePath = filePath+"file/"+name+".int";//intï¿½Ä¼ï¿½Â·ï¿½ï¿½
             filePath = filePath.substring(1,filePath.length());
             File file=new File(filePath);
-            	if(file.isFile() && file.exists()){ //ÅÐ¶ÏÎÄ¼þÊÇ·ñ´æÔÚ
+            	if(file.isFile() && file.exists()){ //ï¿½Ð¶ï¿½ï¿½Ä¼ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
             		InputStreamReader read = new InputStreamReader(
-            		new FileInputStream(file),encoding);//¿¼ÂÇµ½±àÂë¸ñÊ½
+            		new FileInputStream(file),encoding);//ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
             		BufferedReader bufferedReader = new BufferedReader(read);
             		String lineTxt = null;
             		int sum=0;
@@ -464,10 +465,10 @@ public class Blast3 extends ActionSupport{
 
             		read.close();
             	}else{
-            		System.out.println("ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼þ");
+            		System.out.println("ï¿½Ò²ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½");
             	}
 			} catch (Exception e) {
-				System.out.println("¶ÁÈ¡ÎÄ¼þÄÚÈÝ³ö´í");
+				System.out.println("ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½");
 				e.printStackTrace();
 			}
 		finally{}
@@ -475,12 +476,12 @@ public class Blast3 extends ActionSupport{
             String encoding="GBK";
 
             String filePath=getWebRoot();
-            filePath = filePath+"file/"+name+".rev";//revÎÄ¼þÂ·¾¶
+            filePath = filePath+"file/"+name+".rev";//revï¿½Ä¼ï¿½Â·ï¿½ï¿½
             filePath = filePath.substring(1,filePath.length());
             File file=new File(filePath);
-            	if(file.isFile() && file.exists()){ //ÅÐ¶ÏÎÄ¼þÊÇ·ñ´æÔÚ
+            	if(file.isFile() && file.exists()){ //ï¿½Ð¶ï¿½ï¿½Ä¼ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
             		InputStreamReader read = new InputStreamReader(
-            		new FileInputStream(file),encoding);//¿¼ÂÇµ½±àÂë¸ñÊ½
+            		new FileInputStream(file),encoding);//ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
             		BufferedReader bufferedReader = new BufferedReader(read);
             		String lineTxt = null;
             		int sum=0;
@@ -517,10 +518,10 @@ public class Blast3 extends ActionSupport{
                 }
             		read.close();
             	}else{
-            		System.out.println("ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼þ");
+            		System.out.println("ï¿½Ò²ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½");
             	}
 			} catch (Exception e) {
-				System.out.println("¶ÁÈ¡ÎÄ¼þÄÚÈÝ³ö´í");
+				System.out.println("ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½");
 				e.printStackTrace();
 			}
 		finally{}

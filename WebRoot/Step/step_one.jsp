@@ -197,7 +197,7 @@ table, table tr th, table tr td {
 		});
 		*/
 		jQuery.fn.bootstrapTable.defaults.data = data;
-	
+	//bootstrapTable的相关内容
 		function check() {
 			var myData = $('#table-methods-table').bootstrapTable('getAllSelections');
 			//alert(JSON.stringify(myData));

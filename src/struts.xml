@@ -15,6 +15,11 @@
 		<action name="picture" class="com.draw.findDataInMagic">
 		   <result name = "success">/Draw/result.jsp</result>
 		</action>
+		<action name="findMaterial1" class="com.draw.findMaterial1">
+		</action>
+		<action name="picture1" class="com.draw.findDataInMagic1">
+		   <result name = "success">/Draw/result.jsp</result>
+		</action>
 	<!-- Blastn -->
 		<action name="blast" class="blast.Blast">
 		   <result name = "success">/Blast/blastresult.jsp</result>

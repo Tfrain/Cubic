@@ -19,7 +19,7 @@ import com.mysql.jdbc.ResultSetMetaData;
 
 public class Dbase {
 	private String user = "root";
-	private String password = "";
+	private String password = "654321";
 	private String url = "jdbc:mysql://localhost:3306/magic";
 	private String driver = "com.mysql.jdbc.Driver";
 
@@ -38,7 +38,7 @@ public class Dbase {
 			System.out.println(e1.toString());
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
-			System.out.println("ÃÜÂë´íÎó!");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 			System.out.println(e2.toString());
 		}
 	}
@@ -48,7 +48,7 @@ public class Dbase {
 		Map<String,Object> map = new HashMap<String,Object> ();
 		Map<String,ArrayList<String>> map1 = new HashMap<String,ArrayList<String>> ();
 		try {
-			rs = stmt.executeQuery(sql);
+			rs = stmt.executeQuery(sql);//ç”¨äºŽæ‰§è¡ŒSELECTæŸ¥è¯¢ã€‚å®ƒè¿”å›žResultSetçš„å¯¹è±¡ã€‚
 		    int i = 1;
 			while(rs.next()){
 			    int j = 1;
@@ -166,7 +166,7 @@ public class Dbase {
 			float end;
 			ResultSetMetaData metaData = (ResultSetMetaData) rs.getMetaData();
 			int columnCount = metaData.getColumnCount();
-			// ±éÀúResultSetÖÐµÄÃ¿ÌõÊý¾Ý
+			// ï¿½ï¿½ï¿½ï¿½ResultSetï¿½Ðµï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			while(rs.next())
 			{
 				start=Float.MAX_VALUE;
@@ -177,7 +177,7 @@ public class Dbase {
 
 				JSONObject jsonresult1=new JSONObject();
 				JSONObject jsonobj=new JSONObject();
-				//»ñÈ¡µÚÒ»¸öchr
+				//ï¿½ï¿½È¡ï¿½ï¿½Ò»ï¿½ï¿½chr
 				for (int i = 1; i <= columnCount; i++) {
 		            String columnName =metaData.getColumnLabel(i);
 		            String value = rs.getString(columnName);
@@ -189,7 +189,7 @@ public class Dbase {
 				start=Float.parseFloat(jsonobj.getString("start"));
 				end=Float.parseFloat(jsonobj.getString("end"));
 
-				//»ñÈ¡µÚ¶þ²ã
+				//ï¿½ï¿½È¡ï¿½Ú¶ï¿½ï¿½ï¿½
 				JSONArray children2 = new JSONArray();
 				JSONArray children1 = new JSONArray();
 
@@ -213,7 +213,7 @@ public class Dbase {
 					}
 					float start2=Float.parseFloat(jsonobj2.getString("start"));
 					float end2=Float.parseFloat(jsonobj2.getString("end"));
-					//µÚÈý²ã
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 					if((start2<=end)&&(end2>start)&&sum!=1)
 					{
@@ -227,7 +227,7 @@ public class Dbase {
 				        jsonresult3.put("color",color1);
 				        jsonresult3.put("value",jsonobj2.getString("pve"));
 				        jsonresult3.put("filter",jsonobj2.getString("Trait"));
-				        jsonresult3.put("name","µÚ"+genenum+"¸ö»ùÒò");
+				        jsonresult3.put("name","ï¿½ï¿½"+genenum+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 				        if(jsonresult3.containsKey("Chr")){
 				        	children2.add(jsonresult3);
 				        }
@@ -247,7 +247,7 @@ public class Dbase {
 				        jsonresult2.put("color", color1);
 				        jsonresult2.put("value", jsonobj2.getString("pve"));
 				        jsonresult2.put("height", x);
-						jsonresult2.put("name", "µÚ"+text+"¶Î");
+						jsonresult2.put("name", "ï¿½ï¿½"+text+"ï¿½ï¿½");
 						if(sum!=1)
 						{
 							x=numberwei(Math.abs(start2-end),jsonobj2.getString("Chr"));
@@ -256,14 +256,14 @@ public class Dbase {
 							jsonspace.put("color", "gray");
 							jsonspace.put("value", "null");
 							jsonspace.put("height", x);
-							jsonspace.put("name", "¿Õ°×");
+							jsonspace.put("name", "ï¿½Õ°ï¿½");
 							JSONObject jsonresult3=new JSONObject();
 							jsonresult3.put("Chr", jsonobj2.getString("Chr"));
 					        jsonresult3.put("type",jsonobj2.getString("method"));
 					        jsonresult3.put("color","gray");
 					        jsonresult3.put("value","null");
 					        jsonresult3.put("filter","space");
-					        jsonresult3.put("name","¿Õ°×");
+					        jsonresult3.put("name","ï¿½Õ°ï¿½");
 					        JSONArray childrenspace=new JSONArray();
 							childrenspace.add(jsonresult3);
 
@@ -283,7 +283,7 @@ public class Dbase {
 				        jsonresult3.put("end",jsonobj2.getString("end"));
 				        jsonresult3.put("value",jsonobj2.getString("pve"));
 				        jsonresult3.put("filter",jsonobj2.getString("Trait"));
-				        jsonresult3.put("name","µÚ"+genenum+"¸ö»ùÒò");
+				        jsonresult3.put("name","ï¿½ï¿½"+genenum+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 				        children2.add(jsonresult3);
 						text++;
 						genenum=1;

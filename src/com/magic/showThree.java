@@ -64,7 +64,7 @@ public class showThree extends ActionSupport{
 		System.out.println(gene);
 		System.out.println(search);
 		Map<String,Object> attributes = ActionContext.getContext().getSession();
-		attributes.put("trait", trait);
+		attributes.put("trait", trait);//trait是一组数据CW,ED,DTS,DTT,ED，，，
 		System.out.println(attributes.get("trait"));
 		String[] traitArray = trait.split(",");
 
@@ -95,7 +95,7 @@ public class showThree extends ActionSupport{
 				traits = traits + "trait = '" + traitArray[i] + "' or ";
 			}
 		}
-        // FIXME: sql is not correct, write the sql again
+
 		if(search.equals("first")){
 			//sql = "select Trait,Marker,Locus,Site,p,markerR2,snp,allele,gene,transcript,annotation from sig_snp_annotation,magic_all_sig_snp where magic_all_sig_snp.Marker=sig_snp_annotation.snp AND Locus='" +chr+ "'AND  Site BETWEEN "+start+" AND "+end+" AND (";
             sql = "select Trait,magic_all_sig_snp.snp,Chr,Pos,p,magic_all_sig_snp.snp,allele,gene,transcript,annotation from sig_snp_annotation,magic_all_sig_snp where magic_all_sig_snp.snp=sig_snp_annotation.snp AND Chr='" +chr+ "'AND  Pos BETWEEN "+start+" AND "+end+" AND (";
@@ -103,7 +103,7 @@ public class showThree extends ActionSupport{
 			for(int i=0;i<traitlen;i++){
 				String sql1 = "";
 				if(i==traitlen-1){
-					sql1 = "trait = '"+traitArray[i];
+					sql1 = "trait = '"+traitArray[i];//trait = 'ED'这种类型
 				}else{
 					sql1 = "trait = '"+traitArray[i]+"' or ";
 				}
@@ -118,7 +118,7 @@ public class showThree extends ActionSupport{
 		}else{
 			sql = "select trait , chr , pos , p , sig_snp_annotation.* from sig_snp_annotation,magic_all_sig_snp where gene='"+gene+"' AND magic_all_sig_snp.snp=sig_snp_annotation.snp";
 			sql2 ="SELECT * FROM gwas where (`start`<(SELECT `start` FROM zmb73_annotation_combined WHERE id='"+gene+"') AND `end`>(SELECT `start` FROM zmb73_annotation_combined WHERE id='"+gene+"'))OR (`start`<(SELECT `end` FROM zmb73_annotation_combined WHERE id='"+gene+"') AND `end`>(SELECT `end` FROM zmb73_annotation_combined WHERE id='"+gene+"'))";
-			System.out.println(sql2);
+			System.out.println(sql2);//基因则直接根据名称，更容易写sql
 			startEndMap = d.getStartEnd(gene);
 			start = startEndMap.get("start");
 			end = startEndMap.get("end");
@@ -144,10 +144,10 @@ public class showThree extends ActionSupport{
 			e.printStackTrace();
 		}
 
-		map2 = (HashMap<String,Object>)d2.getChr(sql2);
+		map2 = (HashMap<String,Object>)d2.getChr(sql2);//调用定义的函数，return的是map，里面就包含键值对
 		map = (HashMap<String,Object>)d.getChr(sql);
 
-		attributes.put("len", map.get("len"));
+		attributes.put("len", map.get("len"));//键值匹配上，len和data在Dbase函数中
 		attributes.put("data", map.get("data"));
 		attributes.put("len2", map2.get("len"));
 		attributes.put("data2", map2.get("data"));

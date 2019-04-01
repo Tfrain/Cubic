@@ -13,19 +13,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	int sta;
     	int end;
     	Map<String,Object> attributes=ActionContext.getContext().getSession();
-    	String [] theName = (String[])attributes.get("names");
-    	String [] theChr = (String[])attributes.get("chrs");
-    	String chrx=theChr[0];
+    	String [] theName = (String[])attributes.get("names");//获取填的第二列
+    	String [] theChr = (String[])attributes.get("chrs");//获取第三列
+    	String chrx=theChr[0];//每一个键的值都是二维数组
     	String nax = theName[0];
     	ArrayList<ArrayList<Integer>> myx;
-    	if(theChr.length==1){
-    	myx = (ArrayList<ArrayList<Integer>>)attributes.get(nax);
+    	if(theChr.length==1){//只有一个时
+    	myx = (ArrayList<ArrayList<Integer>>)attributes.get(nax);//myx就是M开头的那个东西
     	}else{
     	myx = (ArrayList<ArrayList<Integer>>)attributes.get(chrx);}
-    	ArrayList<Integer> parent_allx = (ArrayList<Integer>)myx.get(0);
+    	ArrayList<Integer> parent_allx = (ArrayList<Integer>)myx.get(0);//第一个数组
     	
-    	double sta1=(Double)attributes.get("sta1");
+    	System.out.println(parent_allx);
+    	
+    	double sta1=(Double)attributes.get("sta1");//findData里面已经填进去了1
     	double end1=(Double)attributes.get("end1");
+    	//二维len 存储多组数据
     	ArrayList<ArrayList<Double>> len=new ArrayList<ArrayList<Double>>();
     	String na;
     	String chr;
@@ -37,38 +40,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	    %><script>
  	    	var se=new Array();
  	    <%
+ 	    //获取<String,ArrayList<String>一组键值对
  	    HashMap<String,ArrayList<String>> table_data = (HashMap<String,ArrayList<String>>)attributes.get("table");
  	    if(theChr.length==1){
 	 	    for(int i=0;i<theName.length;i++){
+	 	    //把一堆M开头的收拾好，此时显示的是一堆M 的东西，反之，则是一堆Chr的东西
 	    			na=theName[i];
 	    			%>se[<%=i%>]=new Array();<%
+	    			//my是na，na[i]里面parent,sta,end，是数据库里面的对应三个数组
 	    			ArrayList<ArrayList<Integer>> my = (ArrayList<ArrayList<Integer>>)attributes.get(na);
 	    			ArrayList<Integer> parent_all = (ArrayList<Integer>)my.get(0);
 	    			ArrayList<Integer> sta_all=(ArrayList<Integer>)my.get(1);
 	    			ArrayList<Integer> end_all=(ArrayList<Integer>)my.get(2);
 					ArrayList<Double> lenr=new ArrayList<Double>();
+					//涉及表格的显示，初步猜测涉及不同颜色块的不同大小
 	    			for(int j=0;j<(parent_all.size());j++){
-	    				sta=(Integer)sta_all.get(j);
+	    				sta=(Integer)sta_all.get(j);//如980，1273514
 	    				double stad=sta;
-	    				end=(Integer)end_all.get(j);
+	    				end=(Integer)end_all.get(j);//如1273504，2735973
 	    				%>
 	    				se[<%=i%>][<%=j%>]={sta:<%=sta%>,end:<%=end%>};
 	    				<%
 	    				double endd=end;
 	    				if(stad<sta1){
-	    					stad=sta1;
+	    					stad=sta1;//基本上是1
 	    				}
 	    				if(endd>end1){
-	    					endd=end1;
+	    					endd=end1;//301354135
 	    				}
 	    				if(j==0){
 	    					lenr.add(0,stad);
 	    					lenr.add(1,endd-stad);
 	    				}else{
-	    					lenr.add(2*j,stad-(Integer)end_all.get(j-1));
+	    					lenr.add(2*j,stad-(Integer)end_all.get(j-1));//长度紧贴,要差值
 	    					lenr.add(2*j+1,endd-stad);
 	    					}
-	    				len.add(i,lenr);	
+	    				len.add(i,lenr);//转移到二维的那个，类似第一个M{0,{980,1273504,-10，...}}
 	    		}
 	    	}
     	}else{
@@ -124,11 +131,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="Jscript/bootstrap-table-export.js"></script>
     <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
 	<style type="text/css">
+	/*如果溢出框，则应该提供滚动机制。!important 提高优先级*/
 .fixed-table-body{overflow-x:auto;overflow-y:auto;height:auto !important;}
 	tr,td,th{
 	border:0px solid transparent !important;
 	}
 	.pagination a:hover{
+	/*渐进色*/
 	background: linear-gradient(to bottom, #fff 0%, #dcdcdc 100%);border:1px solid #979797 !important;
 	}
 	.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus
@@ -139,6 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     background: linear-gradient(to bottom, #585858 0%, #111 100%);
     border-color: #428bca;
     }
+    //选择器
     .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     padding: 10px;
     line-height: 2.42857143;
@@ -167,9 +177,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <br/>
         <br/>
+        
+        
     <div class="content" style="width:100%;min-width:1150px;border:1px solid #ddd;border-collapse:collapse;border-radius:1px;display:inline-block;margin:0 auto">
+    	//实例中 id 为 container 的 div 用于包含 Highcharts 绘制的图表。
     	<div id="container" style="width: 95%; margin: 0 auto"></div>
     </div>
+    
+    
     <div class="content" style="width:100%;min-width:1150px;height:160px;border:1px solid #ddd;border-collapse:collapse;border-radius:1px;display:inline-block;margin:0 auto">
     <%for(int i=0;i<25;i++){
     	color = colors[i];
@@ -187,6 +202,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </div>
     <%} %> 
     </div>
+    
+    
     <div class="content" style="width:100%;min-width:1150px;border:1px solid #ddd;border-collapse:collapse;border-radius:1px;display:inline-block;margin:0 auto"">	
     <table id="table" data-toggle="table">
       <thead>
@@ -207,6 +224,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </table>    
     </div>	
    </div>
+   /*以上是主干*/
    <%}else{%>
     <div class="content" style="margin:10%"><b  style="margin:40%;font-size:20px;width:30%;color:red !important; ">No matching data!</b></div>
     <%} %>    
@@ -257,7 +275,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		for(int j=0;j<parent_all.size();j++){
     			%>par[<%=i%>][<%=j%>]=<%=parent_all.get(j)%>;<%
     		}
-			for(int j=0;j<(parent_all.size()*2);j++){
+			for(int j=0;j<(parent_all.size()*2);j++){//上面是2倍
 			%>
 					p[<%=i%>][<%=j%>]=<%=len.get(i).get(j)%>;
     			<%
@@ -265,34 +283,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	}
 	%>
-	var maxlen=0;
+	var maxlen=0;//p[i].length指的是M中，首尾数组的长度
 	for(var i=0;i<c.length;i++){
 		if(p[i].length>maxlen){maxlen=p[i].length;}
 	}
 	var pp=new Array();
 	for(var i=0;i<maxlen;i++){
 		pp[i]=new Array();
-		for(var j=0;j<c.length;j++){
+		for(var j=0;j<c.length;j++){//j是M的个数
 			if(p[j][i]==undefined){pp[i][j]={color:'#ffffff',y:0};}
 			else{
 				if(i%2==0)
-				pp[i][j]={color:'#ffffff',y:p[j][i]};
+				pp[i][j]={color:'#ffffff',y:p[j][i]};//猜测表格的缝隙
 				else
-				pp[i][j]={color:colors[((i-1)/2)%25],y:p[j][i]};
+				pp[i][j]={color:colors[((i-1)/2)%25],y:p[j][i]};//其实就是按顺序给颜色
 				}
 				
 		}
 	}
-$(document).ready(function() {  
+$(document).ready(function() {  //防止文档在完全加载（就绪）之前运行
    var chart = {
-      type: 'bar'
+      type: 'bar'//条形
    };
    var title = {
       text: ''   
    };
-   var color=new Array(maxlen);
+   var color=new Array(maxlen);//即用到最多的颜色
    var xAxis = {
-      categories: c,
+      categories: c,//非M即chr
       
    };
    var yAxis = {
@@ -316,7 +334,7 @@ $(document).ready(function() {
    };
    var plotOptions = {
 	  series: {
-	     stacking: 'normal'
+	     stacking: 'normal'//使其分色
 	  }
    };
    
@@ -325,7 +343,7 @@ $(document).ready(function() {
    };
    
    var series=new Array();
-   for(var i=0;i<maxlen;i++){
+   for(var i=0;i<maxlen;i++){//假设为10组，则长度为10.M的个数和p[i][j]一致
    		series[i]={data:pp[i]};
    };
    var legend = {
@@ -348,25 +366,26 @@ $(document).ready(function() {
 </script>
        <%@ include file="../ListFooter.jsp"%>
   </body>
+
 <script type="text/javascript">
     $(function(){
-        $('#table').bootstrapTable({//'#table' 鏀逛负鎵€鐢ㄨ〃鐨勯€夋嫨鍣?
-        url: "localhost:8080/Magic/Draw/magic.jsp",//鏀逛负褰撳墠缃戦〉鐨剈rl锛屽彲閫氳繃榧犳爣鍙冲嚮缃戦〉 鏌ョ湅淇℃伅鎵惧嚭
-        method: 'GET',                      //璇锋眰鏂瑰紡锛?锛?
-       	striped: true,                      //鏄惁鏄剧ず琛岄棿闅旇壊
-       	pagination: true,
+        $('#table').bootstrapTable({//'#table' 改为所用表的选择
+        url: "localhost:8080/Magic/Draw/magic.jsp",//改为当前网页的url，可通过鼠标右击网页 查看信息找出
+        method: 'GET',                      //请求方式
+       	striped: true,                      //是否显示行间隔色
+       	pagination: true，//显示分页
        	pageSize: 5,
        	search: true,
-        showExport: true,  
-        buttonsAlign:"left",
-        exportTypes:['csv','excel'],
+        showExport: true,  //是否显示导出按钮
+        buttonsAlign:"left",//按钮位置
+        exportTypes:['csv','excel'],//导出文件类型
         exportOptions:{  
-          //ignoreColumn: [0,0],            //蹇界暐鏌愪竴鍒楃殑绱㈠紩  
-          fileName: 'Bin Map',              //鏂囦欢鍚嶇О璁剧疆  
-          worksheetName: 'Sheet1',          //琛ㄦ牸宸ヤ綔鍖哄悕绉? 
+          //ignoreColumn: [0,0],            //忽略某一列的索引 
+          fileName: 'Bin Map',              //文件名称设置
+          worksheetName: 'Sheet1',          //表格工作区名
           tableName: 'Bin Map',  
       }, 
-        columns: [{//淇敼涓烘墍鐢ㄨ〃鐨勪俊鎭?field濉暟鎹簱涓殑 瀵瑰簲鐨勬爣棰橈紝title涓鸿鏄剧ず鐨勫悕绉?
+        columns: [{//修改为所用表的信�?field填数据库中的 对应的标题，title为要显示的名
         field: 'name',
         title: 'name',
         sortable:true

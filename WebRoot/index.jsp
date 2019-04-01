@@ -16,9 +16,6 @@
 <meta name="author" content="Daliu" />
 <meta name="keywords" content="" />
 <meta name="describe" content="" />
-<meta name="renderer" content="webkit" />
-<meta name="renderer" content="ie-comp" />
-<meta name="renderer" content="ie-stand" />
 <link href="Css/bootstrap.min.css" rel="stylesheet" />
 <link href="Css/main.css" rel="stylesheet" />
 <link href="Css/main1.css" rel="stylesheet" />
@@ -213,14 +210,12 @@
 
 					<div class="my-panel">
 						<h2 style="color:#4381be;">Citations</h2>
-<%--
-   -                        <p style="text-indent:2em;">Researchers who wish to use RiceVarMap are encouraged to refer to our publication or 
-   -                        <a href="http://ricevarmap.ncpgr.cn/v2/publication/" style="color:#4381be;">more</a>:</p>
-   -
-   -                        <p style="text-indent:2em;">Zhao H, Yao W, Ouyang Y, Yang W, Wang G, Lian X, Xing Y, Chen L, Xie W. 
-   -                        <a href="https://academic.oup.com/nar/article/43/D1/D1018/2439488" style="color:#4381be;">RiceVarMap: a comprehensive database of rice genomic variations.</a>
-   -                        Nucleic Acids Res, 2015, 43: D1018-1022</p>
-   --%>
+						<p style="text-indent:2em;">Researchers who wish to use RiceVarMap are encouraged to refer to our publication or 
+                        <a href="http://ricevarmap.ncpgr.cn/v2/publication/" style="color:#4381be;">more</a>:</p>
+
+                        <p style="text-indent:2em;">Zhao H, Yao W, Ouyang Y, Yang W, Wang G, Lian X, Xing Y, Chen L, Xie W. 
+                        <a href="https://academic.oup.com/nar/article/43/D1/D1018/2439488" style="color:#4381be;">RiceVarMap: a comprehensive database of rice genomic variations.</a>
+                        Nucleic Acids Res, 2015, 43: D1018-1022</p>
 					</div>
 
 				</div>

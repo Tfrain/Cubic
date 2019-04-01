@@ -14,7 +14,7 @@ public class findDataInMagic extends ActionSupport{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String name;
+	private String name;//原本第二列
 	private String chr;
 	private String name1;
 	private String namee;
@@ -28,11 +28,11 @@ public class findDataInMagic extends ActionSupport{
 		String [] na = null ;
 		String []chrs = null;
 		
-		if(name1.isEmpty()){
+		if(name1.isEmpty()){//没填空
 			chrs = chr.split(", ");
 		}else{
-			name = name1;
-			String ttp = "1,2,3,4,5,6,7,8,9,10";
+			name = name1;//填空
+			String ttp = "1,2,3,4,5,6,7,8,9,10";//第三列后台是以数字传递
 			chrs = ttp.split(",");
 		}
 		
@@ -43,13 +43,15 @@ public class findDataInMagic extends ActionSupport{
 		System.out.println("chr "+chr);
 		
 		Map<String,Object> attributes = ActionContext.getContext().getSession();
-		attributes.put("names", na);
-		attributes.put("chrs", chrs);
-		//鏌ヨ鐢诲浘锛�
-		if(chrs.length == 1){
+		attributes.put("names", na);//name(一堆M开头的)
+		attributes.put("chrs", chrs);//一、堆数字
+		System.out.println(attributes.toString());//输出键值对
+		//查询画图
+		if(chrs.length == 1){//第三列只有一个的时候
+			//最后都转换成数据库能识别的数字，1对应最大
 			for(int i=0;i<na.length;i++){
 				String sql;
-				if(names.equals(""))
+				if(names.equals(""))//只用一次
 				{
 					names="1";
 					if(chr.equals("1")){
@@ -87,17 +89,19 @@ public class findDataInMagic extends ActionSupport{
 				else 
 				{
 					System.out.println("select parent,sta,end from all_bin where name='"+na[i]+"' AND ((sta BETWEEN "+names+" AND "+namee+") OR (end BETWEEN "+names+" AND "+namee+"))"+" AND chr='"+chr+"'");
+					System.out.println("_________________");
 					sql="select parent,sta,end from all_bin where name='"+na[i]+"' AND ((sta BETWEEN "+names+" AND "+namee+") OR (end BETWEEN "+names+" AND "+namee+"))"+" AND chr='"+chr+"'";
 				}
-				System.out.println(na[i]);
+				System.out.println(na[i]);//M开头的玩意
 				d.getLen(sql).toString();
-				System.out.println(d.getLen(sql));
-				attributes.put(na[i], d.getLen(sql));
+				System.out.println("_________________");
+				System.out.println(d.getLen(sql));//数据
+				attributes.put(na[i], d.getLen(sql));//M开头，
 			}
 		}else{
-			for(int i=0;i<chrs.length;i++){
+			for(int i=0;i<chrs.length;i++){//多个第三列时
 				String sql=null;
-				if(names.equals(""))
+				if(names.equals(""))//不填空
 				{
 					names="1";
 					if(chrs[i].equals("1")){
@@ -145,17 +149,17 @@ public class findDataInMagic extends ActionSupport{
 				attributes.put(chrs[i], d.getLen(sql));
 			}
 		}
-		//鐢昏〃
+		//画表
 		HashMap<String,ArrayList<String>> mtable = new HashMap<String,ArrayList<String>>();
-		System.out.println(na.length);
+		System.out.println(na.length);//第二列选的个数
 		for(int i=0;i<na.length;i++){
 			String sql="select * from bin_summary_maxp2 where name='"+na[i]+"'";
 			System.out.println(na[i]);
 			System.out.println(sql);
 			mtable.put(na[i], d.getTable(sql));
-			System.out.println(mtable);
+			System.out.println(mtable);//以键值对进行输出，值很长
 		}
-		attributes.put("table", mtable);
+		attributes.put("table", mtable);//table寓意画图表格
 		double sta1=1;
 		double end1=301354135;
 		if(!names.equals(""))

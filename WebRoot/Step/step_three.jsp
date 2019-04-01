@@ -15,6 +15,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         String search = attributes.get("search").toString();
         int len = Integer.parseInt(attributes.get("len").toString());
         int len2 = Integer.parseInt(attributes.get("len2").toString());
+        
+        //字符串：数组（字符串）没看数据库，但逻辑关系len2里面存储着QTL的数据
         HashMap<String,ArrayList<String>> data = (HashMap<String,ArrayList<String>>)attributes.get("data");
         HashMap<String,ArrayList<String>> data2 = (HashMap<String,ArrayList<String>>)attributes.get("data2");   
     %>
@@ -113,6 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             %>
             <div class="my-panel">
             <h3>QTL region</h3>
+            
             <hr/>
             <%if(len2 > 0){%>
             <table id="table" data-toggle="table" class="table table-hover">
@@ -220,6 +223,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <%}%>
             </div>
            <%}else{%>
+           <!-- else是指填的是下面的Search By Gene ID，即非first，结果是相同的 -->
             <div class="my-panel">
            <h3>QTL region</h3>
            <hr/>
