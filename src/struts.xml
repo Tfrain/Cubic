@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="a" extends="struts-default">
+	<!-- Step -->
+		<action name="showTwo" class="com.magic.showTwo">
+			<result name="success">/Step/step_two.jsp</result>
+		</action>
+		<action name="showThree" class="com.magic.showThree">
+			<result name="success">/Step/step_three.jsp</result>
+		</action>
+	<!-- Draw -->	
+		<action name="findMaterial" class="com.draw.findMaterial">
+		</action>
+		<action name="picture" class="com.draw.findDataInMagic">
+		   <result name = "success">/Draw/result.jsp</result>
+		</action>
+	<!-- Blastn -->
+		<action name="blast" class="blast.Blast">
+		   <result name = "success">/Blast/blastresult.jsp</result>
+		</action>
+	<!-- Primer1 -->
+		<action name="primer" class="blast.Blast2">
+		   <result name = "success">/Primer/primerresult.jsp</result>
+	    </action>
+	<!-- Primer2 -->
+		<action name="primer2" class="blast.Blast3">
+		   <result name = "success">/Primer/primerresult.jsp</result>
+	    </action>
+	<!-- Primer3 -->
+		<action name="primer3" class="blast.Blast4">
+		   <result name = "success">/Primer/primerresult.jsp</result>
+	    </action>
+	    
+	<!-- Genetree -->
+		<action name="genetree" class="genetree.Genetree">
+		   <result name= "success">/genetree/gene_tree.jsp</result>
+		</action>	
+	<!-- Jbrowse -->
+		<action name="jbrowse" class="jbrowse.jbrowse">
+		   <result name= "success">/JBrowse/jbrowse.jsp</result>
+		</action>	
+	</package>
+</struts>

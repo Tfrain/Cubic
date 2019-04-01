@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+.myinput{
+    background:#EDF1F1;
+    border:solid 2px #D9E2EB;
+    border-radius:3px;
+}
+
+myinput span{
+    padding-left:6px;
+    display:inline-block;
+}
+
+myinput select , input{
+    display:inline-block;
+    border:none;
+    padding:0 2px;
+}
