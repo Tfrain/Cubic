@@ -314,7 +314,7 @@ size3 {
 }
 
 .btn {
-	padding: 5px 10px;
+	padding: 10px 20px;
 	margin: 15px;
 	background: #4381be;
 	border: none;
@@ -348,9 +348,9 @@ size3 {
 .my-panel {
 	border: solid 1px #eee;
 	border-radius: 3px;
-	padding: 5px;
-	margin-bottom: 21px;
-	box-shadow: 0.3px 0.3px 0px #e5e4e4;
+	padding: 0px;
+	margin-bottom: 10px;
+	box-shadow: 0.3px 1px 10px #ccc;
 }
 
 .my-panel>.title {
@@ -557,7 +557,7 @@ body {
 .line {
     float: left;
     border-right: 1px solid #ddd;
-    height: 275px;
+    height: 400px;
     margin: 0 auto 0 50%;
     position: absolute;
 }

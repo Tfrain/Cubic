@@ -1,4 +1,4 @@
-        <div class="nav">
+        <div class="nav" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-21" data-genuitec-path="/Magic/WebRoot/ListHeader.jsp">
             <div class="logo">MAIZE CUBIC</div>
             <div class="menu">
                 <div class="list">
@@ -17,10 +17,14 @@
                     <a href="">TOOLS</a>
                     
                     <div class="detail1" >
-                    <div class="lefttool" float="left" align="left"><br></br><h3>These tools can make it easier for us to visually query and recognize 
-                    these variations,and will also help us make better use of the information in the future.<br></h3>
+                    <div class="lefttool" float="left" align="left" style="height:300px"><h3><br></br>These tools can make it easier for us to visually query and recognize 
+                    these variations,and will also help us make better use of the information in the future.<br><br></br></h3>
                     </div>
-                    <div class="lefttool" float="left"><h4>Variation Map</h4>
+				
+				<div class="list" float="left" align="left">  
+                    </div>
+					
+                    <div float="right;width:49%;height:300px;border:1px solid #000"><h4>Variation Map</h4>
                     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Draw/magic.jsp">·Bin Map</a><br>
                     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/JBrowse/jbrowsetool.jsp">·Variation Browser</a>
                     <br>
@@ -40,8 +44,9 @@
                     
                 </div>
                 <div class="list">
-                    GUIDE
+                    <a href="/Magic/guide.jsp">GUIDE</a>
                     
+
                 </div>
                 <div class="list">
                 	<a href="/Magic/contact.jsp">CONTACT</a>

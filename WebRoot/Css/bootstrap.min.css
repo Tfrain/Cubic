@@ -1,3 +1,7 @@
+[genuitec-file-id="wc1-3"],[genuitec-lp-path="/Magic/WebRoot/Css/bootstrap.min.css"],[genuitec-lp-enabled=false]{
+  /* for codelive */
+}
+
 /*!
  * Bootstrap v3.3.0 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
@@ -186,8 +190,9 @@ optgroup {
 
 table {
 	border-spacing: 0;
-	border-collapse: collapse
+	border-collapse: collapse;
 }
+
 
 td, th {
 	padding: 0
@@ -2340,15 +2345,16 @@ th {
 
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td,
 	.table>tbody>tr>td, .table>tfoot>tr>td {
-	padding: 8px;
+	padding: 2px;
 	line-height: 1.42857143;
 	vertical-align: top;
-	border-top: 1px solid #ddd
+	border-top: 1px solid #ddd;
+	font-size: 5px;
 }
 
 .table>thead>tr>th {
 	vertical-align: bottom;
-	border-bottom: 2px solid #ddd
+	border-bottom: 2px solid #ddd;
 }
 
 .table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>th,

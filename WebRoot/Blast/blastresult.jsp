@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String midline=(String)attribute.get("midline");
 	String hseq=(String)attribute.get("hseq");*/
 	String qseq,midline,hseq;
-/*都是blastin.txt里面的内容，在.java里面获取判断，在这里显示*/
+
 	Map<String, String> queryfrommap=new HashMap<String, String>();
 	queryfrommap=(Map<String, String>)attribute.get("queryfrommap");
 	
@@ -116,8 +116,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	Map<String, String> totalscoremap=new HashMap<String, String>();
 	totalscoremap=(Map<String, String>)attribute.get("totalscoremap");
 	
-	/*下面是进行迭代器，Iterator 模式是用于遍历集合类的标准访问方法
-	再下面会用到他们进行遍历*/
 	Set<String> qseqname=qseqmap.keySet();
 	Iterator<String> it1=qseqname.iterator();
 	
@@ -136,7 +134,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	Set<String> totalscorename=totalscoremap.keySet();
 	Iterator<String> ittotalscore=totalscorename.iterator();
 	
-	Set<String> chrname=chrmap.keySet();/*设计三个迭代器？仍旧是填写内容的判断*/
+	Set<String> chrname=chrmap.keySet();
 	Iterator<String> itchr=chrname.iterator();
 	Iterator<String> itchr1=chrname.iterator();
 	Iterator<String> itchr2=chrname.iterator();/*<!--lv 7-12 change new-->*/

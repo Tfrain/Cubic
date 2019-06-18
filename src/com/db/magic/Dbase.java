@@ -15,6 +15,7 @@ import net.sf.json.JSONObject;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.ResultSetMetaData;
 
 public class Dbase {
@@ -22,9 +23,10 @@ public class Dbase {
 	private String password = "654321";
 	private String url = "jdbc:mysql://localhost:3306/magic";
 	private String driver = "com.mysql.jdbc.Driver";
-
+	
 	private Connection con = null;
     private Statement stmt = null;
+    private java.sql.PreparedStatement stmtq;
 	private ResultSet rs = null;
 
 	public Dbase(){
@@ -38,17 +40,17 @@ public class Dbase {
 			System.out.println(e1.toString());
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
-			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
+			System.out.println("ÃÜÂë´íÎó!");
 			System.out.println(e2.toString());
 		}
 	}
 
-
 	public Map<String,Object> getChr(String sql){
+		System.out.println("step in getChr");
 		Map<String,Object> map = new HashMap<String,Object> ();
 		Map<String,ArrayList<String>> map1 = new HashMap<String,ArrayList<String>> ();
 		try {
-			rs = stmt.executeQuery(sql);//ç”¨äºŽæ‰§è¡ŒSELECTæŸ¥è¯¢ã€‚å®ƒè¿”å›žResultSetçš„å¯¹è±¡ã€‚
+			rs = stmt.executeQuery(sql);//ÓÃÓÚÖ´ÐÐSELECT²éÑ¯¡£Ëü·µ»ØResultSetµÄ¶ÔÏó¡£
 		    int i = 1;
 			while(rs.next()){
 			    int j = 1;
@@ -68,7 +70,7 @@ public class Dbase {
 			    	list.add(rs.getString(j));
 			    	j++;
 			    }
-			    //System.out.println(list);
+			    System.out.println(list);
 			    map1.put(Integer.toString(i), list);
 			    i++;
 			}
@@ -82,6 +84,7 @@ public class Dbase {
         System.out.println("getChr: query sucessfully length = " + len);
 		return map;
 	}
+
 
 	public String getPrimer3(String sql){
 		String result = "";
@@ -166,7 +169,7 @@ public class Dbase {
 			float end;
 			ResultSetMetaData metaData = (ResultSetMetaData) rs.getMetaData();
 			int columnCount = metaData.getColumnCount();
-			// ï¿½ï¿½ï¿½ï¿½ResultSetï¿½Ðµï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			// ±éÀúResultSetÖÐµÄÃ¿ÌõÊý¾Ý
 			while(rs.next())
 			{
 				start=Float.MAX_VALUE;
@@ -177,7 +180,7 @@ public class Dbase {
 
 				JSONObject jsonresult1=new JSONObject();
 				JSONObject jsonobj=new JSONObject();
-				//ï¿½ï¿½È¡ï¿½ï¿½Ò»ï¿½ï¿½chr
+				//»ñÈ¡µÚÒ»¸öchr
 				for (int i = 1; i <= columnCount; i++) {
 		            String columnName =metaData.getColumnLabel(i);
 		            String value = rs.getString(columnName);
@@ -189,7 +192,7 @@ public class Dbase {
 				start=Float.parseFloat(jsonobj.getString("start"));
 				end=Float.parseFloat(jsonobj.getString("end"));
 
-				//ï¿½ï¿½È¡ï¿½Ú¶ï¿½ï¿½ï¿½
+				//»ñÈ¡µÚ¶þ²ã
 				JSONArray children2 = new JSONArray();
 				JSONArray children1 = new JSONArray();
 
@@ -213,7 +216,7 @@ public class Dbase {
 					}
 					float start2=Float.parseFloat(jsonobj2.getString("start"));
 					float end2=Float.parseFloat(jsonobj2.getString("end"));
-					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					//µÚÈý²ã
 
 					if((start2<=end)&&(end2>start)&&sum!=1)
 					{
@@ -227,7 +230,7 @@ public class Dbase {
 				        jsonresult3.put("color",color1);
 				        jsonresult3.put("value",jsonobj2.getString("pve"));
 				        jsonresult3.put("filter",jsonobj2.getString("Trait"));
-				        jsonresult3.put("name","ï¿½ï¿½"+genenum+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+				        jsonresult3.put("name","µÚ"+genenum+"¸ö»ùÒò");
 				        if(jsonresult3.containsKey("Chr")){
 				        	children2.add(jsonresult3);
 				        }
@@ -247,7 +250,7 @@ public class Dbase {
 				        jsonresult2.put("color", color1);
 				        jsonresult2.put("value", jsonobj2.getString("pve"));
 				        jsonresult2.put("height", x);
-						jsonresult2.put("name", "ï¿½ï¿½"+text+"ï¿½ï¿½");
+						jsonresult2.put("name", "µÚ"+text+"¶Î");
 						if(sum!=1)
 						{
 							x=numberwei(Math.abs(start2-end),jsonobj2.getString("Chr"));
@@ -256,14 +259,14 @@ public class Dbase {
 							jsonspace.put("color", "gray");
 							jsonspace.put("value", "null");
 							jsonspace.put("height", x);
-							jsonspace.put("name", "ï¿½Õ°ï¿½");
+							jsonspace.put("name", "¿Õ°×");
 							JSONObject jsonresult3=new JSONObject();
 							jsonresult3.put("Chr", jsonobj2.getString("Chr"));
 					        jsonresult3.put("type",jsonobj2.getString("method"));
 					        jsonresult3.put("color","gray");
 					        jsonresult3.put("value","null");
 					        jsonresult3.put("filter","space");
-					        jsonresult3.put("name","ï¿½Õ°ï¿½");
+					        jsonresult3.put("name","¿Õ°×");
 					        JSONArray childrenspace=new JSONArray();
 							childrenspace.add(jsonresult3);
 
@@ -283,7 +286,7 @@ public class Dbase {
 				        jsonresult3.put("end",jsonobj2.getString("end"));
 				        jsonresult3.put("value",jsonobj2.getString("pve"));
 				        jsonresult3.put("filter",jsonobj2.getString("Trait"));
-				        jsonresult3.put("name","ï¿½ï¿½"+genenum+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+				        jsonresult3.put("name","µÚ"+genenum+"¸ö»ùÒò");
 				        children2.add(jsonresult3);
 						text++;
 						genenum=1;
@@ -467,6 +470,7 @@ public class Dbase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		data.add(parent_all);
 		data.add(sta_all);
 		data.add(end_all);

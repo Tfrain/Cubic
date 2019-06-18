@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>JBrowse</title>
     <link rel="stylesheet" type="text/css" href="./css/genome.css">
 </head>
-<body>
+<head>
 	
     <script type="text/javascript">
     	//window.location.replace("../ListHeader.jsp");
@@ -69,11 +69,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                    // parse the query vars in the page URL
                    //var queryParams = ioQuery.queryToObject( window.location.search.slice(1) );
-                   var validurl = window.location.search.replace(/&amp;/g, '&');
+                  var validurl = window.location.search.replace(/&amp;/g, '&');
                    var queryParams = ioQuery.queryToObject( validurl.slice(1) );
                    var tracks = queryParams.tracks;
+                   console.log(tracks);
+                   console.log("--------------");
                    var vcfTracks = tracks.substring(0, tracks.indexOf(",GFF3"));
-                   //alert(vcfTracks)
+                   console.log(vcfTracks);
                     $.ajax({
                         type:"post",
                         url:"jbrowse",

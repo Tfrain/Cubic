@@ -27,10 +27,9 @@ public class Blast extends ActionSupport{
 	 public String getWebRoot()
 	 {
 	     String path = getWebClassesPath();
-	     if (path.indexOf("WEB-INF") > 0)//返回第一次的索引值，无则返回-1
+	     if (path.indexOf("WEB-INF") > 0)
 	     {
 	        path = path.substring(0,path.indexOf("WEB-INF/classes"));
-	        path = path.replaceAll("%20", " ");
 	     }
 	     return path;
 	}
@@ -147,53 +146,49 @@ public class Blast extends ActionSupport{
 
 
 	public String execute(){
-		if(inputtext!=null)//里面填写的内容
+		if(inputtext!=null)
 		{
 			try{
 				String filePath=getWebRoot();
 	            filePath = filePath+"file/";
 	            filePath = filePath.substring(1);
-	            System.out.println(filePath);
 	            filePath = filePath.replaceAll("\\/","\\\\");
-	            System.out.println(filePath);
 				String textpath=filePath+"blastin.txt";
 				 File writer = new File(textpath);
-				 System.out.println(writer.exists());//修改之后变成true
 				 if(writer.exists())
 				 {
 					 OutputStream out=null;
-					 out=new FileOutputStream(writer);//写入输出流，把项目下的blastin.txt写入流
-                     Pattern p = Pattern.compile("[^ATGCatgc]");//正则，测试inputtext内容，按理是写入文件中
+					 out=new FileOutputStream(writer);
+                     Pattern p = Pattern.compile("[^ATGCatgc]");
                      Matcher matcher = p.matcher(inputtext);
                      inputtext = matcher.replaceAll("");
 					 byte b[] = inputtext.getBytes();
-					 System.out.println(b);
-					 out.write(b);//将符合正则表达式的内容写进去
+					 out.write(b);
 					 out.close();
 				 }
 
 			}catch (Exception e) {
-				System.out.println("д���ļ����ݳ���");
+				System.out.println("д���ļ����ݳ���");
 				e.printStackTrace();
 			}finally{}
 		}
 		try {
             Runtime rt = Runtime.getRuntime();
-            String filePath=getWebRoot();//项目路径
+            String filePath=getWebRoot();
             filePath = filePath+"file/";
             filePath = filePath.substring(1);
             filePath = filePath.replaceAll("\\/","\\\\");
             inputfile=filePath+"blastin.txt";
-            String cmd1="blastn";//cmd1默认设为blastn
+            String cmd1="blastn";
             /*
              *if(database == null || blastprograme == null){
              *    return SUCCESS;
              *}
              */
-            //���databaseΪ�վ�ִ��try����Ĵ��룬�ⲻ��bug��������������
-            if(blastprograme.equals("primer-blast"))//Last中有两者取其一
+            //���databaseΪ�վ�ִ��try����Ĵ��룬�ⲻ��bug��������������
+            if(blastprograme.equals("primer-blast"))
                 cmd1="blastn -task blastn-short";
-            String datafile = new String();//新建存储数据库的路径
+            String datafile = new String();
             /*
              *if(database.equals("HZS"))
              *{
@@ -216,67 +211,43 @@ public class Blast extends ActionSupport{
              *    database1=database;
              *}
              */
-            
 //             the path for the server
-       
-//            if(database.equals("HZS"))//Last对应
-//            {
-//                datafile="E:\\Magic\\blast\\hzs\\HZ_H.genome";
-//            }
-//            else if(database.equals("V3.25"))
-//            {
-//                datafile="E:\\Magic\\blast\\v3.25\\Zea_mays.AGPv3.25.database";
-//            }
-//            else if(database.equals("V4"))
-//            {
-//                datafile="E:\\Magic\\blast\\v4\\Zea_mays.AGPv4.dna.toplevel.fa";
-//            }
-//            else if(database.equals("PAN"))
-//            {
-//                datafile="E:\\Magic\\blast\\pan\\pan.fasta";
-//            }
-            
-            // path for wei
-//           // G:\\Magic\\blast\\hzs
-          if(database.equals("HZS"))//Last对应,文件夹里面只有这一个
-          {
-              datafile="G:\\Magic\\blast\\hzs\\HZ_H.genome";//我的路径
-          }
-          else if(database.equals("V3.25"))
-          {
-              datafile="E:\\Magic\\blast\\v3.25\\Zea_mays.AGPv3.25.database";
-          }
-          else if(database.equals("V4"))
-          {
-              datafile="E:\\Magic\\blast\\v4\\Zea_mays.AGPv4.dna.toplevel.fa";
-          }
-          else if(database.equals("PAN"))
-          {
-              datafile="E:\\Magic\\blast\\pan\\pan.fasta";
-          }
+            if(database.equals("HZS"))
+            {
+                datafile="E:\\Magic\\blast\\hzs\\HZ_H.genome";
+            }
+            else if(database.equals("V3.25"))
+            {
+                datafile="E:\\Magic\\blast\\v3.25\\Zea_mays.AGPv3.25.database";
+            }
+            else if(database.equals("V4"))
+            {
+                datafile="E:\\Magic\\blast\\v4\\Zea_mays.AGPv4.dna.toplevel.fa";
+            }
+            else if(database.equals("PAN"))
+            {
+                datafile="E:\\Magic\\blast\\pan\\pan.fasta";
+            }
 
-            System.out.println("database="+database);//database存储的是HZS、v3.25、V4之一
-            System.out.println("database1="+database1);//database1在这边一定是null
-            //inputeralue是Last里面Evalue的值，inputmaxtarget存储Max target seqences，inputpercent存储Percent Identity，inputfile是导入的blast.txt路径、datafile是HZS、v3.25、V4之一数据库
-            Process pr = rt.exec("cmd /c "+cmd1+" -evalue "+inputeralue+" -perc_identity "+inputmaxtarget+" -max_target_seqs "+inputpercent+" -outfmt 5 "+" -query \""+inputfile+"\" -out  \""+filePath+"blast.txt\" -db \""+ datafile + "\""); // cmd /c calc
+            System.out.println("database="+database);
+            System.out.println("database1="+database1);
+
+            Process pr = rt.exec("cmd /c "+cmd1+" -evalue "+inputeralue+" -perc_identity "+inputmaxtarget+" -max_target_seqs "+inputpercent+" -outfmt 5 "+" -query "+inputfile+" -out "+filePath+"blast.txt -db "+ datafile); // cmd /c calc
             //Process pr = rt.exec("cmd /c "+cmd1+" -evalue "+inputeralue+" -perc_identity "+inputmaxtarget+" -max_target_seqs "+inputpercent+" -outfmt 5 "+" -query "+inputfile+" -out "+filePath+"blast.txt -db "+" E:\\Magic\\blast\\hzs\\HZ_H.genome"); // cmd /c calc
             	//-task blastn-short
-            System.out.println("cmd /c "+cmd1+" -evalue "+inputeralue+" -perc_identity "+inputmaxtarget+" -max_target_seqs "+inputpercent+" -outfmt 5 "+" -query \""+inputfile+"\" -out  \""+filePath+"blast.txt\" -db \""+ datafile + "\"");
+            System.out.println("cmd /c "+cmd1+" -evalue "+inputeralue+" -perc_identity "+inputmaxtarget+" -max_target_seqs "+inputpercent+" -outfmt 5 "+" -query "+inputfile+" -out "+filePath+"blast.txt -db "+datafile);
             //blastn  -evalue 0.00001 -perc_identity 95 -max_target_seqs 5 -outfmt 5  -query D:\Blast+\blast\test1.fasta -out D:\Blast+\blast\blast.txt -db D:\Blast+\blast\hzs\HZ_H.genome
-           //读取数据
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream(), "GBK"));
-            //cmd /c dir 是执行完dir命令后关闭命令窗口。调用外部应用程序，这里是shell，因为路径不对，所以具体情况不甚了解
-            String line = null;//应当返回shell执行后的结果
 
-            while ((line = input.readLine()) != null) {///一次读一行，读入null时文件结束
+            String line = null;
+
+            while ((line = input.readLine()) != null) {
                 System.out.println(line+"1");
-                break;
             }
-            //可能为空
-            System.out.println(line+"1");
+
             //System.out.println("Exited with error code " + exitVal+":"+"cmd /c "+"blastn -task blastn-short  -evalue "+inputeralue+" -perc_identity "+inputmaxtarget+" -max_target_seqs "+inputpercent+" -outfmt 5 "+" -query D:\\Blast+\\blast\\test1.fasta"+" -out D:\\Blast+\\blast\\blast.txt -db "+"D:\\Blast+\\blast\\hzs\\HZ_H.genome");
         } catch (Exception e) {
-            System.out.println(e.toString());
+            //System.out.println(e.toString());
             e.printStackTrace();
         }finally{}
 
@@ -286,30 +257,26 @@ public class Blast extends ActionSupport{
             filePath = filePath+"file/";
             filePath = filePath.substring(1);
             filePath = filePath.replaceAll("\\/","\\\\");
-            System.out.println(filePath);
-            filePath = filePath+"blast.txt";//blast.out�ļ�·��
+            filePath = filePath+"blast.txt";//blast.out�ļ�·��
             File file=new File(filePath);
             //System.out.println(filePath);
-            System.out.println(file.isFile() && file.exists());//修改后为true
-            	if(file.isFile() && file.exists()){ //�ж��ļ��Ƿ����
-            		
-            		InputStreamReader read = new InputStreamReader(//将blast.txt保存的文件加入输入流
-            		new FileInputStream(file),encoding);//���ǵ������ʽ
-            		BufferedReader bufferedReader = new BufferedReader(read);//从输入流中读取文本
+            	if(file.isFile() && file.exists()){ //�ж��ļ��Ƿ����
+            		InputStreamReader read = new InputStreamReader(
+            		new FileInputStream(file),encoding);//���ǵ������ʽ
+            		BufferedReader bufferedReader = new BufferedReader(read);
             		String lineTxt = null;
-            		System.out.println((lineTxt = bufferedReader.readLine()) != null);//我自己写的，没正常读取
-            		while((lineTxt = bufferedReader.readLine()) != null){//读一行文字
+            		while((lineTxt = bufferedReader.readLine()) != null){
             			//char[] strchar=lineTxt.toCharArray();
-            			lineTxt=lineTxt.trim();//trim() 方法用于删除字符串的头尾空白符
-            			System.out.println(""+lineTxt);//从数据库里获取的内容
-            			if(lineTxt.indexOf("<Iteration_query-ID>")!=-1)//如果不包含<Iteration_query-ID>
+            			lineTxt=lineTxt.trim();
+            			//System.out.println(""+lineTxt);
+            			if(lineTxt.indexOf("<Iteration_query-ID>")!=-1)
             			{
-            				queryid=lineTxt.replace("<Iteration_query-ID>","");//改成<Iteration_query-ID>
+            				queryid=lineTxt.replace("<Iteration_query-ID>","");
             				queryid=queryid.replace("</Iteration_query-ID>","");
-            				queryid1=queryid;//queryid1里面是</Iteration_query-ID>
+            				queryid1=queryid;
             				//System.out.println("queryid="+queryid);
             			}
-            			else if(lineTxt.indexOf("<BlastOutput_program>")!=-1)//同理，但是if else说明只要一个
+            			else if(lineTxt.indexOf("<BlastOutput_program>")!=-1)
             			{
             				programe=lineTxt.replace("<BlastOutput_program>","");
             				programe=programe.replace("</BlastOutput_program>","");
@@ -553,10 +520,10 @@ public class Blast extends ActionSupport{
 
             		read.close();
             	}else{
-            		System.out.println("上面无法执行");
+            		System.out.println("�Ҳ���ָ�����ļ�");
             	}
 			} catch (Exception e) {
-				System.out.println("出错了");
+				System.out.println("��ȡ�ļ����ݳ���");
 				e.printStackTrace();
 			}finally{}
 

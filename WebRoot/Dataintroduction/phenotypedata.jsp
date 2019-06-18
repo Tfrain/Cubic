@@ -69,7 +69,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-8 col-md-offset-2">
+			<div class="my-panel">
                 <div class="my-panel" style="margin-top:10px;">
 				<table style="width:100%;">
 					<thead></thead>
@@ -203,7 +203,7 @@
 				</table>
                 </div>
 			</div>
-			<div class="col-md-10 col-md-offset-1">
+			<div class="my-panel">
 <style>
 table, table tr th, table tr td {
     padding: 8px;
@@ -221,7 +221,7 @@ tr:nth-child(even) {
     display:none;
 }
 </style>
-<div class="my-panel" style="margin-top:10px;">
+<div style="margin-top:10px;">
                 <table>
                     <tr>
                         <table style="width:100%">
@@ -234,8 +234,8 @@ tr:nth-child(even) {
                             <col width="11%"></col>
                             <col width="11%"></col>
 							<tr>
-								<td><b>abbreviation</b></td>
-								<td><b>CLASS</b></td>
+								<td><b>Abbreviation</b></td>
+								<td><b>Class</b></td>
 								<td><b>Max</b></td>
 								<td><b>Min</b></td>
 								<td><b>Mean</b></td>
@@ -247,7 +247,7 @@ tr:nth-child(even) {
                     </tr>
                     <tr>
 				<div
-					style="width:100%;height:500px;position:relative;overflow-y:scroll">
+					style="width:100%;height:480px;position:relative;overflow-y:scroll">
 					<table style="width:100%;">
                             <col width="11%"></col>
                             <col width="23%"></col>

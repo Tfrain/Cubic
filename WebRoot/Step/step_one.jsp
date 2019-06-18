@@ -50,7 +50,12 @@
 			if (val == "first" || val == "second") {
 				form.submit();
 			} else {
-				alert("please choose one chance");
+				var myData = $('#table-methods-table').bootstrapTable('getAllSelections');
+				if (myData.length == 0) {
+				alert("Please select at least one Trait!");
+				} else{
+				alert("Please select “Search By Region” or “Search By Gene ID”");
+				}
 			}
 		});
 	});
@@ -87,12 +92,12 @@ table, table tr th, table tr td {
 }
 </style>
 				<table id="table-methods-table" data-toggle="table" data="data"
-					data-height="500">
+					data-height="500" >
 					<!-- data-height="246" -->
 					<thead>
 						<tr>
-							<th data-field="state" data-checkbox="true"></th>
-							<th data-field="id" data-align="center" data-sortable="true">trait
+							<th data-field="state" data-checkbox="true" ></th>
+							<th data-field="id" data-align="center" data-sortable="true">Trait
 								Name</th>
 							<th data-field="name" data-align="center" data-sortable="true">Full
 								Name</th>
@@ -118,8 +123,8 @@ table, table tr th, table tr td {
 						<div class="input-group ">
                     <span class="input-group-addon">Chromesome:</span>
 						<select class="form-control eg" style="display:inline;"
-							title="eg: Chr1" name="chr">
-							<option value='' disabled selected style='display:none;'>Choose One Chromesome</option>
+							title="eg: Chr1" name="chr" id="sel2">
+							<option value='' disabled selected style='display:none;' style="width:300px;">Choose One Chromesome</option>
 							<option value="1">Chr1</option>
 							<option value="2">Chr2</option>
 							<option value="3">Chr3</option>
@@ -137,7 +142,7 @@ table, table tr th, table tr td {
 					<div class="col-md-9 col-xs-9">
 						<div class="input-group ">
 							<span class="input-group-addon">Start:</span> <input type="text"
-								class="form-control eg" title="eg: 147" style="display:inline;" name="start"
+								class="form-control eg" title="eg: 147" style="display:inline;width:300px;" name="start"
 								readonly="readonly" id="sh1">
 						</div>
 					</div>
@@ -146,7 +151,7 @@ table, table tr th, table tr td {
 					<div class="col-md-9 col-xs-9">
 						<div class="input-group ">
 							<span class="input-group-addon">End:</span> <input type="text"
-								class="form-control eg" title="eg: 6782830 " style="display:inline;" name="end"
+								class="form-control eg" title="eg: 6782830 " style="width:310px; display:inline;"name="end"
 								readonly="readonly" id="sh2">
 						</div>
 					</div>
@@ -169,8 +174,8 @@ table, table tr th, table tr td {
 				</div>
 			</div>
 			</div>
-			<div class="btns2">
-				<button class="btn" text-algin="right" id="next" float="right">Submit</button>
+			<div class="btns" >
+				<button class="btn" text-algin="left" id="next" float="right">Submit</button>
 			</div>
 			</div>
 		</form>
@@ -197,7 +202,7 @@ table, table tr th, table tr td {
 		});
 		*/
 		jQuery.fn.bootstrapTable.defaults.data = data;
-	//bootstrapTable的相关内容
+	
 		function check() {
 			var myData = $('#table-methods-table').bootstrapTable('getAllSelections');
 			//alert(JSON.stringify(myData));
@@ -214,24 +219,99 @@ table, table tr th, table tr td {
 			//$('#sead').val(name);
 			$('#sead').val(tas);
 			if (num == 0) {
-				alert("You must choose at least one trait！");
+				alert("Please select at least one Trait!");
 				return false;
 			} else if (val == undefined) {
 				return false;
 			} else {
 				if (val == "first") {
-					if (/^\d+$/.test($("#sh1").val()) && /^\d+$/.test($("#sh2").val())) {
-                     if(parseInt($("#sh1").val()) > parseInt($("#sh2").val())){
-                           alert("end position must bigger than start position");
-                           return false;
-                     }
-						return true;
-					} else {
-						alert("please enter number");
+				var start = /^\d+$/.test($("#sh1").val());
+				var end = /^\d+$/.test($("#sh2").val());
+				
+					if ($(".form-control :selected").val() == ''){
+						alert("Please select one Chromosome.");
 						return false;
 					}
-				} else {
-					return true;
+					if((!start || !end) && $("#sh2").val() != '' && $("#sh1").val() != '') {
+						if(!start && !end) {
+							alert("Please input the correct start and end,like 147 and 6782830.");
+							
+						} else if(!start) {
+							alert("Please input the correct start,like 147.");
+						}
+						else{alert("Please input the correct end,like 6782830.");}
+						return false;
+					
+					}
+					else if (start && end) {
+                     	if(parseInt($("#sh1").val()) > parseInt($("#sh2").val())){
+                         	  alert("Input start or end position error,please input again.");
+                          	 return false;
+                     	}
+                     	else if($("#sel2").val() == '1' && parseInt($("#sh2").val()) > 300479650) {
+                     		alert("Please input a number of end position less than 300479650.");
+                          	 return false;
+                     	}
+                     	else if($("#sel2").val() == '2' && parseInt($("#sh2").val()) > 237033410) {
+                     		alert("Please input a number of end position less than 237033410.");
+                          	 return false;
+                     	}
+                     	else if($("#sel2").val() == '3' && parseInt($("#sh2").val()) > 229669323) {
+                     		alert("Please input a number of end position less than 229669323.");
+                          	 return false;
+                     	}
+                     	else if($("#sel2").val() == '4' && parseInt($("#sh2").val()) > 237410737) {
+                     		alert("Please input a number of end position less than 237410737.");
+                          	 return false;
+                     	}
+                     	else if($("#sel2").val() == '5' && parseInt($("#sh2").val()) > 215109004) {
+                     		alert("Please input a number of end position less than 215109004.");
+                          	 return false;
+                     	}
+                     	else if($("#sel2").val() == '6' && parseInt($("#sh2").val()) > 168172808) {
+                     		alert("Please input a number of end position less than 168172808.");
+                          	 return false;
+                     	}
+                     	else if($("#sel2").val() == '7' && parseInt($("#sh2").val()) > 176393750) {
+                     		alert("Please input a number of end position less than 176393750.");
+                          	 return false;
+                     	}
+                     	else if($("#sel2").val() == '8' && parseInt($("#sh2").val()) > 172234845) {
+                     		alert("Please input a number of end position less than 172234845.");
+                          	 return false;
+                     	}
+                     	else if($("#sel2").val() == '9' && parseInt($("#sh2").val()) > 154216405) {
+                     		alert("Please input a number of end position less than 154216405.");
+                          	 return false;
+                     	}
+                     	else if($("#sel2").val() == '10' && parseInt($("#sh2").val()) > 146087335) {
+                     		alert("Please input a number of end position less than 146087335.");
+                          	 return false;
+                     	}
+						return true;
+					}
+					else if($("#sh1").val() == '' && $("#sh2").val() != ''){
+    					alert(("Please input start position!"));
+    					return false;
+    				} 
+    				else if($("#sh2").val() == '' && $("#sh1").val() != ''){
+    					alert(("Please input end position!"));
+    					return false;
+    				} 
+					else {
+						alert("Please input start and end position!");
+						return false;
+					}
+				} else if (val == "second"){
+				var gene = /^(?![0-9]+$)(?![A-Z]+$)[0-9A-Z]{12,17}$/.test($("#sh3").val());
+					if($("#sh3").val() == '') {
+						alert("Please input the Gene ID!");
+						return false;
+					}
+					else if (!gene) {
+						alert("Please input the correct Gene ID! like GRMZM2G040389.");
+						return false;
+					}
 				}
 			}
 		}

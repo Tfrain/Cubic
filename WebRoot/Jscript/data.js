@@ -4,7 +4,7 @@ var data = [
         "name": "Cob weight"
     },
     {
-		"id": "ED",
+		"id": "DTA",
         "name": "Date to anthesis"
     },
     {

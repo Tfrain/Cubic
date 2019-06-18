@@ -63,8 +63,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
   function check1()
 { 
-	var eralue=$("#Eralue").val();//onblur='javascript:$("#auto")'更高级的把默认值填写进去，失去焦点发生,估计就是自适应的意思
-	var maxtar=$("#maxtar").val();//用户名,比较简单，根据搜索，见名知意，改动方便
+	var eralue=$("#Eralue").val();//用户名
+	var maxtar=$("#maxtar").val();//用户名
  	var percent=$("#percent").val();
  	var database1=$("#Database").val();
  	var blastprograme1=$("#blastprograme1").val();

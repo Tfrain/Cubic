@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <div class="row">
                     <input type="text" placeholder="Gene" class="input" name="gene" readonly="readonly" id="sh3">
-                    <span style="color:gray;">(eg: GRMZM2G040389 )</span>
+                    <span style="color:gray;">(eg:GRMZM2G091756 )</span>
                 </div>
             </div>
             </form>

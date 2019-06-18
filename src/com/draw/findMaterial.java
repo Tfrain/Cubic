@@ -23,7 +23,6 @@ public class findMaterial extends ActionSupport{
         String  result  = d.test(sql);
         result=result.substring(0,result.length()-1);
         System.out.println(result);
-        //System.out.println(result);
 		try {
 			writer = ServletActionContext.getResponse().getWriter();
 			writer.write(result);

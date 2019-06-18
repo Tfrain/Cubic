@@ -58,7 +58,7 @@ if __name__ == "__main__":
     trait = args.trait
     # path = str(args.path)
     # print(path)
-    db = mysql.connect("localhost", "root", "", "magic")
+    db = mysql.connect("localhost", "root", "nick35789624", "magic")
     cursor = db.cursor()
     # cursor.execute("select * from magic_all_sig_snp where pos BETWEEN "
     #                + start + " and " + end)

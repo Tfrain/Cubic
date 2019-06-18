@@ -64,7 +64,7 @@ public class showThree extends ActionSupport{
 		System.out.println(gene);
 		System.out.println(search);
 		Map<String,Object> attributes = ActionContext.getContext().getSession();
-		attributes.put("trait", trait);//traitæ˜¯ä¸€ç»„æ•°æ®CW,ED,DTS,DTT,EDï¼Œï¼Œï¼Œ
+		attributes.put("trait", trait);//traitÊÇÒ»×éÊı¾İCW,ED,DTS,DTT,ED£¬£¬£¬
 		System.out.println(attributes.get("trait"));
 		String[] traitArray = trait.split(",");
 
@@ -103,7 +103,7 @@ public class showThree extends ActionSupport{
 			for(int i=0;i<traitlen;i++){
 				String sql1 = "";
 				if(i==traitlen-1){
-					sql1 = "trait = '"+traitArray[i];//trait = 'ED'è¿™ç§ç±»å‹
+					sql1 = "trait = '"+traitArray[i];//trait = 'ED'ÕâÖÖÀàĞÍ
 				}else{
 					sql1 = "trait = '"+traitArray[i]+"' or ";
 				}
@@ -118,7 +118,7 @@ public class showThree extends ActionSupport{
 		}else{
 			sql = "select trait , chr , pos , p , sig_snp_annotation.* from sig_snp_annotation,magic_all_sig_snp where gene='"+gene+"' AND magic_all_sig_snp.snp=sig_snp_annotation.snp";
 			sql2 ="SELECT * FROM gwas where (`start`<(SELECT `start` FROM zmb73_annotation_combined WHERE id='"+gene+"') AND `end`>(SELECT `start` FROM zmb73_annotation_combined WHERE id='"+gene+"'))OR (`start`<(SELECT `end` FROM zmb73_annotation_combined WHERE id='"+gene+"') AND `end`>(SELECT `end` FROM zmb73_annotation_combined WHERE id='"+gene+"'))";
-			System.out.println(sql2);//åŸºå› åˆ™ç›´æ¥æ ¹æ®åç§°ï¼Œæ›´å®¹æ˜“å†™sql
+			System.out.println(sql2);//»ùÒòÔòÖ±½Ó¸ù¾İÃû³Æ£¬¸üÈİÒ×Ğ´sql
 			startEndMap = d.getStartEnd(gene);
 			start = startEndMap.get("start");
 			end = startEndMap.get("end");
@@ -137,6 +137,8 @@ public class showThree extends ActionSupport{
 					+ "chromesome.py " + Integer.parseInt(start) + " " + Integer.parseInt(end) + " " + chr + " " + "\""+ traits + "\"";
 			System.out.println(tmp);
 			rt.exec(tmp).waitFor();
+//			rt.exec(tmp);
+			System.out.println("after waitFor");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
@@ -144,10 +146,10 @@ public class showThree extends ActionSupport{
 			e.printStackTrace();
 		}
 
-		map2 = (HashMap<String,Object>)d2.getChr(sql2);//è°ƒç”¨å®šä¹‰çš„å‡½æ•°ï¼Œreturnçš„æ˜¯mapï¼Œé‡Œé¢å°±åŒ…å«é”®å€¼å¯¹
+		map2 = (HashMap<String,Object>)d2.getChr(sql2);//µ÷ÓÃ¶¨ÒåµÄº¯Êı£¬returnµÄÊÇmap£¬ÀïÃæ¾Í°üº¬¼üÖµ¶Ô
 		map = (HashMap<String,Object>)d.getChr(sql);
 
-		attributes.put("len", map.get("len"));//é”®å€¼åŒ¹é…ä¸Šï¼Œlenå’Œdataåœ¨Dbaseå‡½æ•°ä¸­
+		attributes.put("len", map.get("len"));//¼üÖµÆ¥ÅäÉÏ£¬lenºÍdataÔÚDbaseº¯ÊıÖĞ
 		attributes.put("data", map.get("data"));
 		attributes.put("len2", map2.get("len"));
 		attributes.put("data2", map2.get("data"));
