@@ -88,7 +88,7 @@ public class showThree extends ActionSupport{
 		Map<String,Object> map2 =  new HashMap<String,Object>();
 		Map<String, String> startEndMap;
 		String traits = "";
-				for (int i = 0; i < traitlen; i++) {
+		for (int i = 0; i < traitlen; i++) {
 			if (i == traitlen - 1) {
 				traits = traits + "trait = '" + traitArray[i];
 			} else {
@@ -126,7 +126,7 @@ public class showThree extends ActionSupport{
 		}
 
 
-				String path = getWebRoot();
+		String path = getWebRoot();
 		path = path.substring(1, path.length());
 		path = path + "py_scripts/";
 		String driver = path.substring(0, path.indexOf('/'));
@@ -218,8 +218,6 @@ public class showThree extends ActionSupport{
 	public void setTrait(String trait) {
 		this.trait = trait;
 	}
-
-
 
 }
 

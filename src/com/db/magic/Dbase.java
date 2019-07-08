@@ -84,6 +84,36 @@ public class Dbase {
         System.out.println("getChr: query sucessfully length = " + len);
 		return map;
 	}
+	
+	public Map<String,Object> getNewChr(String sql){
+		System.out.println("getNewChr is executing");
+		Map<String,Object> map = new HashMap<String,Object> ();
+		Map<String,ArrayList<String>> map1 = new HashMap<String,ArrayList<String>> ();
+		try {
+			rs = stmt.executeQuery(sql);//用于执行SELECT查询。它返回ResultSet的对象。
+		    int i = 1;
+			while(rs.next()){
+			    int j = 1;
+				ArrayList<String> list = new ArrayList<String>();
+
+			    while(j<=rs.getMetaData().getColumnCount()){
+			    	list.add(rs.getString(j));
+			    	j++;
+			    }
+			    System.out.println(list);
+			    map1.put(Integer.toString(i), list);
+			    i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		map.put("data", map1);
+		int len = map1.size();
+		map.put("len", len);
+        System.out.println("getChr: query sucessfully length = " + len);
+		return map;
+	}
 
 
 	public String getPrimer3(String sql){

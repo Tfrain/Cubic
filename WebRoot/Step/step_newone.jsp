@@ -9,11 +9,11 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>GWAS Search</title>
+<title>Variation Search</title>
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,user-scalable=no" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="author" content="Daliu" />
+<meta name="author" content="wei" />
 <meta name="keywords" content="" />
 <meta name="describe" content="" />
 <link type="text/css" rel="stylesheet" href="Css/bootstrap.min.css" />
@@ -27,35 +27,22 @@
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('input:radio[name="search"]').click(function() {
-			var val = $('input:radio[name="search"]:checked').val();
-			//alert(val);
-			if (val == "first") {
-				$("#sh1").removeAttr("readonly");
-				$("#sh2").removeAttr("readonly");
-				$("#sh3").attr("readonly", "readonly");
-				$("#sh3").val("");
-			} else {
-				$("#sh3").removeAttr("readonly");
-				$("#sh1").attr("readonly", "readonly");
-				$("#sh2").attr("readonly", "readonly");
-				$("#sh1").val("");
-				$("#sh2").val("");
-			}
-		});
-
-
 		$("#next").click(function() {
-			var val = $('input:radio[name="search"]:checked').val();
-			if (val == "first" || val == "second") {
+			var variation = $("#variationName").val();
+			var gene = $("#geneid").val();
+			if (variation == ""||gene == "") {
 				form.submit();
 			} else {
-				var myData = $('#table-methods-table').bootstrapTable('getAllSelections');
-				if (myData.length == 0) {
-				alert("Please select at least one Trait!");
-				} else{
-				alert("Please select “Search By Region” or “Search By Gene ID”");
+				var variation = /^[a-z][a-z0-9_.]{5,20}$/.test($("#variationName").val());
+				var gene = /^(?![0-9]+$)(?![A-Z]+$)[0-9A-Z]{12,17}$/.test($("#geneid").val());
+				if(variation != "") {
+					alert("Please select Variation Name Like chr5.s_2269!");
+					return false;
 				}
+				if (gene != "") {
+					alert("Please select Gene ID Like GRMZM2G356204!");
+					return false;
+				} 
 			}
 		});
 	});
@@ -64,9 +51,9 @@
 
 <body>
 	<%@ include file="../ListHeader.jsp"%>
-	<h3 style="position:relative;left:4.9%;">GWAS Search</h3>
+	<h3 style="position:relative;left:4.9%;">Variation Search</h3>
 	<br>
-	<div class="container" style="height:700px;">
+	<div class="container" style="height:600px;">
 		<div class="describe">
 			<p>
 				<font size="3">Single-variant-based GWAS and haplotype-based GWAS results of 23 agronomic traits for poplulation were available in this section. And detailed information of significant SNPs(p&lt;2.79x10-8) for you interested traits can be queried by limiting genomic coordinate or gene ID.</font>
@@ -77,9 +64,8 @@
 					identifier, study and gene.</font>
 			</p>
 		</div>
-		<form action="showThree" method="post" onsubmit="return check();">
-            <div class="row">
-            <div class="col-md-6">
+		<form action="showNewThree" method="post" onsubmit="return check();">
+            <div class="col-md-6" style="width:100%">
 			<div class="search">
 <style>
 table, table tr th, table tr td {
@@ -90,40 +76,43 @@ table, table tr th, table tr td {
     display:none;
 }
 </style>
-				<table id="table-methods-table" data-toggle="table" data="data"
-					data-height="500" >
-					<!-- data-height="246" -->
-					<thead>
-						<tr>
-							<th data-field="state" data-checkbox="true" ></th>
-							<th data-field="id" data-align="center" data-sortable="true">Trait
-								Name</th>
-							<th data-field="name" data-align="center" data-sortable="true">Full
-								Name</th>
-						</tr>
-					</thead>
-				</table>
-			</div>
-			</div>
-			<br> <br> <input type="hidden" id="sead" name="trait" />
-			<div class="col-md-6">
-			<div class="search">
-				<style>
-.col-md-9, .col-xs-9, col-md-9{
-    padding:10px 10px
-}
-
-</style>
-				<div class="row col-md-9 col-md-offset-1">
-					<input type="radio" name="search" value="first"> <font
-						size="3">Search By Region</font><br>
-					<div class="col-md-9 col-xs-9"
-						style="padding-right:3px;padding-left:3px;">
-						<div class="input-group ">
-                    <span class="input-group-addon">Chromesome:</span>
-						<select class="form-control eg" style="display:inline;"
-							title="eg: Chr1" name="chr" id="sel2">
-							<option value='' disabled selected style='display:none;' style="width:300px;">Choose One Chromesome</option>
+          <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Variation Name</label>
+          <div class="col-sm-10">
+                  <div class="col-sm-8 col-lg-8" style="padding-left:0px">
+                      <input id="variationName" type="text" name="variation" title="eg:chr5.s_2269" placeholder="eg:chr5.s_2269" class="form-control">
+              </div>
+          </div>
+          </div>
+          
+          <div class="form-group row">
+              <label class="col-sm-2">Gene ID</label>
+              <div class="col-sm-4">
+                  <input id="geneid" type="text" name="gene" title="eg:GRMZM2G356204" placeholder="eg:GRMZM2G356204" class="form-control">
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Variation Type</label>
+              <div class="col-sm-10">
+                  <select id="fearturetype" class="form-control" name="feature" id="sel2">
+                  <option value="downstream_gene_variant">downstream_gene_variant</option>
+				  <option value="upstream_gene_variant">upstream_gene_variant</option>
+                  <option value="synonymous_variant">synonymous_variant</option>
+                  <option value="missense_variant">missense_variant</option>
+                  <option value="3_prime_UTR_variant">3_prime_UTR_variant</option>
+                  <option value="intron_variant">intron_variant</option>
+                  <option value="splice_region_variant">splice_region_variant</option>
+                  <option value="5_prime_UTR_variantt">5_prime_UTR_variantt</option>
+                  <option value="stop_lost">stop_lost</option>
+                  <option value="stop_gained">stop_gained</option>
+                  <option value="stop_retained_variant">stop_retained_variant</option>
+                  </select>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Chr/Scaffold</label>
+              <div class="col-sm-2">
+                  <select id="chrScaffold" class="form-control" name="chr" id="sel3">
 							<option value="1">Chr1</option>
 							<option value="2">Chr2</option>
 							<option value="3">Chr3</option>
@@ -134,75 +123,48 @@ table, table tr th, table tr td {
 							<option value="8">Chr8</option>
 							<option value="9">Chr9</option>
 							<option value="10">Chr10</option>
-						</select>
-					</div>
-					</div>
-
-					<div class="col-md-9 col-xs-9">
-						<div class="input-group ">
-							<span class="input-group-addon">Start:</span> <input type="text"
-								class="form-control eg" title="eg: 147" style="display:inline;width:300px;" name="start"
-								readonly="readonly" id="sh1">
-						</div>
-					</div>
-
-
-					<div class="col-md-9 col-xs-9">
-						<div class="input-group ">
-							<span class="input-group-addon">End:</span> <input type="text"
-								class="form-control eg" title="eg: 6782830 " style="width:310px; display:inline;"name="end"
-								readonly="readonly" id="sh2">
-						</div>
-					</div>
-					<br>
-					<%--<span style="color:gray;float:left;"><font size="3">(eg: Chr1 147 6782830 )</font></span><!--修改了与注释不符的错误-->--%>
-				</div>
-				<div class="row col-md-9 col-md-offset-1">
-					<input type="radio" name="search" value="second"><font
-						size="3"> Search By Gene ID</font><br>
-					<!--定义了字体大小-->
-                    <div class="col-md-7 col-xs-7">
-					<div class="input-group ">
-						<span class="input-group-addon">Gene:</span> <input type="text"
-							class="form-control eg" style="width:220px;"
-							title="eg: GRMZM2G040389" name="gene" readonly="readonly"
-							id="sh3">
-					</div>
-					</div>
-					<%--<span style="color:gray;float:left;"><font size="3">(eg: GRMZM2G040389 )</font></span><!--修改了与注释不符的错误-->--%>
-				</div>
-			</div>
-			</div>
-			<div class="btns" >
-				<button class="btn" text-algin="left" id="next" float="right">Submit</button>
-			</div>
-			</div>
-		</form>
-	</div>
+                  </select>
+              </div>
+              <label class="col-sm-1 col-form-label">between</label>
+              <div class="col-sm-2">
+                  <input id='chrScaffoldStart' type="text" class="form-control" name="start">
+              </div>
+              <label class="col-sm-1 col-form-label">and</label>
+              <div class="col-sm-2">
+                  <input id='chrScaffoldEnd' type="text" class="form-control" name="end">
+              </div>
+          </div>
+          
+          <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Variation effect</label>
+              <div class="col-sm-10">
+                  <select id="variationEffect" class="form-control" name="effect" id="sel4">
+				  <option value="MODIFIER">MODIFIER</option>
+				  <option value="MODERTE">MODERTE</option>
+				  <option value="LOW">LOW</option>
+				  <option value="HIGH">HIGH</option>
+                  </select>
+              </div>
+          </div>
+          </div>
+          </div>
+              <div class="col">
+             <button class="btn btn-success form-control" text-algin="left" id="next" float="right" style="height:60px">Search</button>
+             </div>
+ 	</form>
+ 	</div>    
 	<%@ include file="../ListFooter.jsp"%>
+	
+	
 	<script type="text/javascript">
-		$(function() {
+		 $(function() {
 			$(".eg").tooltip();
 		});
-		/*
-		$ajax({
-		        	type:"get",
-		    			url:"showTrait",
-			success:function(result){
-		    				alert("success");
-		    				var result = [{"id": 2,"name": "sb"}]; 
-				jQuery.fn.bootstrapTable.defaults.data = result;
-			},
-			error:function(){
-				alert("系统异常，请稍后重试");
-				var result = [{"id": 1,"name": "bb"}]; 
-				jQuery.fn.bootstrapTable.defaults.data = result;
-			}
-		});
-		*/
 		jQuery.fn.bootstrapTable.defaults.data = data;
 	
 		function check() {
+		return true;
+		/*
 			var myData = $('#table-methods-table').bootstrapTable('getAllSelections');
 			//alert(JSON.stringify(myData));
 			//alert(myData.length);
@@ -312,7 +274,7 @@ table, table tr th, table tr td {
 						return false;
 					}
 				}
-			}
+			}*/
 		}
 		//加载自己的数据时将data.js文件里的值修改了就是
 		//jQuery.fn.bootstrapTable.defaults.data = data;
