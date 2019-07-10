@@ -51,23 +51,19 @@ public class showNewThree extends ActionSupport{
 	
 		
 		Map<String,Object> attributes = ActionContext.getContext().getSession();
-		attributes.put("variation", variation);
-		System.out.println(attributes.get("variation"));
+		//attributes.put("variation", variation);
+		//System.out.println(attributes.get("variation"));
 		
-		attributes.put("effect", effect);
-		String sql;
-
+		//attributes.put("effect", effect);
+		String sql= "SELECT * FROM variation WHERE";
 		Dbase d = new Dbase();
-
 		Map<String,Object> map =  new HashMap<String,Object>();
-		
-		sql = "SELECT * FROM test WHERE";
-		
-		if (!variation.equals("")) {
+		System.out.println(sql);
+		if (variation!=null&&!variation.equals("")) {
 			i++;
 			sql = sql + " Uploaded_variation = '"+variation+"'";
 		}
-		if(!gene.equals("")) {
+		if(gene!=null&&!gene.equals("")) {
 			if(i==0) {
 				sql = sql + " Gene = '"+gene+"'";
 			}
@@ -76,16 +72,16 @@ public class showNewThree extends ActionSupport{
 			}
 			i++;
 		}
-		if(!feature.equals("")) {
+		if(feature!=null&&!feature.equals("")) {
 			if(i==0) {
-				sql = sql + " Consequence = '"+feature+"'";
+				sql = sql + " ((Consequence = '"+feature+"') OR ("+"Consequence LIKE '%"+feature+"') OR ("+"Consequence LIKE '"+feature+"%'))";
 			}
 			else {
-			sql = sql + " AND Consequence = '"+feature+"'";
+				sql = sql + " AND ((Consequence = '"+feature+"') OR ("+"Consequence LIKE '%"+feature+"') OR ("+"Consequence LIKE '"+feature+"%'))";
 			}
 			i++;
 		}
-		if(!chr.equals("")) {
+		if(chr != null&&!chr.equals("")) {
 			if(i==0) {
 				sql = sql + " Chr = '"+chr+"'";
 			}
@@ -94,7 +90,7 @@ public class showNewThree extends ActionSupport{
 			}
 			i++;
 		}
-		if(!start.equals("")) {
+		if(start != null&&!start.equals("")) {
 			if(i==0) {
 				sql = sql + " Location >= '"+start+"'";
 			}
@@ -103,7 +99,7 @@ public class showNewThree extends ActionSupport{
 			}
 			i++;
 		}
-		if(!end.equals("")) {
+		if(end!=null&&!end.equals("")) {
 			if(i==0) {
 				sql = sql + " Location <= '"+end+"'";
 			}
@@ -112,7 +108,7 @@ public class showNewThree extends ActionSupport{
 			}
 			i++;
 		}
-		if(!effect.equals("")) {
+		if(effect!=null&&!effect.equals("")) {
 			if(i==0) {
 				sql = sql + " Extra LIKE 'IMPACT="+effect+"%'";
 			}
@@ -121,6 +117,7 @@ public class showNewThree extends ActionSupport{
 			}
 			i++;
 		}
+		
 		//sql ="select * FROM test WHERE Gene = '"+gene+"' and Uploaded_variation LIKE '"+chr+"%'";
 		System.out.println(sql);
 		

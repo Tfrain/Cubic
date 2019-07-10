@@ -72,7 +72,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     th{
         background-color:white;
     }
-
   </style>
   
   <body>
@@ -84,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <br>
             
             <div class="my-panel">
-           <h3>Vatiation SNP</h3>
+           <h3>SNP</h3>
            <hr/>
             <%if(len > 0){%>
             <table id="table3" data-toggle="table" class="table table-hover">
@@ -108,6 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td><%=data.get(Integer.toString(i)).get(12)%></td>
                     <td><%=data.get(Integer.toString(i)).get(13)%></td>
                     <td><%=data.get(Integer.toString(i)).get(14)%></td>
+                    <td><%=data.get(Integer.toString(i)).get(15)%></td>
                 </tr>	
            <%} %>
                        </tbody>
@@ -130,24 +130,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $('#table3').bootstrapTable({//'#table' 改为所用表的选择器
         url: "localhost:8080/Magic/Step/step_newone.jsp",//改为当前网页的url，可通过鼠标右击网页 查看信息找出
         method: 'GET',                      //请求方式（*）
-       	striped: true,                      //是否显示行间隔色
+       	striped: true,						//是否显示行间隔色
+       	cache: false,                      	//缓存
        	pagination: true,
        	smartDisplay:false,
-       	pageSize: 5,
+       	pageSize: 10,
        	search: true,
         showExport: true,  
         buttonsAlign:"left",
         exportTypes:['csv','excel'],
         exportOptions:{  
-          //ignoreColumn: [0,0],            //忽略某一列的索引  
-          fileName: 'Variation SNP',              //文件名称设置  
-          worksheetName: '111',          //表格工作区名称  
-          tableName: 'Variation SNP',  
-      }, 
+           //ignoreColumn: [0,1],  //忽略某一列的索引  
+           fileName: 'SNP',  //文件名称设置  
+           worksheetName: 'sheet1',  //表格工作区名称  
+           tableName: 'SNP',  
+           excelstyles: ['background-color', 'color', 'font-size', 'font-weight'],  
+           //onMsoNumberFormat: DoOnMsoNumberFormat  
+       }, 
       columns: [{//修改为所用表的信息 field填数据库中的 对应的标题，title为要显示的名称
         field: 'Uploaded_variation',
-        title: 'Uploaded_variation',
-        sortable:true
+        title: 'Variation',
+        sortable:true,
     }, {
         field: 'Chr',
         title: 'Chr',
@@ -163,47 +166,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     },{
         field: 'Gene',
         title: 'Gene',
-        sortable:true
     },{
         field: 'Feature',
         title: 'Feature',
-        sortable:true    
     },{
         field: 'Feature_type',
-        title: 'Feature_type',
-        sortable:true    
+        title: 'Feature_type',  
     },{
         field: 'Consequence',
-        title: 'Consequence',
-        sortable:true    
-    },{
-        field: 'cDNA_position',
-        title: 'cDNA_position',
-        sortable:true    
-    },{
-        field: 'CDS_position',
-        title: 'CDS_position',
-        sortable:true    
-    },{
-        field: 'Protein_position',
-        title: 'Protein_position',
-        sortable:true    
-    },{
-        field: 'Amino_acids',
-        title: 'Amino_acids',
-        sortable:true    
-    },{
-        field: 'Codons',
-        title: 'Codons',
-        sortable:true    
-    },{
-        field: 'Existing_variation',
-        title: 'Existing_variation',
-        sortable:true    
+        title: 'Variation_type',
+        formatter:function(value,row,index){
+            if(value.length>10){  
+        		return "<span title='"+value+"'>"+value.substring(0,10)+"..."+"</span>";  
+    		}else{  
+        		return "<span title='"+value+"'>"+value.substring(0,value.length)+"</span>";  
+   			}  
+     }     
     },{
         field: 'Extra',
         title: 'Extra',
-        sortable:true    
+        formatter:function(value,row,index){
+            if(value.length>15){  
+        		return "<span title='"+value+"'>"+value.substring(0,15)+"..."+"</span>";  
+    		}else{  
+        		return "<span title='"+value+"'>"+value.substring(0,value.length)+"</span>";  
+   			}  
+     }   
+    },{
+        field: 'Action',
+        title: 'Action',
+        formatter:function(value,row,index){
+          var textR='<p><a href="'+ value +'" target="_blank" style="color:red">JBrowse</a></p>';
+          return textR;
+     }
+    },{
+        field: 'cDNA_position',
+        title: 'cDNA_position',
+        sortable:true,
+    },{
+        field: 'CDS_position',
+        title: 'CDS_position',
+        sortable:true,
+    },{
+        field: 'Protein_position',
+        title: 'Protein_position',
+        sortable:true,
+    },{
+        field: 'Amino_acids',
+        title: 'Amino_acids',
+        sortable:true,
+    },{
+        field: 'Codons',
+        title: 'Codons',
+        sortable:true,
+    },{
+        field: 'Existing_variation',
+        title: 'Existing_variation',
+        sortable:true,
     }
     ],    
  		});

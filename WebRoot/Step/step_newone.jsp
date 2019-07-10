@@ -28,13 +28,13 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#next").click(function() {
-			var variation = $("#variationName").val();
-			var gene = $("#geneid").val();
+			var variation = $("#sel5").val();
+			var gene = $("#sel4").val();
 			if (variation == ""||gene == "") {
 				form.submit();
 			} else {
-				var variation = /^[a-z][a-z0-9_.]{5,20}$/.test($("#variationName").val());
-				var gene = /^(?![0-9]+$)(?![A-Z]+$)[0-9A-Z]{12,17}$/.test($("#geneid").val());
+				var variation = /^[a-z][a-z0-9_.]{5,20}$/.test($("#sel5").val());
+				var gene = /^(?![0-9]+$)(?![A-Z]+$)[0-9A-Z]{12,17}$/.test($("#sel4").val());
 				if(variation != "") {
 					alert("Please select Variation Name Like chr5.s_2269!");
 					return false;
@@ -77,24 +77,25 @@ table, table tr th, table tr td {
 }
 </style>
           <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Variation Name</label>
+          <label class="eg col-sm-2 col-form-label">Variation Name</label>
           <div class="col-sm-10">
                   <div class="col-sm-8 col-lg-8" style="padding-left:0px">
-                      <input id="variationName" type="text" name="variation" title="eg:chr5.s_2269" placeholder="eg:chr5.s_2269" class="form-control">
+                      <input id="sel5" type="text" name="variation" title="eg:chr5.s_2269" placeholder="eg:chr5.s_2269" class="form-control">
               </div>
           </div>
           </div>
           
           <div class="form-group row">
-              <label class="col-sm-2">Gene ID</label>
+              <label class="eg col-sm-2">Gene ID</label>
               <div class="col-sm-4">
-                  <input id="geneid" type="text" name="gene" title="eg:GRMZM2G356204" placeholder="eg:GRMZM2G356204" class="form-control">
+                  <input id="sel4" type="text" name="gene" title="eg:GRMZM2G356204" placeholder="eg:GRMZM2G356204" class="form-control">
               </div>
           </div>
           <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Variation Type</label>
+              <label class="eg col-sm-2 col-form-label">Variation Type</label>
               <div class="col-sm-10">
-                  <select id="fearturetype" class="form-control" name="feature" id="sel2">
+                  <select class="form-control" name="feature" id="sel3">
+                  <option value="" disabled selected style='display:none;'>Choose One Variation Type</option>
                   <option value="downstream_gene_variant">downstream_gene_variant</option>
 				  <option value="upstream_gene_variant">upstream_gene_variant</option>
                   <option value="synonymous_variant">synonymous_variant</option>
@@ -110,9 +111,10 @@ table, table tr th, table tr td {
               </div>
           </div>
           <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Chr/Scaffold</label>
+              <label class="eg col-sm-2 col-form-label">Chr/Scaffold</label>
               <div class="col-sm-2">
-                  <select id="chrScaffold" class="form-control" name="chr" id="sel3">
+                  <select class="form-control" name="chr" id="sel2">
+                  			<option value="" disabled selected style='display:none;'>Choose One Chr/Scaffold</option>
 							<option value="1">Chr1</option>
 							<option value="2">Chr2</option>
 							<option value="3">Chr3</option>
@@ -127,18 +129,19 @@ table, table tr th, table tr td {
               </div>
               <label class="col-sm-1 col-form-label">between</label>
               <div class="col-sm-2">
-                  <input id='chrScaffoldStart' type="text" class="form-control" name="start">
+                  <input type="text" class="form-control" name="start" id="sh1">
               </div>
               <label class="col-sm-1 col-form-label">and</label>
               <div class="col-sm-2">
-                  <input id='chrScaffoldEnd' type="text" class="form-control" name="end">
+                  <input type="text" class="form-control" name="end" id="sh2">
               </div>
           </div>
           
           <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Variation effect</label>
+              <label class="eg col-sm-2 col-form-label">Variation effect</label>
               <div class="col-sm-10">
-                  <select id="variationEffect" class="form-control" name="effect" id="sel4">
+                  <select class="form-control" name="effect" id="sel1">
+                  <option value="" disabled selected style='display:none;'>Variation effect</option>
 				  <option value="MODIFIER">MODIFIER</option>
 				  <option value="MODERTE">MODERTE</option>
 				  <option value="LOW">LOW</option>
@@ -148,6 +151,11 @@ table, table tr th, table tr td {
           </div>
           </div>
           </div>
+           <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
               <div class="col">
              <button class="btn btn-success form-control" text-algin="left" id="next" float="right" style="height:60px">Search</button>
              </div>
@@ -156,55 +164,39 @@ table, table tr th, table tr td {
 	<%@ include file="../ListFooter.jsp"%>
 	
 	
-	<script type="text/javascript">
+<script type="text/javascript">
 		 $(function() {
 			$(".eg").tooltip();
 		});
 		jQuery.fn.bootstrapTable.defaults.data = data;
 	
 		function check() {
-		return true;
-		/*
-			var myData = $('#table-methods-table').bootstrapTable('getAllSelections');
-			//alert(JSON.stringify(myData));
-			//alert(myData.length);
-			var val = $('input:radio[name="search"]:checked').val();
-			var num = myData.length;
-			var tas = new Array();
-			for (var i = 0; i < num; i++) {
-				tas[i] = myData[i].id;
-			//alert(tas[i]);
+			//if($("#sel1 :selected").val() == ''){$("#sel1").attr("value",'');}
+			//if($("#sel2 :selected").val() == ''){$("#sel2").attr("value",'');}
+			//if($("#sel3 :selected").val() == ''){$("#sel3").attr("value",'');}
+			var start = /^\d+$/.test($("#sh1").val());
+			var end = /^\d+$/.test($("#sh2").val());
+			
+			if ($("#start").val() == ''&&$("#end").val() == ''&&$("#sel2").val() != '') {
+					alert("Please select one Chr/Scaffold!");
+					return false;
 			}
-			//alert(tas);
-			//var name = myData[0].name;
-			//$('#sead').val(name);
-			$('#sead').val(tas);
-			if (num == 0) {
-				alert("Please select at least one Trait!");
+			
+			if ($("#sel1 :selected").val() == ''&&$("#sel2 :selected").val() == ''&&$("#sel3 :selected").val() == ''&&$("#sel4").val() == ''&&$("#sel5").val() == ''&&$("#sh1").val() == ''&&$("#sh2").val() == '') {
+				alert("Please select at least one Option!");
 				return false;
-			} else if (val == undefined) {
-				return false;
-			} else {
-				if (val == "first") {
-				var start = /^\d+$/.test($("#sh1").val());
-				var end = /^\d+$/.test($("#sh2").val());
-				
-					if ($(".form-control :selected").val() == ''){
-						alert("Please select one Chromosome.");
-						return false;
-					}
-					if((!start || !end) && $("#sh2").val() != '' && $("#sh1").val() != '') {
-						if(!start && !end) {
-							alert("Please input the correct start and end,like 147 and 6782830.");
+			}
+			
+			if((!start || !end) && $("#sh2").val() != '' && $("#sh1").val() != '') {
+					if(!start && !end) {
+						alert("Please input the correct start and end,like 147 and 6782830.");
 							
-						} else if(!start) {
-							alert("Please input the correct start,like 147.");
-						}
-						else{alert("Please input the correct end,like 6782830.");}
+					} else if(!start) {
+						alert("Please input the correct start,like 147.");
+					} else{alert("Please input the correct end,like 6782830.");}
 						return false;
 					
-					}
-					else if (start && end) {
+			} else if (start && end) {
                      	if(parseInt($("#sh1").val()) > parseInt($("#sh2").val())){
                          	  alert("Input start or end position error,please input again.");
                           	 return false;
@@ -250,34 +242,18 @@ table, table tr th, table tr td {
                           	 return false;
                      	}
 						return true;
-					}
-					else if($("#sh1").val() == '' && $("#sh2").val() != ''){
+			} else if($("#sh1").val() == '' && $("#sh2").val() != ''){
     					alert(("Please input start position!"));
     					return false;
-    				} 
-    				else if($("#sh2").val() == '' && $("#sh1").val() != ''){
+    		} else if($("#sh2").val() == '' && $("#sh1").val() != ''){
     					alert(("Please input end position!"));
     					return false;
-    				} 
-					else {
+    		}/* else {
 						alert("Please input start and end position!");
 						return false;
-					}
-				} else if (val == "second"){
-				var gene = /^(?![0-9]+$)(?![A-Z]+$)[0-9A-Z]{12,17}$/.test($("#sh3").val());
-					if($("#sh3").val() == '') {
-						alert("Please input the Gene ID!");
-						return false;
-					}
-					else if (!gene) {
-						alert("Please input the correct Gene ID! like GRMZM2G040389.");
-						return false;
-					}
-				}
 			}*/
-		}
-		//加载自己的数据时将data.js文件里的值修改了就是
-		//jQuery.fn.bootstrapTable.defaults.data = data;
+			return true;
+		};
 	</script>
 </body>
 </html>

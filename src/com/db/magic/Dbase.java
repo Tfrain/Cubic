@@ -20,6 +20,7 @@ import com.mysql.jdbc.ResultSetMetaData;
 
 public class Dbase {
 	private String user = "root";
+	//服务器密码为"",本地为654321
 	private String password = "654321";
 	private String url = "jdbc:mysql://localhost:3306/magic";
 	private String driver = "com.mysql.jdbc.Driver";
@@ -87,6 +88,7 @@ public class Dbase {
 	
 	public Map<String,Object> getNewChr(String sql){
 		System.out.println("getNewChr is executing");
+		String action = "http://modem.hzau.edu.cn/Magic/JBrowse/jbrowse.jsp?loc=";
 		Map<String,Object> map = new HashMap<String,Object> ();
 		Map<String,ArrayList<String>> map1 = new HashMap<String,ArrayList<String>> ();
 		try {
@@ -96,10 +98,23 @@ public class Dbase {
 			    int j = 1;
 				ArrayList<String> list = new ArrayList<String>();
 
-			    while(j<=rs.getMetaData().getColumnCount()){
+			    while(j<rs.getMetaData().getColumnCount()){
+			    	if(j==2) {
+			    		action += rs.getString(j);
+			    	}
+			    	if(j==3) {
+			    		action = action+"%3A"+rs.getString(j)+"&tracks=cubic_merge%2CGFF3%2CDNA&highlight=";
+			    	}
+			    	if(j==9) {
+			    		list.add(rs.getString(15));
+			    		list.add(action);
+			    		action = "http://modem.hzau.edu.cn/Magic/JBrowse/jbrowse.jsp?loc=";
+			    		j++;
+			    	}
 			    	list.add(rs.getString(j));
 			    	j++;
 			    }
+			    list.add("-");
 			    System.out.println(list);
 			    map1.put(Integer.toString(i), list);
 			    i++;

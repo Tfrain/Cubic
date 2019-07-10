@@ -27,7 +27,7 @@ def getTracks(c, start, end):
 
 color_dict = {"CW": "#FF0000", "ED": "#87CEEB", "EL": "#6B8E23", "ELW": "#71C671", "KNPR": "#FF1493", "KWPE": "#7A7A7A", "LBT": "#218868", "PH": "#FFFF00", "LNAE": "#C7C7C7",
         "DTA":"#6A5ACD","DTS":"#DC143C","DTT":"#9400D3","EH":"#F08080","ELL":"#7FFF00","ERN":"#B03060","EW":"#00FF7F","LNBE":"#0000AA","TBN":"#191970","TL":"#228B22"
-         ,"KNPE":"#DEB887",
+         ,"KNPE":"#DEB887","ATI":"#A52A2A","STI":"#D2691E","SAI":"#6495ED"
               }
 
 # to add new column, just add here
@@ -58,32 +58,35 @@ if __name__ == "__main__":
     trait = args.trait
     # path = str(args.path)
     # print(path)
-    db = mysql.connect("localhost", "root", "nick35789624", "magic")
+    db = mysql.connect("localhost", "root", "", "magic")
     cursor = db.cursor()
     # cursor.execute("select * from magic_all_sig_snp where pos BETWEEN "
     #                + start + " and " + end)
     # cursor.execute("select * from magic_all_sig_snp , sig_snp_annotation "
     #               + "where magic_all_sig_snp.id = ")
     sql = "select magic_all_sig_snp.* , sig_snp_annotation.annotation " \
-          + " from magic_all_sig_snp , sig_snp_annotation " \
-          +" where magic_all_sig_snp.id = sig_snp_annotation.id " \
-          + " and pos between " + start + " and " + end \
+          + " from magic_all_sig_snp left join sig_snp_annotation on sig_snp_annotation.id = magic_all_sig_snp.id " \
+          +" where " \
+          + " pos between " + start + " and " + end \
           + " and chr = " + chr + " and ( " + trait + "')"
     cursor.execute(sql
     )
-    print(sql)
+    # print(sql)
     data = cursor.fetchall()
+    # print("data:", data)
     start = int(start)
     end = int(end)
-    print(len(data))
+    # print(len(data))
     if len(data) != 0:
         length = len(data)
         minp = 10000;
         maxp = -10000;
         # fromkey will make all the keys point to a object
+        # 方便添加新的键值对，将column_dict中的键值对都动态地添加进去
         for k in column_dict.keys():
             my_dict.update({k:[]})
-        print(my_dict)
+        # print(my_dict)
+        # print(data)
         for i in range(length):
             my_dict['x'].append(int(data[i][column_dict['pos']]))
             try:
@@ -99,6 +102,9 @@ if __name__ == "__main__":
             for k in column_dict.keys():
                 if k == 'chr':
                     my_dict[k].append('chr' + str(data[i][column_dict[k]]))
+                elif k == 'annotation' and data[i][column_dict[k]] is None:
+                    # print("annotation is None")
+                    my_dict[k].append("no_annotation")
                 else:
                     my_dict[k].append(data[i][column_dict[k]])
 
@@ -108,10 +114,10 @@ if __name__ == "__main__":
             # s = "1%3A123..1231412&tracks=chr1_67195493_67197493%2CDNA&highlight="
             s = "http://modem.hzau.edu.cn/Magic/JBrowse/jbrowse.jsp?"
             urldict = {}
-            urldict['loc'] = data[i][column_dict['chr']] + ":" + str(start) + ".." + str(end)
+            urldict['loc'] = data[i][column_dict['chr']] + ":" + str(data[i][column_dict['pos']]) + ".." + str(data[i][column_dict['pos']])
             snp = data[i][column_dict['snp']]
             snp = snp[snp.find('_') + 1:]
-            urldict['tracks'] = getTracks(my_dict['chr'][i], int(snp), int(snp)) + ",GFF3,DNA"
+            urldict['tracks'] = "cubic_merge" + ",GFF3,DNA"
             # s = s + "%3A";
             # s  = s + str(start)
             # s = s + ".."
@@ -126,7 +132,7 @@ if __name__ == "__main__":
             # s = s + "%2CGFF3%2CDNA%26highlight="
             s = s + parse.urlencode(urldict)
             my_dict['param'].append(s)
-            # print("param:" , s)
+            #print("param:" , s)
         # print(s)
         my_dict.update({'label':[]})
         for i in range(length):
@@ -136,9 +142,18 @@ if __name__ == "__main__":
         for k in column_dict.keys():
             tooltips.append((k, '@' + k))
 
-        radius = (end - start ) / 400
+        radius = (end - start) / 400
         vertical = (maxp - minp) / 200
+        if vertical == 0:
+            vertical = 1
+        if radius == 0:
+            radius = 1
+        # print("radius:", radius)
+        # print("vertical:", vertical)
+        # print("minp:", minp)
+        # print("maxp:", maxp)
         TOOLS = "crosshair, pan, wheel_zoom, box_zoom, reset, box_select, lasso_select, hover, tap"
+        # print("my_dict:", my_dict)
         p = figure(tools=TOOLS, x_range=(start - radius * 5, end + radius * 50),
                 y_range=(minp - vertical * 5, maxp + vertical * 5),tooltips=tooltips,
                     x_axis_label='pos', y_axis_label='-log(p)', plot_width=1100,plot_height=500)
@@ -161,7 +176,7 @@ if __name__ == "__main__":
         # print(save(gridplot((p,), plot_width=1400,plot_height=600), resources=output_file("chrome.html" , "chrome", mode="relative", root_dir=path)))
         output_file("chrome.html" , "chrome")
         save_path = save(p)
-        print(save_path)
+        # print(save_path)
         # show(p)
         # http://localhost:8080/Magic/JBrowse/jbrowse.jsp?loc=1%3A123..1231412&tracks=chr1_67195493_67197493%2CDNA&highlight=
         # html = open(save_path)
