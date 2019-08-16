@@ -23,14 +23,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     //window.location.href = "/Magic/index.jsp";
             //
             function getTracks(start, end){
-                var from = Math.floor(parseInt(start) / 100000);
-                var to = Math.floor((parseInt(end) / 100000) + 1);
-                var chr = "chr" + $("#chr").val()
-                var str = chr + "_" + (from * 100000) + "_" + ((from + 1) * 100000);
-                for (var i = from + 1; i < to; i++) {
-                    str = str + "," + chr + "_" +
-            (i * 100000) + "_" + ((i + 1) * 100000);
-                }
+                //var from = Math.floor(parseInt(start) / 100000);
+               // var to = Math.floor((parseInt(end) / 100000) + 1);
+              //  var chr = "chr" + $("#chr").val()
+                //var str = chr + "_" + (from * 100000) + "_" + ((from + 1) * 100000);
+                var str = "cubic_merge";
+             //   for (var i = from + 1; i < to; i++) {
+            //        str = str + "," + chr + "_" +
+           // (i * 100000) + "_" + ((i + 1) * 100000);
+               // }
                 return str;
             }
         $(function(){$(".eg").tooltip();});
@@ -158,11 +159,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	
     </script>
-  </head>
+  <script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"50600",secure:"50605"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
   
-  <body>
+  <body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-17" data-genuitec-path="/Magic/WebRoot/JBrowse/jbrowsetool.jsp">
     <%@ include file="../ListHeader.jsp"%>
-    <div class="container">
+    <div class="container" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-17" data-genuitec-path="/Magic/WebRoot/JBrowse/jbrowsetool.jsp">
             <div class="describe">
                 <h3>Variation Browser</h3>
             </div>
@@ -173,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 }
 </style>
                 <br>
-                <h4>Select one or more loci. Specify gene identifiers (e.g. GRMZM2G040380) or regions (e.g. Chr1 147 6782830).</h4>
+                <h4>Select one or more loci. Specify gene identifiers (e.g. GRMZM2G040380) or regions (e.g. Chr1 45509404 45519404).</h4>
                 <div class="row">
                     <input type="radio" name="search" value="first"> Search By Region
                 </div>
@@ -195,6 +196,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </select>
                     </div>
 
+					<div class="col-md-1 col-xs-1">
+                    <span style="color:gray">      </span>
+                    </div>
+
                     <div class="col-md-3 col-xs-3">
                     <div class="input-group ">
                         <span class="input-group-addon">Start:</span>
@@ -203,7 +208,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
 
                     <div class="col-md-1 col-xs-1">
-                    <span style="color:gray">------------</span>
+                    <span style="color:gray">      </span>
                     </div>
 
                     <div class="col-md-3 col-xs-3">
@@ -212,10 +217,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <input type="text" class="form-control eg" style="display:inline;" title="eg: 67828030" name="end" readonly="readonly" id="sh2">
                     </div>
                     </div>
-                    <%--<span style="color:gray;">(eg: Chr1 147 67828030 )</span>--%>
+                    <%--<span style="color:gray;">(eg: chr1 147 67828030 )</span>--%>
                 </div>
                 <br>
-                <div class="row">
+               <div class="row">
                     <input type="radio" name="search" value="second" > Search By Gene ID
                 </div>
                 <div class="row">

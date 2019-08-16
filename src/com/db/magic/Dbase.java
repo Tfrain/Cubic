@@ -115,7 +115,7 @@ public class Dbase {
 			    	j++;
 			    }
 			    list.add("-");
-			    System.out.println(list);
+			    //System.out.println(list);
 			    map1.put(Integer.toString(i), list);
 			    i++;
 			}

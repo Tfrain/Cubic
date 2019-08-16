@@ -74,11 +74,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    		<h4 class="Phenotypicstrongblack" style="display:block">Input the start and end position:&nbsp;</h4>
 				    		<div class="input-group input-lg">
 				    			<span class="input-group-addon">Start:</span>
-				    			<input class="inputss form-control eg" title="eg:start:1 end 300000000 or start:2000 end 3000000" name="names" placeholder="Please input the start position" type = "text"></input>
+				    			<input class="inputss form-control eg" title="eg:start:164 end 301424690 or start:1553 end 3396851" name="names" placeholder="Please input the start position" type = "text"></input>
 				    		</div>
 				    		<div class="input-group input-lg">
 				    			<span class="input-group-addon">End:</span>
-				    			<input class="inpute form-control eg" title="eg:start:1 end 300000000 or start:2000 end 3000000" name="namee" placeholder="Please input the end position" type = "text"></input>
+				    			<input class="inpute form-control eg" title="eg:start:164 end 301424690 or start:1553 end 3396851" name="namee" placeholder="Please input the end position" type = "text"></input>
 							</div>
 							<%--<span class = "Grand9" style="display:block;font-size:14px;color:grey;margin-left:120px;">(e.g:start:1 end 300000000</span>--%>
 							<%--<span class = "Grand9" style="display:block;font-size:14px;color:grey;margin-left:120px;">or start:2000 end 3000000)</span>--%>

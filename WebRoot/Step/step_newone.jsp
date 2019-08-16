@@ -25,29 +25,26 @@
 <script type="text/javascript" src="Jscript/bootstrap-table.min.js"></script>
 <script src="Jscript/data.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#next").click(function() {
-			var variation = $("#sel5").val();
-			var gene = $("#sel4").val();
-			if (variation == ""||gene == "") {
-				form.submit();
-			} else {
-				var variation = /^[a-z][a-z0-9_.]{5,20}$/.test($("#sel5").val());
-				var gene = /^(?![0-9]+$)(?![A-Z]+$)[0-9A-Z]{12,17}$/.test($("#sel4").val());
-				if(variation != "") {
-					alert("Please select Variation Name Like chr5.s_2269!");
-					return false;
-				}
-				if (gene != "") {
-					alert("Please select Gene ID Like GRMZM2G356204!");
-					return false;
-				} 
-			}
-		});
-	});
-</script>
-</head>
+<style type="text/css">
+.loading{
+	width:250px;
+	height:56px;
+	position: absolute;
+	top:50%;
+	left:50%;
+	line-height:56px;
+	color:#fff;
+	padding-left:60px;
+	font-size:15px;
+	background: #000 url(images/loader.gif) no-repeat 20px 50%;
+	opacity: 0.7;
+	z-index:9999;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+</style>
 
 <body>
 	<%@ include file="../ListHeader.jsp"%>
@@ -64,6 +61,8 @@
 					identifier, study and gene.</font>
 			</p>
 		</div>
+		<br>
+		<br>
 		<form action="showNewThree" method="post" onsubmit="return check();">
             <div class="col-md-6" style="width:100%">
 			<div class="search">
@@ -77,18 +76,18 @@ table, table tr th, table tr td {
 }
 </style>
           <div class="form-group row">
-          <label class="eg col-sm-2 col-form-label">Variation Name</label>
+          <label class="col-sm-2 col-form-label">Variation Name</label>
           <div class="col-sm-10">
                   <div class="col-sm-8 col-lg-8" style="padding-left:0px">
-                      <input id="sel5" type="text" name="variation" title="eg:chr5.s_2269" placeholder="eg:chr5.s_2269" class="form-control">
+                      <input id="sel5" type="text" name="variation" title="eg:chr1.s_276394019" placeholder="eg:chr1.s_276394019" class="eg form-control">
               </div>
           </div>
           </div>
           
           <div class="form-group row">
-              <label class="eg col-sm-2">Gene ID</label>
+              <label class="col-sm-2">Gene ID</label>
               <div class="col-sm-4">
-                  <input id="sel4" type="text" name="gene" title="eg:GRMZM2G356204" placeholder="eg:GRMZM2G356204" class="form-control">
+                  <input id="sel4" type="text" name="gene" title="eg:GRMZM2G356204" placeholder="eg:GRMZM2G356204" class="eg form-control">
               </div>
           </div>
           <div class="form-group row">
@@ -105,8 +104,15 @@ table, table tr th, table tr td {
                   <option value="splice_region_variant">splice_region_variant</option>
                   <option value="5_prime_UTR_variantt">5_prime_UTR_variantt</option>
                   <option value="stop_lost">stop_lost</option>
+                  <option value="start_lost">start_lost</option>
                   <option value="stop_gained">stop_gained</option>
                   <option value="stop_retained_variant">stop_retained_variant</option>
+                  <option value="splice_donor_variant">splice_donor_variant</option>
+                  <option value="non_coding_transcript_exon_variant">non_coding_transcript_exon_variant</option>
+                  <option value="splice_acceptor_variant">splice_acceptor_variant</option>
+                  <option value="coding_sequence_variant">coding_sequence_variant</option>
+                  <option value="incomplete_terminal_codon_variant">incomplete_terminal_codon_variant</option>
+                  <option value="intergenic_variant">intergenic_variant</option>
                   </select>
               </div>
           </div>
@@ -129,11 +135,11 @@ table, table tr th, table tr td {
               </div>
               <label class="col-sm-1 col-form-label">between</label>
               <div class="col-sm-2">
-                  <input type="text" class="form-control" name="start" id="sh1">
+                  <input type="text" class="eg form-control" title="eg:147" placeholder="eg:147" name="start" id="sh1">
               </div>
               <label class="col-sm-1 col-form-label">and</label>
               <div class="col-sm-2">
-                  <input type="text" class="form-control" name="end" id="sh2">
+                  <input type="text" class="eg form-control" title="eg:6782830" placeholder="eg:6782830" name="end" id="sh2">
               </div>
           </div>
           
@@ -141,21 +147,19 @@ table, table tr th, table tr td {
               <label class="eg col-sm-2 col-form-label">Variation effect</label>
               <div class="col-sm-10">
                   <select class="form-control" name="effect" id="sel1">
-                  <option value="" disabled selected style='display:none;'>Variation effect</option>
+                  <option value="" disabled selected style='display:none;'>Choose One Variation effect</option>
 				  <option value="MODIFIER">MODIFIER</option>
-				  <option value="MODERTE">MODERTE</option>
+				  <option value="MODERATE">MODERATE</option>
 				  <option value="LOW">LOW</option>
 				  <option value="HIGH">HIGH</option>
                   </select>
               </div>
           </div>
           </div>
-          </div>
-           <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <br>
+            </div>
+			<div id="wait">
+			</div>
               <div class="col">
              <button class="btn btn-success form-control" text-algin="left" id="next" float="right" style="height:60px">Search</button>
              </div>
@@ -174,19 +178,30 @@ table, table tr th, table tr td {
 			//if($("#sel1 :selected").val() == ''){$("#sel1").attr("value",'');}
 			//if($("#sel2 :selected").val() == ''){$("#sel2").attr("value",'');}
 			//if($("#sel3 :selected").val() == ''){$("#sel3").attr("value",'');}
+			
+			var vari = /^[a-z][a-z0-9_.]{8,20}$/.test($("#sel5").val());
+			var gene = /^(?![0-9]+$)(?![A-Z]+$)[0-9A-Z]{12,17}$/.test($("#sel4").val());
+			if(vari == ""&&$("#sel5").val()!='') {
+				alert("Please input Variation Name Like chr1.s_276394019!");
+				return false;
+			}
+			if (gene == ""&&$("#sel4").val()!='') {
+				alert("Please input Gene ID Like GRMZM2G356204!");
+				return false;
+			} 
+			
 			var start = /^\d+$/.test($("#sh1").val());
 			var end = /^\d+$/.test($("#sh2").val());
-			
-			if ($("#start").val() == ''&&$("#end").val() == ''&&$("#sel2").val() != '') {
-					alert("Please select one Chr/Scaffold!");
-					return false;
-			}
-			
+			var variation = $("#sel5").val();
+			var chr = $("#sel2").val();
 			if ($("#sel1 :selected").val() == ''&&$("#sel2 :selected").val() == ''&&$("#sel3 :selected").val() == ''&&$("#sel4").val() == ''&&$("#sel5").val() == ''&&$("#sh1").val() == ''&&$("#sh2").val() == '') {
 				alert("Please select at least one Option!");
 				return false;
 			}
-			
+			if(variation!=""&&chr!=null&&chr!=variation.substring(3,4)) {
+				alert("Please input the same chr and variation name!");
+				return false;
+			}
 			if((!start || !end) && $("#sh2").val() != '' && $("#sh1").val() != '') {
 					if(!start && !end) {
 						alert("Please input the correct start and end,like 147 and 6782830.");
@@ -197,6 +212,10 @@ table, table tr th, table tr td {
 						return false;
 					
 			} else if (start && end) {
+						if ($("#start").val() != ''&&$("#end").val() != ''&&chr == null) {
+								alert("Please select one Chr/Scaffold!");
+								return false;
+						}
                      	if(parseInt($("#sh1").val()) > parseInt($("#sh2").val())){
                          	  alert("Input start or end position error,please input again.");
                           	 return false;
@@ -241,6 +260,8 @@ table, table tr th, table tr td {
                      		alert("Please input a number of end position less than 146087335.");
                           	 return false;
                      	}
+						var str = $("<div id='loading' class='loading'>Loading pages...</div>");
+						$('#wait').append(str);
 						return true;
 			} else if($("#sh1").val() == '' && $("#sh2").val() != ''){
     					alert(("Please input start position!"));
@@ -252,6 +273,8 @@ table, table tr th, table tr td {
 						alert("Please input start and end position!");
 						return false;
 			}*/
+			var str = $("<div id='loading' class='loading'>Loading pages...</div>");
+			$('#wait').append(str);
 			return true;
 		};
 	</script>

@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <%if(len > 0){%>
             <table id="table3" data-toggle="table" class="table table-hover">
                       <tbody>
-           <% 
+           <%
               	    for(int i=1;i<=len;i++){
             %>
             	<tr>
@@ -121,10 +121,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         </div>
         </div>
-    
+
     	<%@ include file="../ListFooter.jsp"%>
   </body>
-  
+
   <script type="text/javascript">
     $(function(){
         $('#table3').bootstrapTable({//'#table' 改为所用表的选择器
@@ -136,10 +136,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        	smartDisplay:false,
        	pageSize: 10,
        	search: true,
-        showExport: true,  
+        showExport: true,
         buttonsAlign:"left",
         exportTypes:['csv','excel'],
-        exportOptions:{  
+        exportOptions:{
            //ignoreColumn: [0,1],  //忽略某一列的索引  
            fileName: 'SNP',  //文件名称设置  
            worksheetName: 'sheet1',  //表格工作区名称  
@@ -171,27 +171,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         title: 'Feature',
     },{
         field: 'Feature_type',
-        title: 'Feature_type',  
+        title: 'Feature_type',
     },{
         field: 'Consequence',
         title: 'Variation_type',
         formatter:function(value,row,index){
-            if(value.length>10){  
-        		return "<span title='"+value+"'>"+value.substring(0,10)+"..."+"</span>";  
-    		}else{  
-        		return "<span title='"+value+"'>"+value.substring(0,value.length)+"</span>";  
-   			}  
-     }     
+            if(value.length>10){
+                return "<span title='"+value+"'>"+value.substring(0,10)+"..."+"</span>";
+            }else{
+                return "<span title='"+value+"'>"+value.substring(0,value.length)+"</span>";
+            }
+     }
     },{
         field: 'Extra',
         title: 'Extra',
         formatter:function(value,row,index){
-            if(value.length>15){  
-        		return "<span title='"+value+"'>"+value.substring(0,15)+"..."+"</span>";  
-    		}else{  
-        		return "<span title='"+value+"'>"+value.substring(0,value.length)+"</span>";  
-   			}  
-     }   
+            if(value.length>15){
+                return "<span title='"+value+"'>"+value.substring(0,15)+"..."+"</span>";
+            }else{
+                return "<span title='"+value+"'>"+value.substring(0,value.length)+"</span>";
+            }
+     }
     },{
         field: 'Action',
         title: 'Action',

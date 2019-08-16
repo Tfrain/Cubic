@@ -13,17 +13,16 @@ public class showNewThree extends ActionSupport{
 
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String variation;
 	private String gene;
-	private String kind;
 	private String feature;
 	private String chr;
 	private String start;
 	private String end;
 	private String effect;
 	private int i=0;
-
+	
 	public String getWebClassesPath() {
 		String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		return path;
@@ -37,10 +36,7 @@ public class showNewThree extends ActionSupport{
 		return path;
 	}
 
-
-
 	public String execute(){
-		
 		System.out.println(variation);
 		System.out.println(gene);
 		System.out.println(feature);
@@ -58,7 +54,6 @@ public class showNewThree extends ActionSupport{
 		String sql= "SELECT * FROM variation WHERE";
 		Dbase d = new Dbase();
 		Map<String,Object> map =  new HashMap<String,Object>();
-		System.out.println(sql);
 		if (variation!=null&&!variation.equals("")) {
 			i++;
 			sql = sql + " Uploaded_variation = '"+variation+"'";
@@ -92,19 +87,19 @@ public class showNewThree extends ActionSupport{
 		}
 		if(start != null&&!start.equals("")) {
 			if(i==0) {
-				sql = sql + " Location >= '"+start+"'";
+				sql = sql + " Location >= "+start+"";
 			}
 			else {
-			sql = sql + " AND Location >= '"+start+"'";
+			sql = sql + " AND Location >= "+start+"";
 			}
 			i++;
 		}
 		if(end!=null&&!end.equals("")) {
 			if(i==0) {
-				sql = sql + " Location <= '"+end+"'";
+				sql = sql + " Location <= "+end+"";
 			}
 			else {
-			sql = sql + " AND Location <= '"+end+"'";
+			sql = sql + " AND Location <= "+end+"";
 			}
 			i++;
 		}
@@ -120,11 +115,7 @@ public class showNewThree extends ActionSupport{
 		
 		//sql ="select * FROM test WHERE Gene = '"+gene+"' and Uploaded_variation LIKE '"+chr+"%'";
 		System.out.println(sql);
-		
-		
-		
-		
-		
+
 		
 		map = (HashMap<String,Object>)d.getNewChr(sql);
 
@@ -133,6 +124,7 @@ public class showNewThree extends ActionSupport{
 
 
 		d.Close();
+		
 		return SUCCESS;
 	}
 	
@@ -182,15 +174,6 @@ public class showNewThree extends ActionSupport{
 	public void setVariation(String variation) {
 		this.variation = variation;
 	}
-
-	public String getKind() {
-		return kind;
-	}
-
-	public void setKind(String kind) {
-		this.kind = kind;
-	}
-
 	public String getFeature() {
 		return feature;
 	}
@@ -206,7 +189,6 @@ public class showNewThree extends ActionSupport{
 	public void setEffect(String effect) {
 		this.effect = effect;
 	}
-
 
 }
 

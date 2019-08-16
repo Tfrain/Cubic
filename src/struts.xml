@@ -9,7 +9,7 @@
 		<action name="showThree" class="com.magic.showThree">
 			<result name="success">/Step/step_three.jsp</result>
 		</action>
-	<!-- Stepn -->
+	<!-- StepNew -->
 		<action name="showNewThree" class="com.magic.showNewThree">
 			<result name="success">/Step/step_newthree.jsp</result>
 		</action>

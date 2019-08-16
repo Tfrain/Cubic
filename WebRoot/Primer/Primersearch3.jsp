@@ -43,7 +43,7 @@
 
 		</div>
 
-		<form action="primer3" method="post">
+		<form action="primer3" method="post" onsubmit="return check();">
 			<div class="leftp">
 				<div style="height:50px;">
                     <div class="col-md-6 col-xs-6">
@@ -177,5 +177,30 @@
 
 
 	<%@ include file="../ListFooter.jsp"%>
+	
+	<script type="text/javascript">
+	function check() {
+			
+			var start = /^\d+$/.test($("#upstream1").val());
+			var end = /^\d+$/.test($("#downstream1").val());
+			var vari = /^[a-z][a-z0-9_.]{8,20}$/.test($("#id1").val());
+			
+			var variation = $("#id1").val();
+			if (parseInt($("#upstream1").val()) > parseInt($("#downstream1").val())) {
+				alert("Input Upstream or Downstream error,please input again.");
+                return false;
+			}
+			if(vari == ""&&start!=''&&end!="") {
+				alert("Please input one Variation ID Like chr1.s_67196493!");
+				return false;
+			}
+			if (vari != ""&&(start==''||end=="")) {
+				alert("Please input Upstream and Downstream like 100 or 200!");
+				return false;
+			} 
+			
+			return true;
+		};
+	</script>
 </body>
 </html>

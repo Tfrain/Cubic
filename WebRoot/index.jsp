@@ -93,6 +93,8 @@
 								style="color:#333;text-align:center;">Bin Map</a>
 							<a href="JBrowse/jbrowsetool.jsp" class="list-group-item"
 								style="color:#333;text-align:center;">Variation Browser</a>
+							<a href="/Magic/Step/step_newone.jsp" class="list-group-item"
+								style="color:#333;text-align:center;">Variation Search</a>
 							<a href="Step\step_one.jsp" class="list-group-item"
 								style="color:#333;text-align:center;">GWAS Search</a>
 							<a href="genetree\gene_tree.jsp" class="list-group-item"
