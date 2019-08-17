@@ -18,6 +18,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="Css/main.css" rel="stylesheet"/>
 	<script type="text/javascript" src="Jscript/jquery-3.1.0.min.js"></script>
     <script type="text/javascript" src="Jscript/bootstrap-table.min.js"></script>
+    <style type="text/css">
+.loading{
+	width:230px;
+	height:56px;
+	position: absolute;
+	top:80%;
+	left:45%;
+	line-height:56px;
+	color:#fff;
+	padding-left:60px;
+	font-size:15px;
+	background: #000 url(images/loader.gif) no-repeat 20px 50%;
+	opacity: 0.7;
+	z-index:9999;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+</style>
     <script type="text/javascript">
         var database_example = 
 'TTGAGAGTTCTAATAAGAGCAACGGCCAATACCATTAGCGAGTTATTTTTCTGCAATATATGTCAGCAAC'+
@@ -52,6 +72,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         function resetExample(){
             $('#inputtext').val("");
         }
+        
+         function check1()
+{ 
+   var str = $("<div id='loading' class='loading'>Please Waiting .....</div>");
+	$('#wait').append(str);
+	$("#next1").attr("disabled",true);
+  return true;
+ }	
     </script>
 	
 </head>
@@ -70,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="btn example" onclick="showExample()" style="padding:2px 2px;font-size:15;width:80px;">example</div>
                         <div class="btn example" onclick="resetExample()" style="padding:2px 2px;font-size:15;width:80px;">reset</div>
                
-             <form action="primer2" method="post">
+             <form action="primer2" method="post" onsubmit="return check1()">
                 
 				  <div class="inputs" style="height: 150px;margin-top:0px;">
             		<div  style="height:300px;padding:5px;">
@@ -80,7 +108,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div> -->
            		 </div>
                           
-           		
+           		<div id="wait">
+				</div>
                 <div class="leftp2" style="height: 350px;">
                                 <h3>Parameter Selection</h3><!-- lv 7-11 change 套用的primersearch2 -->
                                 <div class="col-md-4 col-xs-4">

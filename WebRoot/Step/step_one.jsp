@@ -25,6 +25,26 @@
 <script type="text/javascript" src="Jscript/bootstrap-table.min.js"></script>
 <script src="Jscript/data.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
+<style type="text/css">
+.loading{
+	width:230px;
+	height:56px;
+	position: absolute;
+	top:40%;
+	left:80%;
+	line-height:56px;
+	color:#fff;
+	padding-left:60px;
+	font-size:15px;
+	background: #000 url(images/loader.gif) no-repeat 20px 50%;
+	opacity: 0.7;
+	z-index:9999;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+</style>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('input:radio[name="search"]').click(function() {
@@ -80,6 +100,8 @@
 		<form action="showThree" method="post" onsubmit="return check();">
             <div class="row">
             <div class="col-md-6">
+            <div id="wait">
+					</div>
 			<div class="search">
 <style>
 table, table tr th, table tr td {
@@ -137,7 +159,6 @@ table, table tr th, table tr td {
 						</select>
 					</div>
 					</div>
-
 					<div class="col-md-9 col-xs-9">
 						<div class="input-group ">
 							<span class="input-group-addon">Start:</span> <input type="text"
@@ -287,6 +308,9 @@ table, table tr th, table tr td {
                      		alert("Please input a number of end position less than 146087335.");
                           	 return false;
                      	}
+                     	var str = $("<div id='loading' class='loading'>Loading pages...</div>");
+						$('#wait').append(str);
+						$("#next").attr("disabled",true);
 						return true;
 					}
 					else if($("#sh1").val() == '' && $("#sh2").val() != ''){
@@ -313,6 +337,9 @@ table, table tr th, table tr td {
 					}
 				}
 			}
+			var str = $("<div id='loading' class='loading'>Please Waiting .....</div>");
+			$('#wait').append(str);
+			$("#next").attr("disabled",true);
 		}
 		//加载自己的数据时将data.js文件里的值修改了就是
 		//jQuery.fn.bootstrapTable.defaults.data = data;

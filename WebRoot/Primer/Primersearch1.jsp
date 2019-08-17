@@ -22,10 +22,37 @@
 <script type="text/javascript" src="Jscript/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="Jscript/bootstrap-table.min.js"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
+<style type="text/css">
+.loading{
+	width:230px;
+	height:56px;
+	position: absolute;
+	top:50%;
+	left:45%;
+	line-height:56px;
+	color:#fff;
+	padding-left:60px;
+	font-size:15px;
+	background: #000 url(images/loader.gif) no-repeat 20px 50%;
+	opacity: 0.7;
+	z-index:9999;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+</style>
     <script type="text/javascript">
 		$(function() {
 			$(".eg").tooltip();
 		});
+	function check1()
+{ 
+   var str = $("<div id='loading' class='loading'>Please Waiting .....</div>");
+	$('#wait').append(str);
+	$("#next1").attr("disabled",true);
+  return true;
+ }	
     </script>
 
 </head>
@@ -44,7 +71,7 @@
 
 		</div>
 		<div class="inputs" style="height: 150px; ">
-			<form action="primer" method="post">
+			<form action="primer" method="post" onsubmit="return check1()">
 				<div class="leftp">
 					<div style="height:65px;">
 						<!-- lv 7-11 change class=""->class="background1" 包括以下所有class="background"修改了style-->
@@ -91,7 +118,9 @@
 						</div>
 					</div>
 				</div>
-				<form action="blast" method="post">
+				<!-- <form action="blast" method="post" onsubmit="return check1()"> -->
+				<div id="wait">
+					</div>
 					<div class="leftp2" style="height: 350px;">
 						<h3>Parameter Selection</h3>
 						<!-- lv 7-11 change 套用的primersearch2 -->

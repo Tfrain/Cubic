@@ -27,11 +27,11 @@
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 <style type="text/css">
 .loading{
-	width:250px;
+	width:230px;
 	height:56px;
 	position: absolute;
 	top:50%;
-	left:50%;
+	left:45%;
 	line-height:56px;
 	color:#fff;
 	padding-left:60px;
@@ -262,6 +262,7 @@ table, table tr th, table tr td {
                      	}
 						var str = $("<div id='loading' class='loading'>Loading pages...</div>");
 						$('#wait').append(str);
+						$("#next").attr("disabled",true);
 						return true;
 			} else if($("#sh1").val() == '' && $("#sh2").val() != ''){
     					alert(("Please input start position!"));
@@ -273,8 +274,9 @@ table, table tr th, table tr td {
 						alert("Please input start and end position!");
 						return false;
 			}*/
-			var str = $("<div id='loading' class='loading'>Loading pages...</div>");
+			var str = $("<div id='loading' class='loading'>Please Waiting .....</div>");
 			$('#wait').append(str);
+			$("#next").attr("disabled",true);
 			return true;
 		};
 	</script>

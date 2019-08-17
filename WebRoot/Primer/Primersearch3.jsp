@@ -22,6 +22,26 @@
 <script type="text/javascript" src="Jscript/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="Jscript/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<style type="text/css">
+.loading{
+	width:230px;
+	height:56px;
+	position: absolute;
+	top:50%;
+	left:45%;
+	line-height:56px;
+	color:#fff;
+	padding-left:60px;
+	font-size:15px;
+	background: #000 url(images/loader.gif) no-repeat 20px 50%;
+	opacity: 0.7;
+	z-index:9999;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+</style>
 
     <script type="text/javascript">
             $(function(){$(".eg").tooltip();});
@@ -51,7 +71,7 @@
 						<!-- lv 7-12 change 45-> 48-->
 						<span class="Input-group-addon">
                             Upstream:</span><input class="form-control eg" type="input"
-								name="upstream" id="upstream1" title="eg:100"
+								name="upstream" id="upstream1" title="eg:100" placeholder="eg:100"
 								/>
 						<!-- lv 7-12 change style="width: 70%;" -->
 
@@ -61,7 +81,7 @@
 					<div class="input-group input-lg">
 						<span class="input-group-addon">
                             Downstream:</span><input class="form-control eg" type="input"
-								name="downstream" id="downstream1" title="eg:200"
+								name="downstream" id="downstream1" title="eg:200" placeholder="eg:200"
 								/>
 					</div>
 					</div>
@@ -75,7 +95,8 @@
                     </div>
 				</div>
 			</div>
-
+					<div id="wait">
+					</div>
 			<div class="leftp2" style="height: 350px;">
 				<h3>Parameter Selection</h3>
 				<!-- lv 7-11 change 套用的primersearch2 -->
@@ -199,6 +220,9 @@
 				return false;
 			} 
 			
+			var str = $("<div id='loading' class='loading'>Please Waiting .....</div>");
+			$('#wait').append(str);
+			$("#next1").attr("disabled",true);
 			return true;
 		};
 	</script>

@@ -18,7 +18,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link type="text/css" rel="stylesheet" href="Css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="Css/main.css"/>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    
+    <style type="text/css">
+.loading{
+	width:250px;
+	height:56px;
+	position: absolute;
+	top:50%;
+	left:45%;
+	line-height:56px;
+	color:#fff;
+	padding-left:60px;
+	font-size:15px;
+	background: #000 url(images/loader.gif) no-repeat 20px 50%;
+	opacity: 0.7;
+	z-index:9999;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+</style>
     <script type="text/javascript">
     //window.location.href = "/Magic/index.jsp";
             //

@@ -19,6 +19,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="Css/main.css" rel="stylesheet"/>
 	<script type="text/javascript" src="Jscript/jquery-3.1.0.min.js"></script>
     <script type="text/javascript" src="Jscript/bootstrap-table.min.js"></script>
+    <style type="text/css">
+.loading{
+	width:230px;
+	height:56px;
+	position: absolute;
+	top:50%;
+	left:45%;
+	line-height:56px;
+	color:#fff;
+	padding-left:60px;
+	font-size:15px;
+	background: #000 url(images/loader.gif) no-repeat 20px 50%;
+	opacity: 0.7;
+	z-index:9999;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+</style>
 <script type="text/javascript"> 
 
         var blast_example = 
@@ -80,6 +100,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      alert("Error: Please put in FASTA sequence!");
      return false;
    }
+   var str = $("<div id='loading' class='loading'>Please Waiting .....</div>");
+	$('#wait').append(str);
+	$("#next1").attr("disabled",true);
   return true;
  }	
  </script>
@@ -133,6 +156,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                         </div>
                     </div>
+                    <div id="wait">
+					</div>
                     <div class="background" style="height:260px;padding:5px;padding-right:7%;clear:both"><!-- lv 7-11-10：01 change class=""->class="background" 180px->280px-->
                         <span style="padding-left:8px;display:inline-block;height:30px;line-height:30px;"><h4>Enter FASTA sequence</h4></span><!-- lv 7-11-10：49 change -->
                         <div class="btn example" onclick="showExample()" style="padding:2px 2px;font-size:15;width:80px;">example</div>

@@ -19,7 +19,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="Css/main.css" rel="stylesheet"/>
     <script type="text/javascript" src="Jscript/jquery-3.1.0.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-	
+	<style type="text/css">
+.loading{
+	width:230px;
+	height:56px;
+	position: absolute;
+	top:38%;
+	left:45%;
+	line-height:56px;
+	color:#fff;
+	padding-left:60px;
+	font-size:15px;
+	background: #000 url(images/loader.gif) no-repeat 20px 50%;
+	opacity: 0.7;
+	z-index:9999;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+</style>
 	
 
   </head>
@@ -45,6 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   			    <option value="L4">L4</option>
 		   			    <option value="Ref">Ref</option>						   
 					</select>
+
 					<select id="sel2" name="name" multiple="multiple" size="5" class="select" style="display:inline-block;width:32.5%;height:350px;"></select>
 					<select id="sel3" name="chr" multiple="multiple" size="5" class="select" style="display:inline-block;width:32.5%;height:350px;">
 						<option value="1">Chr1</option>
@@ -58,6 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <option value="9">Chr9</option>
 					    <option value="10">Chr10</option>	
 					</select>
+				</div>
+				<div id="wait">
 				</div>
 				<div class="line"></div>
 				<div class="right-panel" style="width:45%;height:400px;float:right">
@@ -83,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<%--<span class = "Grand9" style="display:block;font-size:14px;color:grey;margin-left:120px;">(e.g:start:1 end 300000000</span>--%>
 							<%--<span class = "Grand9" style="display:block;font-size:14px;color:grey;margin-left:120px;">or start:2000 end 3000000)</span>--%>
 							<div class="btns" style="margin-top:3%">
-	                			<button class="btn" style="position:relative;margin:auto;">Submit</button>
+	                			<button class="btn" id="next" style="position:relative;margin:auto;">Submit</button>
 	                		</div>
 						</div>
 				</div>	
@@ -201,6 +223,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			return false;
     		}
     	}
+    	var str = $("<div id='loading' class='loading'>Please Waiting .....</div>");
+		$('#wait').append(str);
+		$("#next").attr("disabled",true);
     	return true;
     }
   </script>
