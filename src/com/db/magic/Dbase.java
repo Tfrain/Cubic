@@ -200,14 +200,17 @@ public class Dbase {
 		return result;
 	}
 	public JSONArray gettree(String sql){
-
+//		TODO 每一个染色体的第一个不会发生包含关系，问一下
+//		TODO 每一个染色体的第一个都不会显示，它被删除了
+//		TODO 最后的灰色应该如何加上去
+//		染色体长度可能会因为灰色长度变化，因为二层基因太多了，它会影响灰色的长度
 		JSONArray jsonArray = new JSONArray();
 		try {
 			String ende;
 			String starte;
 			String color;
 			rs = stmt.executeQuery(sql);
-			int flag=0;
+			float head=400000000;
 			int text=0;
 			int genenum=0;
 			float start;
@@ -220,7 +223,7 @@ public class Dbase {
 				start=Float.MAX_VALUE;
 				end=-1;
 				text++;
-				genenum=0;
+				genenum=1;
 				int sum=0;
 
 				JSONObject jsonresult1=new JSONObject();
@@ -234,8 +237,6 @@ public class Dbase {
 				String chr1;
 				chr1=jsonobj.getString("Chr");
 
-				start=Float.parseFloat(jsonobj.getString("start"));
-				end=Float.parseFloat(jsonobj.getString("end"));
 
 				//获取第二层
 				JSONArray children2 = new JSONArray();
@@ -244,7 +245,7 @@ public class Dbase {
 				while(rs!=null)
 				{
 
-					sum++;
+					//sum++;
 					JSONObject jsonobj2=new JSONObject();
 					JSONObject jsonresult2=new JSONObject();
 					JSONObject jsonspace=new JSONObject();
@@ -254,6 +255,8 @@ public class Dbase {
 			            jsonobj2.put(columnName, value);
 			        }
 					String chr2=jsonobj2.getString("Chr");
+//					这里是1到2这样染色体跳转的关键，但是会吞掉每个染色体的第一个基因
+//					可以考虑数据库的每个染色体数据的末尾都加一行1，和最终加一是一个道理
 					if(!chr2.equals(chr1))
 					{
 						text=0;
@@ -262,9 +265,19 @@ public class Dbase {
 					float start2=Float.parseFloat(jsonobj2.getString("start"));
 					float end2=Float.parseFloat(jsonobj2.getString("end"));
 					//第三层
-
-					if((start2<=end)&&(end2>start)&&sum!=1)
+//					这个if一般都不被执行，而是执行else
+//					当执行if的时候只会加正常基因，而不会加段，神奇之处就要看genenum这里是怎么运行的
+//					start2<=end中end在下文会变，起作用，end2>start中start内部变化，起作用，但一定大于啊
+//					这里二层的多个基因就是有交叉的基因，例如13,24
+//					这里的多个正常的二层children是因为有个start end的范围较大，将很多基因包含进去了
+//					这里sum等于1只能保证第一个不为灰色，且第一段没有两个二层基因
+//					去掉sum=1就可以是第一个基因包含多个基因，可能因为美化关系，改善了这个包含
+//					想清楚这里多个交叉基因是怎么加的，末尾的黑色也就能够解决了
+					if((start2<=end))
 					{
+						if (start < head) {
+							head = start;
+						}
 						color=jsonobj2.getString("Trait");
 						String color1=colorr(color);
 						JSONObject jsonresult3=new JSONObject();
@@ -279,14 +292,15 @@ public class Dbase {
 				        if(jsonresult3.containsKey("Chr")){
 				        	children2.add(jsonresult3);
 				        }
-				        start=start2;
+//				        grayLength += end-start;
+//				        start=start2;
 				        genenum++;
 					}
 					else
 					{
-
 						color=jsonobj2.getString("Trait");
 						String color1=colorr(color);
+//						正常的长度就是end-start
 						float x=(Float.parseFloat(jsonobj2.getString("end"))-Float.parseFloat(jsonobj2.getString("start")));
 						x=numberwei(x,jsonobj2.getString("Chr"));
 						jsonresult2.put("chr", jsonobj2.getString("Chr"));
@@ -294,11 +308,20 @@ public class Dbase {
 						jsonresult2.put("type", jsonobj2.getString("method"));
 				        jsonresult2.put("color", color1);
 				        jsonresult2.put("value", jsonobj2.getString("pve"));
+				        // height是一点点算出来的，从上面可以看出，和end-start有很大关系，所以是叠加的
 				        jsonresult2.put("height", x);
 						jsonresult2.put("name", "第"+text+"段");
-						if(sum!=1)
-						{
+						
+//						灰色的end和倍数放大有关，如果都是1的话，并不影响比例，也就是说比例尺是一样的
+//						if(head == 400000000)
+//						{
 							x=numberwei(Math.abs(start2-end),jsonobj2.getString("Chr"));
+							//x = Float.parseFloat((float)Math.abs(start2-end));
+							//x = (Float.parseFloat()-Float.parseFloat());
+//						}else {
+							//x = Math.abs(head-end);
+//							x=numberwei(Math.abs(head-end),jsonobj2.getString("Chr"));
+//						}
 							jsonspace.put("id", "space");
 							jsonspace.put("type", jsonobj2.getString("method"));
 							jsonspace.put("color", "gray");
@@ -317,31 +340,34 @@ public class Dbase {
 
 							if(!childrenspace.isEmpty())
 							{
-
+//								这里的是灰色的二层children
 								jsonspace.put("children", childrenspace);
 								childrenspace.clear();
 							}
-						}
 
-						JSONObject jsonresult3=new JSONObject();
-						jsonresult3.put("Chr", jsonobj2.getString("Chr"));
-				        jsonresult3.put("type",jsonobj2.getString("method"));
-				        jsonresult3.put("color",color1);
-				        jsonresult3.put("start",jsonobj2.getString("start"));
-				        jsonresult3.put("end",jsonobj2.getString("end"));
-				        jsonresult3.put("value",jsonobj2.getString("pve"));
-				        jsonresult3.put("filter",jsonobj2.getString("Trait"));
-				        jsonresult3.put("name","第"+genenum+"个基因");
-				        children2.add(jsonresult3);
+						JSONObject jsonresult4=new JSONObject();
+						jsonresult4.put("Chr", jsonobj2.getString("Chr"));
+				        jsonresult4.put("type",jsonobj2.getString("method"));
+				        jsonresult4.put("color",color1);
+				        jsonresult4.put("start",jsonobj2.getString("start"));
+				        jsonresult4.put("end",jsonobj2.getString("end"));
+				        jsonresult4.put("value",jsonobj2.getString("pve"));
+				        jsonresult4.put("filter",jsonobj2.getString("Trait"));
+				        jsonresult4.put("name","第"+genenum+"个基因");
+				        children2.add(jsonresult4);
 						text++;
 						genenum=1;
 						if(!children2.isEmpty())
 						{
-
+//							这里的是正常的二层children
 							jsonresult2.put("children", children2);
 							children2.clear();
+//							head = 400000000;
 						}
 					}
+//					这里是二层多组基因存在的数据变化之处
+//					因为这里的end在变化，当出现多个二层基因组，就会出现灰色不正常现象，本质是数学思维
+//					因为end长度逐渐变长了，所以下文的倍数设计，就是一个程序员不好好工作的烂摊子
 					if(start2>end)
 						end=end2;
 					if(jsonspace.containsKey("name")&&jsonspace.containsKey("id")&&jsonspace.containsKey("type")&&jsonspace.containsKey("color")&&jsonspace.containsKey("value")&&jsonspace.containsKey("height"))
@@ -356,6 +382,8 @@ public class Dbase {
 			        rs.next();
 				}
 				if(!children1.isEmpty())
+//					这里是第一个children，这里一个children代表一个染色体
+//					比如8的数据都在一个children之下
 					jsonresult1.put("children", children1);
 				jsonArray.add(jsonresult1);
 			}
@@ -373,37 +401,52 @@ public class Dbase {
 	public float numberwei(float f,String chr)
 	{
 		    float beishu=3;
-			if(chr.equals("5"))
-				beishu=(float) 0.66*beishu;
-			if(chr.equals("6"))
-				beishu=(float) 2.5*beishu;
-			if(chr.equals("9"))
-				beishu=(float) 2.5*beishu;
+		    if(chr.equals("1"))
+				beishu=(float) 1*beishu;
+		    if(chr.equals("2"))
+				beishu=(float) 1*beishu;
+		    if(chr.equals("3"))
+				beishu=(float) 1*beishu;
 			if(chr.equals("4"))
-				beishu=(float) 1.1*beishu;
-			if(chr.equals("1"))
-				beishu=(float) 1.2*beishu;
-		    if(f>1)
-		    {
-		    	while(f>10)
-		    	{
-		    		f /= 10 ;
-		    	}
-		    }
-		    if(f<1)
-		    {
-		    	while(f<1)
-		    	{
-		    		f=f*10;
-		    	}
-		    }
-		    if(f>5)
-		    	f=f/2;
+				beishu=(float) 1*beishu;
+			if(chr.equals("5"))
+				beishu=(float) 1*beishu;
+			if(chr.equals("6"))
+				beishu=(float) 1*beishu;
+			if(chr.equals("7"))
+				beishu=(float) 1*beishu;
+			if(chr.equals("8"))
+				beishu=(float) 1*beishu;
+			if(chr.equals("9"))
+				beishu=(float) 1*beishu;
+			if(chr.equals("10"))
+				beishu=(float) 1*beishu;
+//		    if(f>1)
+//		    {
+//		    	while(f>10)
+//		    	{
+//		    		f /= 10 ;
+//		    	}
+//		    }
+//		    if(f<1)
+//		    {
+//		    	while(f<1)
+//		    	{
+//		    		f=f*10;
+//		    	}
+//		    }
+//		    if(f>5)
+//		    	f=f/2;
+			f /= 2400000;
 		    return f*beishu;
 	}
 	public String colorr(String color)
 	{
-		if(color.equals("CW"))
+		if(color.equals("ATI"))
+		{
+		     String color1="#A52A2A";
+		     return color1;
+		}else if(color.equals("CW"))
 		{
 		     String color1="#5AB400";
 		     return color1;
@@ -463,6 +506,11 @@ public class Dbase {
 		     String color1="#6959CD";
 		     return color1;
 		}
+		else if(color.equals("KNPR"))
+		{
+		     String color1="#FF1483";
+		     return color1;
+		}
 		else if(color.equals("KWPE"))
 		{
 		     String color1="#EE00EE";
@@ -475,7 +523,7 @@ public class Dbase {
 		}
 		else if(color.equals("LNAE"))
 		{
-		     String color1="#F0FFFF";
+		     String color1="#FFA07A";
 		     return color1;
 		}
 		else if(color.equals("LNBE"))
@@ -491,6 +539,21 @@ public class Dbase {
 		else if(color.equals("TBN"))
 		{
 			 String color1="#C30000";
+			 return color1;
+		}
+		else if(color.equals("TL"))
+		{
+			 String color1="#228B22";
+			 return color1;
+		}
+		else if(color.equals("SAI"))
+		{
+			 String color1="#6495ED";
+			 return color1;
+		}
+		else if(color.equals("STI"))
+		{
+			 String color1="#D2691E";
 			 return color1;
 		}
 		else

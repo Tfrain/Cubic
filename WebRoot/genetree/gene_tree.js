@@ -18,15 +18,15 @@ var svgWidth = bodyWidth*0.9-200;
 treeNode.setAttribute('width',svgWidth);
 treeNode.setAttribute('viewBox','0 0 '+svgWidth+' 580');
 
-var width = 200;//每一组的宽度
-var height = 2000;//每一组的高度
-var xNum = 10;//每一水平方向染色体的个数（水平方向组数）
+var width = 400;//每一组的宽度
+var height = 3000;//每一组的高度
+var xNum = 50;//每一水平方向染色体的个数（水平方向组数）
 var topHeight = -700;//距离顶部的高度（相当于一个顶部边距）
 var leftWidth = 40;//距离左边的宽度（相当于一个左边距）
 
 
 var r = 4;//圆圈的半径（三角形则以它为半径的外接圆）
-var circleNum = 10;//每一行需要放置圆圈（三角形）的个数
+var circleNum = 50;//每一行需要放置圆圈（三角形）的个数
 var circleRow = 2;//需要放置圆圈的排数
 var circleRowSpan = 1;//每一组圆圈之间的间隔
 
@@ -37,20 +37,30 @@ var lineLength = 60;//线条长度
 tree= JSON.parse(tree);
 
 var rstlength = tree.length;
-    //console.log("rstlength:" + rstlength);
+// 10个
+console.log("rstlength:" + rstlength);
+    
 for(var i=0; i<rstlength; i++){
     var eachRst = tree[i].children;//每一组染色体数据
     var rst = {};
+    // rst 是指左边距
     rst.x= width*(i%xNum)+leftWidth;
+    
     var length = eachRst.length;
     var allHeight = r*length*2*circleRow+circleRowSpan;//圆圈和每组圆圈间距排成的总高度
     //var allGenHeight = gyHeight*length;//因子的总高度
     var allGenHeight = 0;
     for(var s in eachRst){
+    	// 这里指相对的主干的长度和位置
         allGenHeight += parseInt(eachRst[s].height);
+        //console.log("allGenHeight:" + allGenHeight + "：  i=" + i);
     }
     var yTemp = 0;
-    //console.log("eachRst.length:" + eachRst.length);
+    
+    //出现 113、109、85、71。。。
+    console.log("length:" + length + "  i:" + i);
+    
+    //length 就是指里面的染色体数目 113、109、85、71.。。。
     for(var k=0;k<length;k++){
         //eachRst[k].height = eachRst[k].height * 2;
         var gyY = topHeight+500+yTemp;
@@ -60,10 +70,12 @@ for(var i=0; i<rstlength; i++){
         html += '<rect x="'+rst.x+'" y="'+gyY+'" width="'+gyWidth+'" height="'+eachRst[k].height+'" style="fill:'+eachRst[k].color+'"/>';//stroke:#797677;stroke-width:1;
         var eachYZ = eachRst[k].children;//每一组因子
         var yzlength = eachYZ.length;
+        // space 仿佛是为了灰色而生的
         if(eachRst[k].id=='space')
         {
             continue;
         }
+        console.log("每一组因子 eachYZ.length:yzlength: " + eachYZ.length);
         //console.log("r:" + r);
         //console.log("k:" + k);
         //console.log("circleRow:" + circleRow);
@@ -73,6 +85,7 @@ for(var i=0; i<rstlength; i++){
         //console.log("topHeight:" + topHeight);
         //console.log("height:" + height);
         //console.log("floor:i/xNum:" + Math.floor(i/xNum));
+        // -700+4*k*2*2(排数)xNum = 10每一水平方向染色体的个数（水平方向组数）2000+1*k
         var circley = topHeight+r*k*2*circleRow+Math.floor(i/xNum)*height+circleRowSpan*k;
         //var circley = topHeight+r*k*2*circleRow+Math.floor(i/xNum*height)+circleRowSpan*k;
         //console.log("before:circley:"+circley);
@@ -109,15 +122,25 @@ for(var i=0; i<rstlength; i++){
         {
             circley=circley-230;
         }
+        if(eachRst[k].chr=='3')
+        {
+            circley=circley-230;
+        }
         //console.log("after:circley:"+circley);
+       
+        // 左边距+线条长度+基因宽度，所以是一组数据的总宽度
         var circlex = rst.x+lineLength+gyWidth;
+        //circley 是线条排列，线条的排列应该是没有问题的
+        
         html += '<line x1="'+(rst.x+gyWidth)+'" y1="'+(gyY+eachRst[k].height/2)+'" x2="'+circlex+'" y2="'+circley+'" style="stroke:black;stroke-width:1"/>';
+        
+        // yzlength 见到过1,2,3,4,15，48当上面id为space时，就会跳过循环向下执行。
         for(var j=0;j<yzlength;j++){
             if(j<circleNum){
                 if(eachYZ[j].type == 'SV_GWAS' || eachYZ[j].type == 'sGWAS'){
                     eachYZ[j].type = 'circle';
                     // title="start:'+eachYZ[j].start+'\nend:'+eachYZ[j].end+'\nPvalue:'+eachYZ[j].value
-                    html += '<circle  filter="'+eachYZ[j].filter+'" cx="'+circlex+'" cy="'+circley+'" r="'+r+'" onclick="clickYZ('+eachYZ[j].Chr+',\''+eachYZ[j].filter+'\','+eachYZ[j].start+','+eachYZ[j].end+')" fill="'+eachYZ[j].color+'"><title>start:'+eachYZ[j].start+'\nend:'+eachYZ[j].end+'\nPvalue:'+eachYZ[j].value+ '</title></circle>';
+                    html += '<circle filter="'+eachYZ[j].filter+'" cx="'+circlex+'" cy="'+circley+'" r="'+r+'" onclick="clickYZ('+eachYZ[j].Chr+',\''+eachYZ[j].filter+'\','+eachYZ[j].start+','+eachYZ[j].end+')" fill="'+eachYZ[j].color+'"><title>chr:'+eachYZ[j].Chr+'\nstart:'+eachYZ[j].start+'\nend:'+eachYZ[j].end+'\nPvalue:'+eachYZ[j].value+ '</title></circle>';
                 }else if(eachYZ[j].type == 'BIN_GWAS' || eachYZ[j].type == 'hGWAS'){
                     eachYZ[j].type = 'triangle';
                     var x1 = circlex-Math.sqrt(3)/2*r;
@@ -126,7 +149,7 @@ for(var i=0; i<rstlength; i++){
                     var y1 = circley-r/2;
                     var y2 = circley-r/2;
                     var y3 = circley+r;
-                    html += '<polygon filter="'+eachYZ[j].filter+'" points="'+x1+','+y1+' '+x2+','+y2+' '+x3+','+y3+'" onclick="clickYZ('+eachYZ[j].Chr+',\''+eachYZ[j].filter+'\','+eachYZ[j].start+','+eachYZ[j].end+')" style="fill:'+eachYZ[j].color+'"><title>start:'+eachYZ[j].start+'\nend:'+eachYZ[j].end+'\nPvalue:'+eachYZ[j].value+ '</title></polygon>';
+                    html += '<polygon filter="'+eachYZ[j].filter+'" points="'+x1+','+y1+' '+x2+','+y2+' '+x3+','+y3+'" onclick="clickYZ('+eachYZ[j].Chr+',\''+eachYZ[j].filter+'\','+eachYZ[j].start+','+eachYZ[j].end+')" style="fill:'+eachYZ[j].color+'"><title>chr:'+eachYZ[j].Chr+'\nstart:'+eachYZ[j].start+'\nend:'+eachYZ[j].end+'\nPvalue:'+eachYZ[j].value+ '</title></polygon>';
                 }
                 circlex = circlex+2*r;
             }else{
@@ -136,7 +159,7 @@ for(var i=0; i<rstlength; i++){
                 var circlex2 = rst.x+lineLength+gyWidth+2*r*(j%circleNum);
                 if(eachYZ[j].type == 'SV_GWAS' || eachYZ[j].type == 'sGWAS'){
                     eachYZ[j].type = 'circle';
-                    html += '<circle filter="'+eachYZ[j].filter+'" onclick="clickYZ('+eachYZ[j].Chr+',\''+eachYZ[j].filter+'\','+eachYZ[j].start+','+eachYZ[j].end+')" cx="'+circlex2+'" cy="'+circley2+'" r="'+eachYZ[j].chr+'" fill="'+eachYZ[j].color+'"/><title>start:'+eachYZ[j].start+'\nend:'+eachYZ[j].end+'\nPvalue:'+eachYZ[j].value+ '</title></circle>';
+                    html += '<circle filter="'+eachYZ[j].filter+'" cx="'+circlex2+'" cy="'+circley2+'" r="'+r+'" onclick="clickYZ('+eachYZ[j].Chr+',\''+eachYZ[j].filter+'\','+eachYZ[j].start+','+eachYZ[j].end+')" fill="'+eachYZ[j].color+'"/><title>chr:'+eachYZ[j].Chr+'\nstart:'+eachYZ[j].start+'\nend:'+eachYZ[j].end+'\nPvalue:'+eachYZ[j].value+ '</title></circle>';
                 }else if(eachYZ[j].type == 'BIN_GWAS' || eachYZ[j].type == 'hGWAS'){
                     eachYZ[j].type = 'triangle';
                     var x21 = circlex2-Math.sqrt(3)/2*r;
@@ -145,7 +168,7 @@ for(var i=0; i<rstlength; i++){
                     var y21 = circley2-r/2;
                     var y22 = circley2-r/2;
                     var y23 = circley2+r;
-                    html += '<polygon filter="'+eachYZ[j].filter+'" points="'+x21+','+y21+' '+x22+','+y22+' '+x23+','+y23+'" onclick="alert(222)" style="fill:'+eachYZ[j].color+'"/><title>start:'+eachYZ[j].start+'\nend:'+eachYZ[j].end+'\nPvalue:'+eachYZ[j].value+ '</title></polygon>';
+                    html += '<polygon filter="'+eachYZ[j].filter+'" points="'+x21+','+y21+' '+x22+','+y22+' '+x23+','+y23+'" onclick="clickYZ('+eachYZ[j].Chr+',\''+eachYZ[j].filter+'\','+eachYZ[j].start+','+eachYZ[j].end+')" style="fill:'+eachYZ[j].color+'"/><title>chr:'+eachYZ[j].Chr+'\nstart:'+eachYZ[j].start+'\nend:'+eachYZ[j].end+'\nPvalue:'+eachYZ[j].value+ '</title></polygon>';
                 }
             }
         }
@@ -257,6 +280,7 @@ treeNode.mousemove(function(e){
 
 
 //滚轮缩放
+
 var scrollFunc=function(e){
 var direct=0;
 e=e || window.event;

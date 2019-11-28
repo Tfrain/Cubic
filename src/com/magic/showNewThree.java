@@ -93,13 +93,30 @@ public class showNewThree extends ActionSupport{
 			sql = sql + " AND Location >= "+start+"";
 			}
 			i++;
+		} else {
+			if(i==0) {
+				sql = sql + " Location >= "+100+"";
+			}
+			else {
+			sql = sql + " AND Location >= "+100+"";
+			}
+			i++;
 		}
+		
 		if(end!=null&&!end.equals("")) {
 			if(i==0) {
 				sql = sql + " Location <= "+end+"";
 			}
 			else {
 			sql = sql + " AND Location <= "+end+"";
+			}
+			i++;
+		} else {
+			if(i==0) {
+				sql = sql + " Location <= "+4000+"";
+			}
+			else {
+			sql = sql + " AND Location <= "+4000+"";
 			}
 			i++;
 		}
