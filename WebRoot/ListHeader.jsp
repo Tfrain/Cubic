@@ -25,19 +25,19 @@
                     </div>
 					
                     <div float="right;width:49%;height:300px;border:1px solid #000"><h4>Variation Map</h4>
-                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Draw/magic.jsp">·Bin Map</a><br>
-                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/JBrowse/jbrowsetool.jsp">·Variation Browser</a><br>
-                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Step/step_newone.jsp">·Variation Search</a>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Draw/magic.jsp">ï¿½Bin Map</a><br>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/JBrowse/jbrowsetool.jsp">ï¿½Variation Browser</a><br>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Step/step_newone.jsp">ï¿½Variation Search</a>
                     <br>
                    		 <h4>GWAS Catalog</h4>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Step/step_one.jsp">·GWAS Search</a><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/genetree.action"/>·GWAS Diagram</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Step/step_one.jsp">ï¿½GWAS Search</a><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/genetree.action">ï¿½GWAS Diagram</a><br>
                     <br>
                     <h4>Variation Application</h4>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Last/Last.jsp">·BLAST/Primer-BLAST</a><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch2.jsp">·General Primer Design</a><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch1.jsp">·Primer Design By Region</a><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch3.jsp">·Design Primer by SNP/INDEL ID</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Last/Last.jsp">ï¿½BLAST/Primer-BLAST</a><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch2.jsp">ï¿½General Primer Design</a><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch1.jsp">ï¿½Primer Design By Region</a><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch3.jsp">ï¿½Design Primer by SNP/INDEL ID</a>
                     </div></div>
                 </div>
                 <div class="list">
