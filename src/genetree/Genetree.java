@@ -27,9 +27,8 @@ public class Genetree extends ActionSupport{
 		String sql="select Trait,method,Chr,start,end,pve from gwas";
 		jsonArray=d.gettree(sql);
 		attributes.put("tree",jsonArray);
-		System.out.println("后台排序");
-		System.out.println(jsonArray);
-		System.out.println("后台排序");
+//		System.out.println(jsonArray);
+//		System.out.println("后台排序");
 		d.Close();
 		return SUCCESS;
 	}
