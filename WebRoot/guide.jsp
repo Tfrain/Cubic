@@ -66,22 +66,12 @@ p{
         <div class="col-md-12">
             <div class="my-panel">
                 <div class="title">
-                    <h3>What are the types of data integrated in database?</h3>
+                    <h3>Manual for MaizeCUBIC database</h3>
                 </div>
-            <p>MaizeCUBIC is a free database describes genomic variations, and phenotypes 
-            for a maize CUBIC population (24 founders and 1404 inbred offspring),  including
-            comprehensive information of over 14M SNPs, 410K InDels, 660K SVs, 600M novel sequences
-            which constituted the highest density and the most diverse maize variant map to date. A
-            total of 23 agronomic traits measured on parents and progeny in five locations representative
-            of where maize is mainly grown in China was also provided in database. Based on 
-            these variations, we display the mosaic structure for progenies in the population, reflecting a
-            high-resolution reshuffle across parental genomes. And to further exploring the
-            genotype–phenotype relationships, two different methods of GWAS results was provided for 
-            dissecting genetic mechanisms 23 agronomic traits. All these data can be accessed through
-            the following analytical tools, as well as download directly from our FTP site.</p>
-        <div style="text-align:center">
-            <img src="images\guide_index.png"></img>
-        </div>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;This manual is created with the expectation to help you better understand MaizeCUBIC 
+            database. Any comments or problems please contact: </p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;Dr. Jianxiao Liu (liujianxiao@mail.hzau.edu.cn)</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;Miss Jingyun Luo (jingyunluo@foxmail.vom)</p>
         </div>
     </div>
 
@@ -89,27 +79,73 @@ p{
         <div class="col-md-12">
             <div class="my-panel">
                 <div class="title">
-                    <h3>Features list and examples to realize it step-by-step</h3>
+                    <h3>What are the types of data integrated in database?</h3>
                 </div>
-            <p>MaizeCUBIC is free and open to the public with user-friendly tools for data analysis,
-            visualization, and download. The tools can be grouped into three
-            general classes according to its related information: Variation Map (Variation Browser, Bin Map),
-            GWAS Catalog (GWAS Search, GWAS Diagram) , Variation Application (BLAST/Primer-BLAST, General
-            Primer Design, Primer Design by 
-            Region, Primer Design by Variation ID).</p>
+            <p>MaizeCUBIC is a free database describes genomic variations, and phenotypes for
+             a maize CUBIC population (24 founders and 1404 inbred offspring), including comprehensive
+              information of over 14M SNPs, 43K Indels, 660K SVs, 600M novel sequences which 
+              constituted high density and diverse maize population variant map. And a subset of 391
+               progenies were randomly selected from the CUBIC population for RNA-sequencing, and
+                the gene expression quantifications data and eQTL mapping results was collected in
+                 database. A total of 23 agronomic traits measured on parents and progeny in five
+                  locations representative of where maize is mainly grown in China was also provided
+                   in database. Based on these variations, we display the mosaic structure for
+                    progenies in the population, reflecting a high-resolution reshuffle across
+                     parental genomes. And to further exploring the genotype–phenotype relationships
+                     , two different methods of GWAS results was provided for dissecting genetic 
+            mechanisms 23 agronomic traits. All these data can be accessed through the following 
+            analytical tools, as well as download directly from our FTP site.</p>
         <div style="text-align:center">
-            <img src="images\guide_tools.png"></img>
+            <img src="images\1.png"></img>
         </div>
         </div>
     </div>
 
+		<div class="col-md-12">
+            <div class="my-panel">
+                <div class="title">
+                <h3>Features list and examples to realize it step-by-step</h3>
+                </div>
+            <p> MaizeCUBIC is free and open to the public with user-friendly tools for data analysis, visualization, and download. The tools can be grouped into three general classes according to its related information: Variation Map (Variation Browser, Bin Map), GWAS Catalog (GWAS Search, GWAS Diagram), Variation Application (BLAST/Primer-BLAST, General Primer Design, Primer Design by Region, Primer Design by Variation ID).</p>
+        <div style="text-align:center">
+            <img src="images\2.png"></img>
+        </div>
+    	</div>
+	</div>
+
+        <div class="col-md-12">
+            <div class="my-panel">
+                <div class="title">
+                    <span class="dot"></span><span class="title">Bin Map</span>
+                </div>
+            <p>Based on variations, we display the mosaic structure for progenies in the population, reflecting a high-resolution reshuffle across parental genomes. You can search detailed haplotype information through choosing or entering accession names and selecting the corresponding genomic region.</p>
+        <div style="text-align:center">
+            <img src="images\guide_binmap1.png"></img>
+        </div>
+
+
+            <p>The results will be like this:</p>
+        <div style="text-align:center">
+            <img src="images\guide_binmap2.png"></img>
+        </div>
+
+
+            <p>Or:</p>
+        <div style="text-align:center">
+            <img src="images\guide_binmap3.png"></img>
+        </div>
+
+        </div>
+    </div>
+    
+    
 
         <div class="col-md-12">
             <div class="my-panel">
                 <div class="title">
                 <h3>Variation Browser</h3>
                 </div>
-            <p>Variation Browser is a utility to easy browse sequences, genes, and genetic variations in various regions of the maize genome.</p>
+            <p> Variation Browser is a utility to easy browse sequences, genes, and genetic variations in various regions of maize genome.</p>
             <p>STEP ONE : choose a region or gene you want to look for, and submit</p>
         <div style="text-align:center">
             <img src="images\guide_browser1.png"></img>
@@ -143,28 +179,20 @@ p{
     </div>
 
 
-        <div class="col-md-12">
+	<div class="col-md-12">
             <div class="my-panel">
                 <div class="title">
-                    <span class="dot"></span><span class="title">Bin Map</span>
+                    <span class="dot"></span><span class="title">Variation Search</span>
                 </div>
-            <p>Based on variations, we display the mosaic structure for progenies in the population, reflecting a high-resolution reshuffle across parental genomes. You can search detailed haplotype information through choosing or entering accession names and selecting the corresponding genomic region.</p>
+            <p>In our database, each identified SNP or Indel is labeled with a unique identifier (ID, e.g. chr1.s_1234, chr1.i_1234). The first string ‘chr’ represents chromosome and the second string indicates the polymorphic type (‘s’ for SNP, ‘i’ for Indel). The subsequent number is the chromosome coordinate of a variation. ‘chr1.s_1234’ means a SNP at chromosome 1, 1234 bp. In this interface, users can fetch the genotypes directly through entering the variation ID. Also, information of variations can be queried by limiting genomic coordinates of the reference genome or gene identifiers. Furthermore, variations can be filtered by keywords of variations annotation.</p>
         <div style="text-align:center">
-            <img src="images\guide_binmap1.png"></img>
+            <img src="images\11.png"></img>
         </div>
-
-
-            <p>The results will be like this:</p>
+        
+        <p>The acquired variations would be displayed in the results page within a table and have links to the relevant entry in Variation Browser tool to see detail information about them.</p>
         <div style="text-align:center">
-            <img src="images\guide_binmap2.png"></img>
+            <img src="images\12.png"></img>
         </div>
-
-
-            <p>Or:</p>
-        <div style="text-align:center">
-            <img src="images\guide_binmap3.png"></img>
-        </div>
-
         </div>
     </div>
 

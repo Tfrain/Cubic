@@ -10,8 +10,8 @@
                     <div class="detail" >
                     <a href="/Magic/Dataintroduction/genotypedata.jsp">Genotype Data   </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/Magic/Dataintroduction/phenotypedata.jsp">Phenotype Data   </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/Magic/index.jsp">Expression Data   </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/Magic/index.jsp">Metabolome Data   </a></div>
+                    <a href="/Magic/Dataintroduction/ExpressionData.jsp">Expression Data   </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
                 </div>
                 <div class="list">
                     <a href="">TOOLS</a>
@@ -25,19 +25,19 @@
                     </div>
 					
                     <div float="right;width:49%;height:300px;border:1px solid #000"><h4>Variation Map</h4>
-                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Draw/magic.jsp">�Bin Map</a><br>
-                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/JBrowse/jbrowsetool.jsp">�Variation Browser</a><br>
-                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Step/step_newone.jsp">�Variation Search</a>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Draw/magic.jsp">稡in Map</a><br>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/JBrowse/jbrowsetool.jsp">稸ariation Browser</a><br>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Step/step_newone.jsp">稸ariation Search</a>
                     <br>
                    		 <h4>GWAS Catalog</h4>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Step/step_one.jsp">�GWAS Search</a><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/genetree.action">�GWAS Diagram</a><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Step/step_one.jsp">稧WAS Search</a><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/genetree.action"/>稧WAS Diagram</a>
                     <br>
                     <h4>Variation Application</h4>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Last/Last.jsp">�BLAST/Primer-BLAST</a><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch2.jsp">�General Primer Design</a><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch1.jsp">�Primer Design By Region</a><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch3.jsp">�Design Primer by SNP/INDEL ID</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Last/Last.jsp">稡LAST/Primer-BLAST</a><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch2.jsp">稧eneral Primer Design</a><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch1.jsp">稰rimer Design By Region</a><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Primer/Primersearch3.jsp">稤esign Primer by SNP/INDEL ID</a>
                     </div></div>
                 </div>
                 <div class="list">

@@ -200,8 +200,8 @@ public class Dbase {
 		return result;
 	}
 	
-	public JSONArray gettree(String sql){
-		JSONArray jsonArray = new JSONArray();
+	public JSONObject gettree(String sql){
+		JSONObject jsonresult=new JSONObject();
 		try {
 			rs = stmt.executeQuery(sql);
 			boolean setHeight = true;
@@ -210,139 +210,125 @@ public class Dbase {
 			int chrJump = 0;
 			int genenum=1;
 			ResultSetMetaData metaData = (ResultSetMetaData) rs.getMetaData();
-			
 			int columnCount = metaData.getColumnCount();
-			// 遍历ResultSet中的每条数据
-			while(rs.next())
+			
+			if (rs != null)
 			{
 				text++;
 				int sum=0;
 				int normalSum=0;
-				JSONObject jsonresult=new JSONObject();
 				JSONObject jsonOuter=new JSONObject();
-				
-				//获取第一个chr
-				for (int i = 1; i <= columnCount; i++) {
-		            String columnName =metaData.getColumnLabel(i);
-		            String value = rs.getString(columnName);
-		            jsonOuter.put(columnName, value);
-		        }
-				jsonOuter.put("start", "0");
-				jsonOuter.put("end", "0");
-				System.out.println("where is doing" + jsonOuter.getString("start")+ jsonOuter.getString("end"));
-				String chrOuter=jsonOuter.getString("Chr");
-
+				jsonOuter.put("start", 0);
+				jsonOuter.put("end", 0);
 				//获取第二层
 				JSONArray childrenOfGene = new JSONArray();
 				JSONArray childrenOfChr = new JSONArray();
 //				方便跳到多个基因时移除
-//				JSONObject jsonresultText=new JSONObject();
 				JSONObject removeText=new JSONObject();
 				
-				while(rs!=null)
+				JSONObject json=new JSONObject();
+				
+				while(rs.next())
 				{
 					JSONObject jsonInner=new JSONObject();
 					JSONObject jsonresultText=new JSONObject();
 					JSONObject OuterGray=new JSONObject();
-					for (int i = 1; i <= columnCount; i++) {
-			            String columnName =metaData.getColumnLabel(i);
-			            String value = rs.getString(columnName);
-			            jsonInner.put(columnName, value);
-			        }
-					String chrInner=jsonInner.getString("Chr");
-//					不同chr的分隔,此时要处理末尾的灰色和重叠基因的特殊情况
-					if(!chrInner.equals(chrOuter))
-					{
-						text=0;
-						normalSum = 0;
-						genenum=1;
-						float[] endGray= {307041717,244442276,235667834,242029974,217928451,169381756,182381542,175347686,157021084,149627545};
-						//多基因加上去情况
-						if(jsonresultText != null && !jsonresultText.containsKey("children")) {
-							float height = Float.parseFloat(jsonOuter.getString("end")) - Float.parseFloat(jsonOuter.getString("start"));
-							JSONOfText(jsonresultText, jsonOuter, heightReduction(height), text);
-							if(!childrenOfGene.isEmpty())
-							{
-//								这里的是正常的二层children
-								jsonresultText.put("children", childrenOfGene);
-								childrenOfGene.clear();
-							}
-							text++;
-							normalSum++;
-						}
-//						加入重叠基因情况
-						if(jsonresultText.containsKey("children")&&normalSum != 0){
-//							因为children重名，必须及时添加
-							childrenOfChr.add(jsonresultText);
-							normalSum = 0;
-						}
+						for (int i = 1; i <= columnCount; i++) {
+				            String columnName =metaData.getColumnLabel(i);
+				            String value = rs.getString(columnName);
+				            jsonInner.put(columnName, value);
+				        }
+						float startInner=Float.parseFloat(jsonInner.getString("start"));
+						float endInner=Float.parseFloat(jsonInner.getString("end"));
 						
-//						距离endGray的灰色,都要加的
-						float grayHeight=heightReduction(endGray[Integer.parseInt(jsonOuter.getString("Chr"))-1]-Float.parseFloat(jsonOuter.getString("end")));
-						if (grayHeight >= 0 ) {
-							JSONArray InnerGray=new JSONArray();
-							JSONObject jsonResultGray =new JSONObject();
-//							在其中外层灰色已经添加相应属性
-							jsonResultGray = grayJSON(OuterGray, jsonInner, grayHeight);
-							InnerGray.add(jsonResultGray);
-							if(!InnerGray.isEmpty())
-							{
-//								这里的是灰色的内层children加到外层
-								OuterGray.put("children", InnerGray);
-								InnerGray.clear();
+//						if(Float.parseFloat(jsonOuter.getString("start")) == 0) {
+//							System.out.println(88);
+//						}
+						//第三层
+//						单层基因跳到多层基因中,因为外层基因要跟上内层基因，所以不得不这么做
+						if(startInner < Float.parseFloat(jsonOuter.getString("end")))
+						{	
+//							正常到多基因的情况要排除，所以要 removeNormal
+							if(!removeNormal) {
+								childrenOfChr.remove(removeText);
+//								System.out.println("移除变正确吗？" + removeText);
+								removeText.clear();
+								text--;
 							}
-						}
-//						加入
-						if(OuterGray.containsKey("children") && normalSum == 0)
-						{
-							childrenOfChr.add(OuterGray);
-						}
-						chrJump = 0;
-						break;
-					}
-					float startInner=Float.parseFloat(jsonInner.getString("start"));
-					float endInner=Float.parseFloat(jsonInner.getString("end"));
-
-					//第三层
-//					单层基因跳到多层基因中,因为外层基因要跟上内层基因，所以不得不这么做
-					if(startInner < Float.parseFloat(jsonOuter.getString("end")))
-					{	
-//						正常到多基因的情况要排除，所以要 removeNormal
-						if(!removeNormal) {
-							childrenOfChr.remove(removeText);
-//							System.out.println("移除变正确吗？" + removeText);
-							removeText.clear();
-							text--;
-						}
-//						外层第一个算进去
-						if(sum == 0) {
+//							外层第一个算进去
+							if(sum == 0) {
+								JSONObject jsonresultGene=new JSONObject();
+								jsonresultGene = JSONOfGene(jsonOuter, genenum);
+								
+						        if(jsonresultGene.containsKey("Chr")){
+						        	childrenOfGene.add(jsonresultGene);
+						        }
+						        sum++;
+							}
 							JSONObject jsonresultGene=new JSONObject();
-							jsonresultGene = JSONOfGene(jsonOuter, genenum);
-							
+							jsonresultGene = JSONOfGene(jsonInner, genenum);
+					        
 					        if(jsonresultGene.containsKey("Chr")){
 					        	childrenOfGene.add(jsonresultGene);
 					        }
-					        sum++;
-						}
-						JSONObject jsonresultGene=new JSONObject();
-						jsonresultGene = JSONOfGene(jsonInner, genenum);
-				        
-				        if(jsonresultGene.containsKey("Chr")){
-				        	childrenOfGene.add(jsonresultGene);
-				        }
-				        genenum++;
-				        setHeight = false;
-//				                为了不一直移除下去
-				        removeNormal = true;
-					} else if (startInner >= Float.parseFloat(jsonOuter.getString("end"))&& setHeight == true) {
-//						正常的长度就是end-start
-						if(normalSum == 0 && Float.parseFloat(jsonOuter.getString("start")) != 0) {
-//							这里加外部的一个text和gene，和灰色，和外面内容一样，不过只要加一次
-							float height = Float.parseFloat(jsonOuter.getString("end")) - Float.parseFloat(jsonOuter.getString("start"));
-							JSONOfText(jsonresultText, jsonOuter, heightReduction(height), text);
-						
+					        genenum++;
+					        setHeight = false;
+//					                为了不一直移除下去
+					        removeNormal = true;
+						} else if (startInner >= Float.parseFloat(jsonOuter.getString("end"))&& setHeight == true) {
+//							正常的长度就是end-start
+//							外结束-外正常，保证多基因到正常时，out的正常能添加到正常中
+							if(normalSum == 0 && Float.parseFloat(jsonOuter.getString("start")) != 0) {
+								
+//								这里加外部的一个text和gene，和灰色，和外面内容一样，不过只要加一次
+								float height = Float.parseFloat(jsonOuter.getString("end")) - Float.parseFloat(jsonOuter.getString("start"));
+								JSONOfText(jsonresultText, jsonOuter, heightReduction(height), text);
+								
+								JSONObject jsonresultGene=new JSONObject();
+								jsonresultGene = JSONOfGene(jsonOuter, genenum);
+								childrenOfGene.add(jsonresultGene);
+								if(!childrenOfGene.isEmpty())
+								{
+//									这里的是正常的二层children
+									jsonresultText.put("children", childrenOfGene);
+									childrenOfGene.clear();
+								}
+								
+								if(jsonresultText.containsKey("children")){
+//									因为children重名，必须及时添加
+									childrenOfChr.add(jsonresultText);
+								}
+								normalSum++;
+								text++;
+								genenum=1;
+							}
+							
+//							为了避免两个第一基因，必须要有这一个
+							if (chrJump == 0) {
+								chrJump++;
+								normalSum++;
+							}
+							
+//							灰色是必备的，而且是先出现。内开始-外结束
+							float grayHeight=heightReduction(Math.abs(startInner-Float.parseFloat(jsonOuter.getString("end"))));
+							if (grayHeight >= 0 ) {
+								JSONArray InnerGray=new JSONArray();
+								JSONObject jsonResultGray =new JSONObject();
+								jsonResultGray = grayJSON(OuterGray, jsonInner, grayHeight);
+								InnerGray.add(jsonResultGray);
+								
+								if(!InnerGray.isEmpty())
+								{
+//									这里的是灰色的内层children加到外层
+									OuterGray.put("children", InnerGray);
+									InnerGray.clear();
+								}
+							}
+//							正常，内结束-内开始
+							JSONOfText(jsonresultText, jsonInner, heightReduction(endInner-startInner), text);
+//							内层单个基因
 							JSONObject jsonresultGene=new JSONObject();
-							jsonresultGene = JSONOfGene(jsonOuter, genenum);
+							jsonresultGene=JSONOfGene(jsonInner, genenum);
 							childrenOfGene.add(jsonresultGene);
 							if(!childrenOfGene.isEmpty())
 							{
@@ -350,135 +336,116 @@ public class Dbase {
 								jsonresultText.put("children", childrenOfGene);
 								childrenOfGene.clear();
 							}
-							
-							if(jsonresultText.containsKey("children")){
-//								因为children重名，必须及时添加
-								childrenOfChr.add(jsonresultText);
-							}
-							normalSum++;
 							text++;
 							genenum=1;
-							if (chrJump == 0) {
-								float grayHeight=heightReduction(Math.abs(startInner-0));
-								if (grayHeight >= 0 ) {
-									JSONArray InnerGray=new JSONArray();
-									JSONObject jsonResultGray =new JSONObject();
-									jsonResultGray = grayJSON(OuterGray, jsonInner, grayHeight);
-									InnerGray.add(jsonResultGray);
-									
-									if(!InnerGray.isEmpty())
-									{
-//										这里的是灰色的内层children加到外层
-										OuterGray.put("children", InnerGray);
-										InnerGray.clear();
-									}
-								}
-								
-								if(OuterGray.containsKey("children"))
+							sum = 0;
+							removeNormal = false;
+						} //多基因-》正常，多基因-》多基因
+						else if(startInner >= Float.parseFloat(jsonOuter.getString("end")) && setHeight == false) {
+//							外层基因，是内层基因的最后一个，但是高度重新计算 endOuter-startOuter
+							float height = Float.parseFloat(jsonOuter.getString("end")) - Float.parseFloat(jsonOuter.getString("start"));
+							JSONOfText(jsonresultText, jsonOuter, heightReduction(height), text);
+							if(!childrenOfGene.isEmpty())
+							{
+//								这里的是正常的二层children
+								jsonresultText.put("children", childrenOfGene);
+								childrenOfGene.clear();
+							}
+							text++;
+							genenum=1;
+//							灰色基因，startInner-endOuter
+							float grayHeight=heightReduction(Math.abs(startInner-Float.parseFloat(jsonOuter.getString("end"))));
+							if (grayHeight >= 0 ) {
+								JSONArray InnerGray=new JSONArray();
+								JSONObject jsonResultGray =new JSONObject();
+//								在其中外层灰色已经添加相应属性
+								jsonResultGray = grayJSON(OuterGray, jsonInner, grayHeight);
+								InnerGray.add(jsonResultGray);
+								if(!InnerGray.isEmpty())
 								{
-									childrenOfChr.add(OuterGray);
+//									这里的是灰色的内层children加到外层
+									OuterGray.put("children", InnerGray);
+									InnerGray.clear();
 								}
-								chrJump++;
 							}
-						}
-//						灰色是必备的，而且是先出现。
-						float grayHeight=heightReduction(Math.abs(startInner-Float.parseFloat(jsonOuter.getString("end"))));
-						if (grayHeight >= 0 ) {
-							JSONArray InnerGray=new JSONArray();
-							JSONObject jsonResultGray =new JSONObject();
-							jsonResultGray = grayJSON(OuterGray, jsonInner, grayHeight);
-							InnerGray.add(jsonResultGray);
-							
-							if(!InnerGray.isEmpty())
-							{
-//								这里的是灰色的内层children加到外层
-								OuterGray.put("children", InnerGray);
-								InnerGray.clear();
-							}
-						}
+							setHeight = true;
+							normalSum = 0;
+						} 
 						
-						JSONOfText(jsonresultText, jsonInner, heightReduction(endInner-startInner), text);
-//						内层单个基因
-						JSONObject jsonresultGene=new JSONObject();
-						jsonresultGene=JSONOfGene(jsonInner, genenum);
-						childrenOfGene.add(jsonresultGene);
-						if(!childrenOfGene.isEmpty())
-						{
-//							这里的是正常的二层children
-							jsonresultText.put("children", childrenOfGene);
-							childrenOfGene.clear();
+						if(startInner >= Float.parseFloat(jsonOuter.getString("end"))) {
+							jsonOuter = jsonInner;
+							sum=0;
 						}
-						text++;
-						genenum=1;
-						sum = 0;
-						removeNormal = false;
-					} //多基因-》正常，多基因-》多基因
-					else if(startInner >= Float.parseFloat(jsonOuter.getString("end")) && setHeight == false) {
-//						外层基因，是内层基因的最后一个，但是高度重新计算 endOuter-startOuter
+						//此时多基因善后（第三个选择语句）应该改变顺序为正常灰色，这样就走总体正常了，变量只有选择 normalSum 证明刚从善后选择语句出来
+						if(OuterGray.containsKey("children") && normalSum != 0)
+						{
+							childrenOfChr.add(OuterGray);
+						}
+						if(jsonresultText.containsKey("children")){
+//							加入单个或多个基因
+							childrenOfChr.add(jsonresultText);
+//							去除正常基因多出来的一组
+							removeText = jsonresultText;
+//							System.out.println("赋值成功吗？" + removeText);
+//							jsonresultText.clear();
+						}
+						if(OuterGray.containsKey("children") && normalSum == 0)
+						{
+							childrenOfChr.add(OuterGray);
+						}
+				}
+
+					JSONObject OuterGray=new JSONObject();
+					float[] endGray= {307041717,244442276,235667834,242029974,217928451,169381756,182381542,175347686,157021084,149627545};
+					//多基因加上去情况
+					if(childrenOfGene != null && !json.containsKey("children")) {
 						float height = Float.parseFloat(jsonOuter.getString("end")) - Float.parseFloat(jsonOuter.getString("start"));
-						JSONOfText(jsonresultText, jsonOuter, heightReduction(height), text);
+						JSONOfText(json, jsonOuter, heightReduction(height), text);
 						if(!childrenOfGene.isEmpty())
 						{
 //							这里的是正常的二层children
-							jsonresultText.put("children", childrenOfGene);
+							json.put("children", childrenOfGene);
 							childrenOfGene.clear();
 						}
 						text++;
-						genenum=1;
-//						灰色基因，startInner-endOuter
-						float grayHeight=heightReduction(Math.abs(startInner-Float.parseFloat(jsonOuter.getString("end"))));
-						if (grayHeight >= 0 ) {
-							JSONArray InnerGray=new JSONArray();
-							JSONObject jsonResultGray =new JSONObject();
-//							在其中外层灰色已经添加相应属性
-							jsonResultGray = grayJSON(OuterGray, jsonInner, grayHeight);
-							InnerGray.add(jsonResultGray);
-							if(!InnerGray.isEmpty())
-							{
-//								这里的是灰色的内层children加到外层
-								OuterGray.put("children", InnerGray);
-								InnerGray.clear();
-							}
-						}
-						setHeight = true;
+						normalSum++;
+					}
+//					加入重叠基因情况
+					if(json.containsKey("children")&&normalSum != 0){
+//						因为children重名，必须及时添加
+						childrenOfChr.add(json);
 						normalSum = 0;
-					} 
+					}
 					
-					if(startInner > Float.parseFloat(jsonOuter.getString("end"))) {
-						jsonOuter = jsonInner;
-						sum=0;
+//					距离endGray的灰色,都要加的
+					float grayHeight=heightReduction(endGray[Integer.parseInt(jsonOuter.getString("Chr"))-1]-Float.parseFloat(jsonOuter.getString("end")));
+					if (grayHeight >= 0 ) {
+						JSONArray InnerGray=new JSONArray();
+						JSONObject jsonResultGray =new JSONObject();
+//						在其中外层灰色已经添加相应属性
+						jsonResultGray = grayJSON(OuterGray, jsonOuter, grayHeight);
+						InnerGray.add(jsonResultGray);
+						if(!InnerGray.isEmpty())
+						{
+//							这里的是灰色的内层children加到外层
+							OuterGray.put("children", InnerGray);
+							InnerGray.clear();
+						}
 					}
-					//为了不使出现两灰色的情形，原本是灰色+正常，但是进入多基因要删除一个正常，就变成了灰色灰色正常
-					//此时多基因善后应该改变顺序为正常灰色，这样就走总体正常了，变量只有选择 normalSum 证明刚从善后选择语句出来
-					if(OuterGray.containsKey("children") && normalSum != 0)
-					{
-//						加入灰色
-						childrenOfChr.add(OuterGray);
-					}
-					if(jsonresultText.containsKey("children")){
-//						加入单个或多个基因
-						childrenOfChr.add(jsonresultText);
-//						去除正常基因多出来的一组
-						removeText = jsonresultText;
-//						System.out.println("赋值成功吗？" + removeText);
-//						jsonresultText.clear();
-					}
-					if(OuterGray.containsKey("children") && normalSum == 0)
+//					此时和多基因先基因后灰色，正常基因先灰色后基因已经没有关系，结尾都要加
+					if(OuterGray.containsKey("children"))
 					{
 						childrenOfChr.add(OuterGray);
 					}
-			        rs.next();
-				}//二层循环
-				
 				if(!childrenOfChr.isEmpty()){
 					jsonresult.put("children", childrenOfChr);
 				}
-				jsonArray.add(jsonresult);
-			}//首层循环
-		} catch (SQLException e) { //sql语句
+				return jsonresult;
+			}//首层判断
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return jsonArray;
+		return jsonresult;
 	}//函数体
 	
 	public JSONObject JSONOfGene(JSONObject json, int genenum){

@@ -123,28 +123,32 @@
 				</div>
 				<div class="panel-body">
 					<div class="my-panel">
-						<h2 style="color:#4381be;">Population Design</h2>
-						<p style="text-indent:2em;">A maize Complete-diallel plus
-							Unbalanced Breeding-like Inter-Cross population (CUBIC)
-							population consist of 1404 individuals derived from twenty-four
-							elite lines that have been widely applied in Chinese breeding
-							programs has been developed.<p/>
+						<p style="text-indent:2em;">The CUBIC (Complete-diallel plus Unbalanced Breeding-like Inter-Cross)
+						 population consists of 1404 progenies descended from 24 Chinese elite inbred
+						  lines (Liu et al., submitted). Generally, CUBIC descends from the traditional 
+						  MAGIC design with the integration of the diallel cross to incorporate information
+						   from phenotypic selection. Since the conventional MAGIC design requires 2^N founder
+						    lines with at least N generations for initial inter-cross of all founders, 
+						    the integration of the diallel cross allows escape from arbitrary founder number 
+						    and saves time during subsequent population development.<p/>
+						<h2 style="color:#4381be;">Population design details of CUBIC</h2>
+						<p style="text-indent:2em;">The 24 founders were selected from four 
+						unrelated groups and have been widely 
+						used in Chinese breeding over the past century.<p/>
                         <div style="text-align:center">
 							<img alt="graph" src="images\graph.png"
 								style="margin:0 auto;width:700px"></img>
                         </div>
-						<p style="text-indent:3em;">•30 F1s with best agronomic
-							performance were selected to futher cross in NCII,and the other
-							110 F1s were randomly selected to cross with open pollinated in
-							isolated region.</p>
-						<p style="text-indent:3em;">•The seed from above F1s were
-							mixed together with the amount of 2:1 with an expectation to
-							improve the population performance.</p>
-						<p style="text-indent:3em;">•All harvest individuals were
-							next planted under open pollination within isolated region for
-							totally 6 generations.</p>
-						<p style="text-indent:3em;">•Following,the population was
-							self-pollinated for another 6 generations.</p>
+						<p style="text-indent:3em;">•The twenty-four founders were crossed under CDC design. </p>
+						<p style="text-indent:3em;">•Thirty F1s with best agronomic performance were selected
+						 to further cross in CDC, and the other 140 F1s were randomly selected to cross with
+						  open pollinated in isolated region.</p>
+						<p style="text-indent:3em;">•The seeds from above F1s were mixed together with the
+						 amount of 2:1 with an expectation to improve the population performance.</p>
+						<p style="text-indent:3em;">•All harvest individuals were next planted under
+						 open pollination within isolated region for totally 6 generations. Following,
+						  the population was self-pollinated for another 6 generations and 1404 inbred
+						   lines have been finally successfully processed and sequenced in next analysis.</p>
 						<div style="text-align:center">
                             <img alt="maize"
 								src="images\maize.png" style="margin:0 auto;width:400px"></img>
@@ -200,7 +204,7 @@
 
 
 					<div class="my-panel">
-						<h2 style="color:#4381be;">Comments or Questions</h2>
+						<h2 style="color:#4381be;">Comments or questions</h2>
 						<p style="text-indent:2em;">For any questions please contact Jianxiao Liu 
                         (liujianxiao@webmail.hzau.edu.cn) or Jingyun Luo  (jingyunluo@foxmail.com)</p>
 					</div>
@@ -222,7 +226,9 @@
    -                        <p style="text-indent:2em;">Zhao H, Yao W, Ouyang Y, Yang W, Wang G, Lian X, Xing Y, Chen L, Xie W. 
    -                        <a href="https://academic.oup.com/nar/article/43/D1/D1018/2439488" style="color:#4381be;">RiceVarMap: a comprehensive database of rice genomic variations.</a>
    -                        Nucleic Acids Res, 2015, 43: D1018-1022</p>
-   --%>
+   --%><a href="http://www.maizego.org/Resources.html" target="_blank" style="text-indent:2em; color: #fc8e00">The promise of directed maize improvement: 
+   						an atlas of genetic architecture and breeding insights 
+   						obtained from the CUBIC population (Liu et al., submitted).</a>
 					</div>
 
 				</div>

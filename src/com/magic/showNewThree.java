@@ -134,6 +134,7 @@ public class showNewThree extends ActionSupport{
 		System.out.println(sql);
 
 		
+		
 		map = (HashMap<String,Object>)d.getNewChr(sql);
 
 		attributes.put("len", map.get("len"));//键值匹配上，len和data在Dbase函数中

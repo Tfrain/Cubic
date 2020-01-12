@@ -34,24 +34,27 @@
 
 <body>
 	<%@ include file="../ListHeader.jsp"%>
-    <div class="container" style="height:2300px">
+    <div class="container" style="height:2050px">
 
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div id="my-panel1" class="my-panel">
+				
 					<div class="title" style="width:100%;color:#4381be;">
-						<h3 style="color:#4381be;">Phenotype Data</h3>
+						<h3 style="color:#4381be;">Phenotype data generation</h3>
 					</div>
-					<p>All 1404 inbreds were planted in a completely randomized
-						block design in 2014 at five locations (N43°42′, E125°18′, Yushu
-						City, Jilin Provence; N42°03′, E123°33′, Shenyang City, Liaoning
-						Provence; N40°10′, E116°21′, Changping District, Beijing City;
-						N38°39′, E115°51, Baoding City, Hebei Provence; N35°27′, E114°01′,
-						Xinxiang City, Henan Provence) of Northern China, where the 24
-						elite founders that served as the parents of the population are
-						the most adapted. About 16 individual plants were planted for each
-						line, and the line Chang7-2 was planted after every 50th entry.</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp; The phenotype data was collected from “An atlas of genetic architecture promises
+				 directed maize improvement”. Here is only extracting and summarizing the data 
+				 generation and analysis part, which is convenient for users to quickly apply.</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp; The 1404 inbreds were planted in a completely randomized block design 
+					in 2014 at five locations (N43°42′, E125°18′, Yushu City, Jilin Provence; 
+					N42°03′, E123°33′, Shenyang City, Liaoning Provence; N40°10′, E116°21′, 
+					Changping District, Beijing City; N38°39′, E115°51, Baoding City, Hebei 
+					Provence; N35°27′, E114°01′, Xinxiang City, Henan Provence) of Northern 
+					China, where the 24 elite founders that served as the parents of the 
+					population are the most adapted. About 16 individual plants were planted 
+					for each line, and the line Chang7-2 was planted after every 50th entry.</p>
 				</div>
 				</div>
                 <div class="col-md-10 col-md-offset-1">
@@ -60,11 +63,14 @@
                 <div class="col-md-12">
 				<div id="my-panel2" class="my-panel">
 					<p style="margin-top:20px;">
-						The population was planted in five different provinces in the
-						summer of 2014, as shown in the map and 23 traits were
-						investigated. Phenotype data in 5 locations
-						respectivelyDownload Blup phenotype dataDownload
+						&nbsp;&nbsp;&nbsp;&nbsp; Twenty-three phenotypes were measured at each location, including: 
+6 flowering times: Days To Tasseling (DTT, measured as the interval from sowing to the day the tassel appeared in half of the individuals per line), Days To Anthesis (DTA, measured as the interval from sowing to the day of pollen shed for half of the individuals), Days To Silking (DTS, measured as the interval from sowing to the day silks emerged for half the individuals), and the intervals between them: ATI, interval between Anthesis and Tasseling; STI, interval between Silking and Tasseling; SAI, interval between Silking and Anthesis. 
+8 developmentally agronomic traits: Plant Height (PH, vertical height from ground to the top of tassel, with an accuracy of 0.5cm), Ear Height (EH, vertical height from ground to the node where the top ear arises), Ear Leaf Length (ELL, straight length of first ear leaf), Ear Leaf Width (ELW, width of ear leaf measured at the widest point), Leaf Number Above Ear (LNAE, leaf or node number from ear leaf to top; counted including ear leaf), Leaf Number Below Ear (LNBE, leaf or node number below ear leaf; not including ear leaf), Tassel Branch Number (TBN, only the primary tassels are considered), Tassel Length (TL, straight length of the main branch).
+ 9 ear traits: Ear Weight (EW), Ear Diameter (ED), Ear Length (EL), Ear Row Number (ERN), Kernel Number Per Row (KNPR), Kernel Number Per Ear (KNPE), Kernel weight Per Ear (KWPE), Cob Weight (CW) and Length of Barren Tip (LBT). For flowering times, all individuals in a line are considered, while only 5 serial individuals at the middle of each line were measured and the average value is used for developmentally agronomic traits. For measuring ear traits, five approximately equidimensional ears were selected to represent each line.
+The best linear unbiased predictor (BLUP) values for each line were used to reduce environmental noise in the phenotypic data.
 					</p>
+                   <a href="http://www.maizego.org/download/Agronomic_23Traits.txt" target="_blank" style="text-indent:2em; color: #fc8e00">[Downloading BLUP penotypes for 23 agronomic traits] 
+   				</a>
 				</div>
 				</div>
 			</div>
@@ -221,247 +227,6 @@ tr:nth-child(even) {
     display:none;
 }
 </style>
-<div style="margin-top:10px;">
-                <table>
-                    <tr>
-                        <table style="width:100%">
-                            <col width="11%"></col>
-                            <col width="23%"></col>
-                            <col width="11%"></col>
-                            <col width="11%"></col>
-                            <col width="11%"></col>
-                            <col width="11%"></col>
-                            <col width="11%"></col>
-                            <col width="11%"></col>
-							<tr>
-								<td><b>Abbreviation</b></td>
-								<td><b>Class</b></td>
-								<td><b>Max</b></td>
-								<td><b>Min</b></td>
-								<td><b>Mean</b></td>
-								<td><b>Sd</b></td>
-								<td><b>Cv</b></td>
-								<td><b>H2</b></td>
-							</tr>
-                        </table>
-                    </tr>
-                    <tr>
-				<div
-					style="width:100%;height:480px;position:relative;overflow-y:scroll">
-					<table style="width:100%;">
-                            <col width="11%"></col>
-                            <col width="23%"></col>
-                            <col width="11%"></col>
-                            <col width="11%"></col>
-                            <col width="11%"></col>
-                            <col width="11%"></col>
-                            <col width="11%"></col>
-                            <col width="11%"></col>
-							<tr>
-								<td>DTA</td>
-								<td>flowering time</td>
-								<td>80.38</td>
-								<td>63.54</td>
-								<td>70.65</td>
-								<td>2.21</td>
-								<td>3.13</td>
-								<td>0.86</td>
-							</tr>
-							<tr>
-								<td>DTS</td>
-								<td>flowering time</td>
-								<td>81.66</td>
-								<td>67.03</td>
-								<td>73.39</td>
-								<td>2.37</td>
-								<td>3.23</td>
-								<td>0.86</td>
-							</tr>
-							<tr>
-								<td>DTT</td>
-								<td>flowering time</td>
-								<td>78.71</td>
-								<td>59.22</td>
-								<td>67.43</td>
-								<td>2.65</td>
-								<td>3.94</td>
-								<td>0.87</td>
-							</tr>
-							<tr>
-								<td>EH</td>
-								<td>Agronomic trait</td>
-								<td>131.20</td>
-								<td>48.59</td>
-								<td>83.74</td>
-								<td>12.97</td>
-								<td>15.49</td>
-								<td>0.91</td>
-							</tr>
-							<tr>
-								<td>ELL</td>
-								<td>Agronomic trait</td>
-								<td>98.88</td>
-								<td>60.75</td>
-								<td>78.35</td>
-								<td>6.07</td>
-								<td>7.75</td>
-								<td>0.88</td>
-							</tr>
-							<tr>
-								<td>ELW</td>
-								<td>Agronomic trait</td>
-								<td>12.38</td>
-								<td>6.50</td>
-								<td>9.21</td>
-								<td>0.84</td>
-								<td>9.08</td>
-								<td>0.87</td>
-							</tr>
-							<tr>
-								<td>LNAE</td>
-								<td>Agronomic trait</td>
-								<td>8.37</td>
-								<td>4.88</td>
-								<td>6.48</td>
-								<td>0.53</td>
-								<td>8.22</td>
-								<td>0.83</td>
-							</tr>
-							<tr>
-								<td>LNBE</td>
-								<td>Agronomic trait</td>
-								<td>10.88</td>
-								<td>5.44</td>
-								<td>7.65</td>
-								<td>0.72</td>
-								<td>9.41</td>
-								<td>0.85</td>
-							</tr>
-							<tr>
-								<td>PH</td>
-								<td>Agronomic trait</td>
-								<td>283.25</td>
-								<td>139.10</td>
-								<td>210.86</td>
-								<td>20.11</td>
-								<td>9.53</td>
-								<td>0.92</td>
-							</tr>
-							<tr>
-								<td>TBN</td>
-								<td>Agronomic trait</td>
-								<td>29.00</td>
-								<td>4.47</td>
-								<td>12.07</td>
-								<td>3.42</td>
-								<td>28.31</td>
-								<td>0.91</td>
-							</tr>
-							<tr>
-								<td>TL</td>
-								<td>Agronomic trait</td>
-								<td>47.56</td>
-								<td>20.30</td>
-								<td>33.14</td>
-								<td>4.14</td>
-								<td>12.49</td>
-								<td>0.93</td>
-							</tr>
-							<tr>
-								<td>CW</td>
-								<td>yield trait</td>
-								<td>38.77</td>
-								<td>9.74</td>
-								<td>19.54</td>
-								<td>4.16</td>
-								<td>21.30</td>
-								<td>0.81</td>
-							</tr>
-							<tr>
-								<td>ED</td>
-								<td>yield trait</td>
-								<td>5.00</td>
-								<td>3.14</td>
-								<td>4.16</td>
-								<td>0.25</td>
-								<td>6.02</td>
-								<td>0.75</td>
-							</tr>
-							<tr>
-								<td>EL</td>
-								<td>yield trait</td>
-								<td>19.05</td>
-								<td>8.76</td>
-								<td>13.38</td>
-								<td>1.41</td>
-								<td>10.54</td>
-								<td>0.84</td>
-							</tr>
-							<tr>
-								<td>ERN</td>
-								<td>yield trait</td>
-								<td>21.14</td>
-								<td>9.87</td>
-								<td>14.22</td>
-								<td>1.45</td>
-								<td>10.21</td>
-								<td>0.85</td>
-							</tr>
-							<tr>
-								<td>EW</td>
-								<td>yield trait</td>
-								<td>171.62</td>
-								<td>41.62</td>
-								<td>91.25</td>
-								<td>15.84</td>
-								<td>17.36</td>
-								<td>0.77</td>
-							</tr>
-							<tr>
-								<td>KNPR</td>
-								<td>yield trait</td>
-								<td>30.60</td>
-								<td>12.96</td>
-								<td>21.17</td>
-								<td>3.05</td>
-								<td>14.41</td>
-								<td>0.80</td>
-							</tr>
-							<tr>
-								<td>KWPE</td>
-								<td>yield trait</td>
-								<td>100.99</td>
-								<td>40.93</td>
-								<td>71.83</td>
-								<td>10.88</td>
-								<td>15.14</td>
-								<td>0.74</td>
-							</tr>
-							<tr>
-								<td>LBT</td>
-								<td>yield trait</td>
-								<td>2.77</td>
-								<td>0.32</td>
-								<td>1.20</td>
-								<td>0.43</td>
-								<td>36.10</td>
-								<td>0.73</td>
-							</tr>
-							<tr>
-								<td>KNPE</td>
-								<td>yield trait</td>
-								<td>529.13</td>
-								<td>153.11</td>
-								<td>304.94</td>
-								<td>54.94</td>
-								<td>18.02</td>
-								<td>0.80</td>
-							</tr>
-					</table>
-                </div>
-                    </tr>
-                </table>
-</div>
 				</div>
 			</div>
 		</div>

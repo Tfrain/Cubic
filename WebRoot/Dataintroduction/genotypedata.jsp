@@ -43,32 +43,85 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                 </div>
             </div>-->
-            <div class="row">
-                <div class="my-panel">
-                <h3 class="title" style="ali">Data generation</h3>
-                <div class="article">
-                    <div class="media">
-                        <div class="media-body" style="text-align:justify">
-                          &nbsp;&nbsp;&nbsp;&nbsp; Young leaves in vegetative growth stage were collected about 5 weeks after planting and quickly frozen in liquid nitrogen. Genomic DNA from each sample was extracted with the cetyltrimethylammonium bromide (CTAB) method and resolved in bidistilled water. DNA solution was then checked for quality and quantity on agarose gels and Qubit (~). Samples having at least 1 µg of total DNA, A260/A230 above 2.0 and A260/A280 above 1.8 were selected and used to construct a sequencing library following the manufacturer’s instructions (Illumina Inc.). DNA libraries were sequenced with Illumina HiSeq 2500 with 125-bp paired-end reads using V4 reagents, generating almost 2000x genome coverage. The sequencing was done to a mean depth of 11X for every founder, and 1X for each 1404 progenies. Sequences data are available in BIG Data Center (BIGD), and GSA project accession number is PRJCA000346.
-            </div>
-                    </div>
-                </div>
-            </div>
-            </div>
+            
             <div class="row" style="margin-top:10px;">
                 <div class="my-panel">
-                <h3 class="title">Genomic Variation</h3>
+                <h3 class="title">Genomic variation</h3>
                 <div class="article">
                     <div class="media">
 
                         <div class="media-body" style="text-align:justify;">
-                           &nbsp;&nbsp;&nbsp;&nbsp; Over 53M SNPs and 2.8M InDels were finally obtained using the pipeline shown in the picture. The SNP set was found >99% consistency compared with genotypes derived from array- and assembly- based methods, while the percent of validated large structural variants was considered as ~60%. Download     
+                           &nbsp;&nbsp;&nbsp;&nbsp;Database genotype data (SNPs, Indels) was collected from previous study (Liu et al., 2020). Briefly,
+                            all progenies were re-sequenced with ~1x coverage, and the 24 founders with 11x coverage; 194 lines were further genotyped 
+                            using a maize200K array to cross-validate variant discovery. Briefly, approximately 5 Tb of raw sequencing data were assembled, 
+                            and popular pipelines were employed to characterize over 14 million high-quality SNPs and 43K InDels.
+                           </br> 
+                           <a href="http://bigd.big.ac.cn/search?dbId=bioproject&q=CRA000171&page=1" target="_blank" style="text-indent:2em; color: #fc8e00">[Downloading raw sequencing reads] 
+   						</a>
+   						</br>
+   						<a href="https://pan.baidu.com/s/1AsPJLTe--gU5EN8aFTMYPA#list/path=%2F" target="_blank" style="text-indent:2em; color: #fc8e00">[Downloading SNPs in PLINK formats] 
+   						</a>
+   						</br>
+   						<a href="https://pan.baidu.com/s/1AsPJLTe--gU5EN8aFTMYPA#list/path=%2F" target="_blank" style="text-indent:2em; color: #fc8e00">[Downloading InDels vcf]
+   						</a>
                              <div class="lefttool" style="width:100%;height:580px;text-align:center;margin-bottom:20px;">
                                   <image src="images/genotype2.png" width="700px"/>
-                             </div>   
-                          <br>&nbsp;&nbsp;&nbsp;&nbsp; Those discordant reads (with unusual insert size) and split ones (best mapped to clipped positions) were applied in SV calling, as population mapping-based strategy. The software LUMPY (Layer et al., 2014) and HYDRA-Multi (Lindberg et al., 2015) were integrated to realize the idea, and TEMP (Zhuang et al., 2014) was used for TE absence/presence calling. Another assembly-based strategy was performed through comparing the B73 (V3.25) reference genome into HZS scaffolds, for which the MUMmer (release 3.0, Kurtz et al., 2004) was implemented to achieve. Download
-
-    Unmapped reads were used to generate population novel sequences. Due to the large number this reads, we devided this sequence into several collections when using MaSuRCA (V3.13) software for de novo assembly. After that we use cd-hit v 4.6.5 software clustering all the contigs we obtained with default parameters to remove redundancy sequence. Then, this Non-redundant contigs set was blast to B73 reference genome, and any with concordance >= 90% and contigs alignment coverage >=50% was removed from future analysis. Additionally, this novel sequence were ﬁltered against EBI bacterial genome database and B73 plastid genome sequences using BLASTN requiring a minimum E-value of 1e-5, and a minimum of 50% coverage and 85% identity, any sequence tend to be nonPlantae was removed from downstream analyses. About 600M novel sequences were finally obtained, including 464707 contigs. >Download
+                             </div>  
+                              
+   						<br>&nbsp;&nbsp;&nbsp;&nbsp; 
+                          <h3 class="title" style="color: #4381be">Identification of structure variation</h3>
+						  &nbsp;&nbsp;&nbsp;&nbsp; Clean reads after trimmed were mapped to B73 reference genome (v3.25, downloaded from http://plants.ensembl.org) using BWA-mem
+						   (Version 0.7.12, Li and Durbin, 2010), 
+						   and discordant reads (with unusual insert size) and split ones (best mapped to clipped positions) 
+						   were extracted and applied in structure variation calling, as population mapping-based strategy. 
+						   The software LUMPY (Layer et al., 2014) and HYDRA-Multi (Lindberg et al., 2015) were integrated to realize the idea. 
+                          </br>
+                          &nbsp;&nbsp;&nbsp;&nbsp; Another assembly-based structure variation calling strategy was performed through comparing the B73 reference genome into HZS scaffolds 
+                          (Li et al., 2019), for which the MUMmer 
+                          (release 3.0, Kurtz et al., 2004) was implemented to achieve. And the percent of validated large structural variants was considered as ~60%.
+                          <br>&nbsp;&nbsp; 
+                          <h3 class="title" style="color: #4381be">Novel sequences assemble</h3>
+&nbsp;&nbsp;&nbsp;&nbsp; Reads that could not be aligned to B73 reference genome (v3.25) in above studies, including unmapped reads of ~11x sequencing data of 24 parents and ~1x sequencing data 1404 progenies, were used to generate novel non-reference sequences of CUBIC population. Due to the large number of unmapped reads, we devided these sequences into several collections when using MaSuRCA 
+(v3.13, Zimin et al., 2013) software for the de novo assembly. After that cd-hit 
+(v4.6.5, Li and Godzik, 2006) software with default parameters was applied to clustering all contigs we obtained to remove redundancy sequences. Then, these non-redundant contigs set was blast to 
+B73 reference genome (v3.25), and alignments with concordance >= 90% and coverage >=50% was removed from future analysis. Additionally, these novel sequences were ﬁltered against EBI bacterial genome database 
+(EBI; http://www.ebi.ac.uk ) and B73 plastid genome sequences 
+(v3.25) using Basic local alignment search tool (BLAST) 
+(Altschul, 1990) requiring a minimum e-value of 1e-5, a minimum of 50% coverage and 85% identity. Also any sequences tend to be nonPlantae was removed from downstream analyses. Finally, about 600M novel sequences were obtained, including 464707 contigs.
+                          </br>
+&nbsp;&nbsp;&nbsp;&nbsp;To evaluate the reliability of novel sequences, we compared them with the PAV tags in a study of maize pan-genome sequence anchors 
+(Lu et al., 2015), 148916 (32%) of our novel sequences was aligned to 818056 (71.3%) of the PAV tags with a minimum of 90% coverage and 85% identity. Also, the novel sequences were blast to a HZS genome 
+(Li et al., 2019), nearly 17% (79000 among 464707) of novel sequences had above 85% identity. In brief, our novel sequences is pretty reliable and covers wider variation than previous studies.
+                          </br>
+                          <h3 class="title" style="color: #4381be">References</h3>
+                          1.	Altschul, S. F. (1990). Basic local alignment search tool (blast). <i>Journal of Molecular Biology, 215</i>(3), 403-410.
+                          </br>
+                          </br>
+                          2.	Chunhui Li, Wei Song, Yingfeng Luo, Shenghan Gao, Ruyang Zhang, Zi Shi, Xiaqing Wang, Ronghuan Wang, Fengge Wang, Jidong Wang, Yanxin Zhao, Aiguo Su, Shuai Wang, Xin Li, Meijie Luo, Shuaishuai Wang, Yunxia Zhang, Jianrong Ge, Jiuran Zhao. (2019). The huangzaosi maize genome provides insights into genomic variation and improvement history of maize. <i>Molecular Plant </i>(3), 402-409.
+                          </br>
+                          </br>
+                          3.	Hai-Jun Liu; Xiaqing Wang; Yingjie Xiao; Jingyun Luo; Feng Qiao; Wenyu Yang; Ruyang Zhang; Yijiang Meng; Jiamin Sun; Shijuan Yan; Yong Peng; Luyao Niu; Liumei Jian; Wei Song; Jiali Yan; Chunhui Li; Yanxin Zhao; Ya Liu; Marilyn L. Warburton; Jiuran Zhao; Jianbing Yan. (2020). An atlas of genetic architecture promises directed maize improvement
+                          </br>
+                          </br>
+                          4.	Heng Li, & Richard Durbin. (2009). Fast and accurate short read alignment with burrows-wheeler transform. <i>Bioinformatics</i>.
+                          </br>
+                          </br>
+                          5.	Kurtz, S. , Phillippy, A. , Delcher, A. L. , & Michael Smoot…. (2004). Versatile and open software for comparing large genomes. <i>Genome biology, 5</i>(2).
+                          </br>
+                          </br>
+                          6.	Layer, Ryan M, Chiang, Colby, Quinlan, Aaron R, & Hall, Ira M.(2014). Lumpy: a probabilistic framework for structural variant discovery. <i>Genome Biology, 15</i>(6), R84.
+                          </br>
+                          </br>
+                          7.	Li, W., & Godzik, A. (2006). Cd-hit: a fast program for clustering and comparing large sets of protein or nucleotide sequences. <i>Bioinformatics, 17</i>, 282-283
+                          </br>
+                          </br>
+                          8.	Lindberg, M. R., Hall, I. M., & Quinlan, A. R.(2015) . Population-based structural variation discovery with hydra-multi. <i>Bioinformatics, 31</i>(8), 1286-1289.
+                     	  </br>
+                          </br>
+                     	  9.	Lu, F. , Romay, M. C. , Glaubitz, J. C. , Bradbury, P. J. , Elshire, R. J. , & Wang, T. , et al. (2015). High-resolution genetic mapping of maize pan-genome sequence anchors. <i>Nature Communications, 6</i>, 6914.
+                     	  </br>
+                          </br>
+                     	  10.	Zimin, A. V., Marcais, G., Puiu, D., Roberts, M., Salzberg, S. L., & Yorke, J. A.(2013) . The masurca genome assembler. <i>Bioinformatics, 29</i>(21), 2669-2677.
                         <br></div>
                     </div>
                 </div>

@@ -51,18 +51,7 @@
 	<h3 style="position:relative;left:4.9%;">Variation Search</h3>
 	<br>
 	<div class="container" style="height:600px;">
-		<div class="describe">
-			<p>
-				<font size="3">Single-variant-based GWAS and haplotype-based GWAS results of 23 agronomic traits for poplulation were available in this section. And detailed information of significant SNPs(p&lt;2.79x10-8) for you interested traits can be queried by limiting genomic coordinate or gene ID.</font>
-			</p>
-			<p>
-				<font size="3">Search the significant SNPs (2.79x10-8) in
-					GWAS results in a number of ways, including by trait, SNP
-					identifier, study and gene.</font>
-			</p>
-		</div>
-		<br>
-		<br>
+		
 		<form action="showNewThree" method="post" onsubmit="return check();">
             <div class="col-md-6" style="width:100%">
 			<div class="search">
@@ -75,25 +64,43 @@ table, table tr th, table tr td {
     display:none;
 }
 </style>
-          <div class="form-group row">
+          <div class="form-group row" style="border:solid 1px #ddd">
+          <input type="radio" name="search" value="first">
+           <b><font size="3">Search for Variation by Variation ID:</font><br></b>
+          </br>
           <label class="col-sm-2 col-form-label">Variation Name</label>
           <div class="col-sm-10">
                   <div class="col-sm-8 col-lg-8" style="padding-left:0px">
-                      <input id="sel5" type="text" name="variation" title="eg:chr1.s_276394019" placeholder="eg:chr1.s_276394019" class="eg form-control">
+                      <input id="sel5" readonly="readonly" type="text" name="variation" title="eg:chr1.s_883" placeholder="eg:chr1.s_883" class="eg form-control">
               </div>
           </div>
+          </br>
+          </br>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;Please input a variation ID (eg:chr1.s_883).</p>
+              
+              <div id="wait">
+			</div>
+			
+              <button class="btn btn-success form-control" text-algin="left" id="next" float="right" style="height:40px; width: 100px; padding: 0px">Search</button>
           </div>
+          <hr>
           
-          <div class="form-group row">
+          
+          <div class="form-group row" style="border:solid 1px #ddd">
+          <input type="radio" name="search" value="second">
+           <b><font size="3">Search for Variations by Gene:</font><br></b>
+          </br>
               <label class="col-sm-2">Gene ID</label>
               <div class="col-sm-4">
-                  <input id="sel4" type="text" name="gene" title="eg:GRMZM2G356204" placeholder="eg:GRMZM2G356204" class="eg form-control">
+                  <input id="sel4" readonly="readonly" type="text" name="gene" title="eg:GRMZM2G059865" placeholder="eg:GRMZM2G059865" class="eg form-control">
               </div>
-          </div>
-          <div class="form-group row">
-              <label class="eg col-sm-2 col-form-label">Variation Type</label>
+              </br>
+          		</br>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;Please input a Gene ID (eg:GRMZM2G059865).</p>
+              <div class="form-group row">
+              <label class="eg col-sm-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;Variation Type</label>
               <div class="col-sm-10">
-                  <select class="form-control" name="feature" id="sel3">
+                  <select class="form-control mul2" disabled="disabled" name="feature" id="sel3">
                   <option value="" disabled selected style='display:none;'>Choose One Variation Type</option>
                   <option value="downstream_gene_variant">downstream_gene_variant</option>
 				  <option value="upstream_gene_variant">upstream_gene_variant</option>
@@ -116,10 +123,35 @@ table, table tr th, table tr td {
                   </select>
               </div>
           </div>
-          <div class="form-group row">
+          
+          <div class="form-group row" style="margin-top: 20px">
+              <label class="eg col-sm-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;Variation effect</label>
+              <div class="col-sm-10">
+                  <select class="form-control mul2" disabled="disabled" name="effect" id="sel1">
+                  <option value="" disabled selected style='display:none;'>Choose One Variation effect</option>
+				  <option value="MODIFIER">MODIFIER</option>
+				  <option value="MODERATE">MODERATE</option>
+				  <option value="LOW">LOW</option>
+				  <option value="HIGH">HIGH</option>
+                  </select>
+              </div>
+          </div>
+          
+          <div id="wait">
+			</div>
+			
+          <button class="btn btn-success form-control" text-algin="left" id="next1" float="right" style="height:40px; width: 100px; padding: 0px">Search</button>
+          </div>
+          <hr>
+          
+          
+          <div class="form-group row" style="border:solid 1px #ddd">
+          <input type="radio" name="search" value="third">
+           <b><font size="3">Search for Variations in a Region:</font><br></b>
+          </br>
               <label class="eg col-sm-2 col-form-label">Chr/Scaffold</label>
               <div class="col-sm-2">
-                  <select class="form-control" name="chr" id="sel2">
+                  <select class="form-control mul3" disabled="disabled" name="chr" id="sel2">
                   			<option value="" disabled selected style='display:none;'>Choose One Chr/Scaffold</option>
 							<option value="1">Chr1</option>
 							<option value="2">Chr2</option>
@@ -135,18 +167,45 @@ table, table tr th, table tr td {
               </div>
               <label class="col-sm-1 col-form-label">between</label>
               <div class="col-sm-2">
-                  <input type="text" class="eg form-control" title="eg:147" placeholder="eg:147" name="start" id="sh1">
+                  <input type="text" readonly="readonly" class="eg form-control" title="eg:147" placeholder="eg:147" name="start" id="sh1">
               </div>
               <label class="col-sm-1 col-form-label">and</label>
               <div class="col-sm-2">
-                  <input type="text" class="eg form-control" title="eg:6782830" placeholder="eg:6782830" name="end" id="sh2">
+                  <input type="text" readonly="readonly" class="eg form-control" title="eg:6782830" placeholder="eg:6782830" name="end" id="sh2">
+              </div>
+              </br>
+              
+              <div class="form-group row">
+              <label class="eg col-sm-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;Variation Type</label>
+              <div class="col-sm-10">
+                  <select class="form-control mul3" disabled="disabled" name="feature" id="sel3">
+                  <option value="" disabled selected style='display:none;'>Choose One Variation Type</option>
+                  <option value="downstream_gene_variant">downstream_gene_variant</option>
+				  <option value="upstream_gene_variant">upstream_gene_variant</option>
+                  <option value="synonymous_variant">synonymous_variant</option>
+                  <option value="missense_variant">missense_variant</option>
+                  <option value="3_prime_UTR_variant">3_prime_UTR_variant</option>
+                  <option value="intron_variant">intron_variant</option>
+                  <option value="splice_region_variant">splice_region_variant</option>
+                  <option value="5_prime_UTR_variantt">5_prime_UTR_variantt</option>
+                  <option value="stop_lost">stop_lost</option>
+                  <option value="start_lost">start_lost</option>
+                  <option value="stop_gained">stop_gained</option>
+                  <option value="stop_retained_variant">stop_retained_variant</option>
+                  <option value="splice_donor_variant">splice_donor_variant</option>
+                  <option value="non_coding_transcript_exon_variant">non_coding_transcript_exon_variant</option>
+                  <option value="splice_acceptor_variant">splice_acceptor_variant</option>
+                  <option value="coding_sequence_variant">coding_sequence_variant</option>
+                  <option value="incomplete_terminal_codon_variant">incomplete_terminal_codon_variant</option>
+                  <option value="intergenic_variant">intergenic_variant</option>
+                  </select>
               </div>
           </div>
-          
-          <div class="form-group row">
-              <label class="eg col-sm-2 col-form-label">Variation effect</label>
+              
+              <div class="form-group row" style="margin-top: 20px">
+              <label class="eg col-sm-2 col-form-label">&nbsp;&nbsp;&nbsp;&nbsp;Variation effect</label>
               <div class="col-sm-10">
-                  <select class="form-control" name="effect" id="sel1">
+                  <select class="form-control mul3" disabled="disabled" name="effect" id="sel1">
                   <option value="" disabled selected style='display:none;'>Choose One Variation effect</option>
 				  <option value="MODIFIER">MODIFIER</option>
 				  <option value="MODERATE">MODERATE</option>
@@ -155,18 +214,60 @@ table, table tr th, table tr td {
                   </select>
               </div>
           </div>
+          
+          <div id="wait">
+			</div>
+			
+          <button class="btn btn-success form-control" text-algin="left" id="next2" float="right" style="height:40px; width: 100px; padding: 0px">Search</button>
+              
+          </div>
+          
           </div>
             <br>
             </div>
-			<div id="wait">
-			</div>
-              <div class="col">
-             <button class="btn btn-success form-control" text-algin="left" id="next" float="right" style="height:60px">Search</button>
-             </div>
  	</form>
  	</div>    
 	<%@ include file="../ListFooter.jsp"%>
 	
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('input:radio[name="search"]').click(function() {
+			var val = $('input:radio[name="search"]:checked').val();
+			//alert(val);
+			if (val == "first") {
+				$("#sel5").removeAttr("readonly");
+				
+				$("#sel4").attr("readonly", "readonly");
+				$(".mul2").attr("disabled", true);
+				
+				$("#sh1").attr("readonly", "readonly");
+				$("#sh2").attr("readonly", "readonly");
+				$(".mul3").attr("disabled", true);
+
+			} else if(val == "second"){
+				$("#sel4").removeAttr("readonly");
+				$(".mul2").attr("disabled", false);
+				
+				$("#sel5").attr("readonly", "readonly");
+				
+				$("#sh1").attr("readonly", "readonly");
+				$("#sh2").attr("readonly", "readonly");
+				$(".mul3").attr("disabled", true);
+			} else{
+				$(".mul3").attr("disabled", false);
+				$("#sh1").removeAttr("readonly");
+				$("#sh2").removeAttr("readonly");
+				
+				$("#sel5").attr("readonly", "readonly");
+				
+				$("#sel4").attr("readonly", "readonly");
+				$(".mul2").attr("disabled", true);
+				
+			}
+		});
+	});
+	
+</script>
 	
 <script type="text/javascript">
 		 $(function() {
@@ -182,11 +283,11 @@ table, table tr th, table tr td {
 			var vari = /^[a-z][a-z0-9_.]{8,20}$/.test($("#sel5").val());
 			var gene = /^(?![0-9]+$)(?![A-Z]+$)[0-9A-Z]{12,17}$/.test($("#sel4").val());
 			if(vari == ""&&$("#sel5").val()!='') {
-				alert("Please input Variation Name Like chr1.s_276394019!");
+				alert("Please input Variation Name Like chr1.s_883!");
 				return false;
 			}
 			if (gene == ""&&$("#sel4").val()!='') {
-				alert("Please input Gene ID Like GRMZM2G356204!");
+				alert("Please input Gene ID Like GRMZM2G059865!");
 				return false;
 			} 
 			
@@ -262,7 +363,10 @@ table, table tr th, table tr td {
                      	}
 						var str = $("<div id='loading' class='loading'>Loading pages...</div>");
 						$('#wait').append(str);
+						$("#next1").attr("disabled",true);
 						$("#next").attr("disabled",true);
+						$("#next2").attr("disabled",true);
+						$(".form-group").attr("disabled",true);
 						return true;
 			} else if($("#sh1").val() == '' && $("#sh2").val() != ''){
     					alert(("Please input start position!"));
@@ -276,7 +380,10 @@ table, table tr th, table tr td {
 			}*/
 			var str = $("<div id='loading' class='loading'>Please Waiting .....</div>");
 			$('#wait').append(str);
+			$("#next1").attr("disabled",true);
 			$("#next").attr("disabled",true);
+			$("#next2").attr("disabled",true);
+			$(".form-group").attr("disabled",true);
 			return true;
 		};
 	</script>

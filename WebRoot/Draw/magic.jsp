@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="describe">
                <h3>Bin Map</h3>
                <br/>
-               <h4>The visualisation of mosaic haplotypes for progenies in synthetic population, reflecting a high-resolution reshuffle across 24 founders genomes.</h4>
+               <h4>A IBD map was constructed of contributions from the twenty-four founders onto the 1,404 progeny lines using a hidden Markov model (HMM) with several modifications on the study of Mott et al., (2000). In the modified HMM model, the hidden states are the progenitor IBD states, and the observed states are the SNP genotypic calls, which can be used undoubtedly to other multi-parental populations.</h4>
         </div>
         <div class="inputs" style="width:100%;height:100%;position:relative;">
         	<form method = "post" action ="picture" style="width:1130px;height:500px;margin:0;position:relative;"onsubmit="return check();">
