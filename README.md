@@ -5,13 +5,15 @@ Introduction
 ------------
 This database includes the jave back end and jsp front end. 
 
-The directory of WebRoot includes the .jsp files and the directory of scr includes the .jave files
+The directory of WebRoot includes the .jsp files and the directory of scr includes the .jave files.
+
 ---
 The part of Genotype Data--->Dataintroduction/genotypedata.jsp.
 
 The part of Phenotype Data--->Dataintroduction/phenotypedata.jsp.
 
 The part of Expression Data--->Dataintroduction/ExpressionData.jsp.
+
 ---
 The part of Haplotype Bin Map--->Draw/magic.jsp, com.draw.findDataInMagic and /Draw/result.jsp.
 
