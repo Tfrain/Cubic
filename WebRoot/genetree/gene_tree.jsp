@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <%@ include file="../ListFooter.jsp"%>
         
         <style>
-            .filter-item{width:100%;height:55px;border-bottom:solid 1px #eee;padding:8px 4px;}
+            .filter-item{width:100%;height:65px;border-bottom:solid 1px #eee;padding:8px 4px;}
             .filter-item:hover{background:#eee;cursor:pointer;}
             .filter-item-selected{background:#eee;cursor:pointer;}
         </style>

@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="row" style="margin-top:10px;">
                 <div class="my-panel">
                 <div class="media-body" style="text-align:justify">
-                          &nbsp;&nbsp;&nbsp;&nbsp; RNA-sequencing data and analysis results was collected from “An atlas of genetic architecture promises directed maize improvement”. Here is only extracting and summarizing the data generation and analysis part, which is convenient for users to quickly apply.        
+                          &nbsp;&nbsp;&nbsp;&nbsp; RNA-sequencing data and analysis results was collected from “CUBIC: an atlas of genetic architecture promises directed maize improvement”. Here is only extracting and summarizing the data generation and analysis part, which is convenient for users to quickly apply.        
             </div>
                 <h3 class="title">RNA-sequencing and analysis pipeline</h3>
                 <div class="article">

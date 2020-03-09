@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    <title>Variation Browser</title>
+    <title>Genome Browser</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="author" content="Daliu"/>
@@ -184,7 +184,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%@ include file="../ListHeader.jsp"%>
     <div class="container" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-17" data-genuitec-path="/Magic/WebRoot/JBrowse/jbrowsetool.jsp">
             <div class="describe">
-                <h3>Variation Browser</h3>
+                <h3>Genome Browser</h3>
             </div>
             <div class="search">
 <style>

@@ -427,13 +427,90 @@ function setFilterPan(tree){
         html += '<div id="'+data[i].filter+'" onclick="filter(\''+data[i].filter+'\')" class="filter-item">'+
                     '<div style="background:'+data[i].color+';width:20px;height:20px;border-radius:10px;float:left;"></div>'+
                     '<div style="background:#398A96;color:white;text-align:center;float:right;width:40px;height:20px;border-radius:10px;">'+data[i].num+'</div>'+
-                    '<div style="width:100%;float:left;">Trait：'+data[i].filter+'</div>'+
+                    '<div style="width:100%;float:left;">Trait：'+transfer(data[i].filter)+'</div>'+
                 '</div>';
     }
     var filterlist = document.getElementById('filterlist');
     filterlist.innerHTML = html;
 }
 
+//分类数据生成
+function transfer(tree){
+  var data = tree;
+  if (data == 'CW') {
+	  data = 'Cob weight'
+	  return data;	  
+  } else if (data == 'DTA') {
+	  data = 'Date to anthesis'
+	  return data;
+  } else if (data == 'DTS') {
+	  data = 'Date to silking'
+	  return data;
+  } else if (data == 'DTT') {
+	  data = 'Date to tasseling'
+	  return data;	  
+  } else if (data == 'ED') {
+	  data = 'Ear diameter'
+	  return data;	  
+  } else if (data == 'EH') {
+	  data = 'Ear height'
+	  return data;	  
+  } else if (data == 'EL') {
+	  data = 'Ear length'
+	  return data;	  
+  } else if (data == 'ELL') {
+	  data = 'Ear leaf length'
+	  return data;	  
+  } else if (data == 'ELW') {
+	  data = 'Ear leaf width'
+	  return data;	  
+  } else if (data == 'ERN') {
+	  data = 'Ear row number'
+	  return data;	  
+  } else if (data == 'EW') {
+	  data = 'Ear weight'
+	  return data;	  
+  } else if (data == 'KNPE') {
+	  data = 'Kernel number per ear'
+	  return data;	  
+  } else if (data == 'KNPR') {
+	  data = 'Kernel number per row'
+	  return data;	  
+  } else if (data == 'KWPE') {
+	  data = 'Kernel weight per ear'
+	  return data;	  
+  } else if (data == 'LBT') {
+	  data = 'Length of barren tip'
+	  return data;	  
+  } else if (data == 'LNAE') {
+	  data = 'Leaf number above ear'
+	  return data;	  
+  } else if (data == 'LNBE') {
+	  data = 'Leaf number below ear'
+	  return data;	  
+  } else if (data == 'PH') {
+	  data = 'Plant height'
+	  return data;	  
+  } else if (data == 'TBN') {
+	  data = 'Tassel branch number'
+	  return data;	  
+  } else if (data == 'TL') {
+	  data = 'Tassel length'
+	  return data;	  
+  } else if (data == 'ATI') {
+	  data = 'Anthesis and tasseling interval'
+	  return data;	  
+  } else if (data == 'STI') {
+	  data = 'Silking and tasseling interval'
+	  return data;	  
+  } else if (data == 'SAI') {
+	  data = 'Silking and anthesis interval'
+	  return data;	  
+  } else {
+	  return data;
+  }
+  return data;
+}
 
 //分类数据生成
 function filterPan(tree){

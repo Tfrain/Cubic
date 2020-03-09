@@ -44,8 +44,7 @@
 					<div class="title" style="width:100%;color:#4381be;">
 						<h3 style="color:#4381be;">Phenotype data generation</h3>
 					</div>
-					<p>&nbsp;&nbsp;&nbsp;&nbsp; The phenotype data was collected from “An atlas of genetic architecture promises
-				 directed maize improvement”. Here is only extracting and summarizing the data 
+					<p>&nbsp;&nbsp;&nbsp;&nbsp; The phenotype data was collected from “CUBIC: an atlas of genetic architecture promises directed maize improvement”. Here is only extracting and summarizing the data 
 				 generation and analysis part, which is convenient for users to quickly apply.</p>
 					<p>&nbsp;&nbsp;&nbsp;&nbsp; The 1404 inbreds were planted in a completely randomized block design 
 					in 2014 at five locations (N43°42′, E125°18′, Yushu City, Jilin Provence; 

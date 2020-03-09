@@ -76,52 +76,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						   were extracted and applied in structure variation calling, as population mapping-based strategy. 
 						   The software LUMPY (Layer et al., 2014) and HYDRA-Multi (Lindberg et al., 2015) were integrated to realize the idea. 
                           </br>
-                          &nbsp;&nbsp;&nbsp;&nbsp; Another assembly-based structure variation calling strategy was performed through comparing the B73 reference genome into HZS scaffolds 
+                          &nbsp;&nbsp;&nbsp;&nbsp; Another assembly-based structure variation calling strategy was performed through comparing the B73 reference genome into HuangZaoSi (also called HZS) scaffolds 
                           (Li et al., 2019), for which the MUMmer 
                           (release 3.0, Kurtz et al., 2004) was implemented to achieve. And the percent of validated large structural variants was considered as ~60%.
                           <br>&nbsp;&nbsp; 
                           <h3 class="title" style="color: #4381be">Novel sequences assemble</h3>
 &nbsp;&nbsp;&nbsp;&nbsp; Reads that could not be aligned to B73 reference genome (v3.25) in above studies, including unmapped reads of ~11x sequencing data of 24 parents and ~1x sequencing data 1404 progenies, were used to generate novel non-reference sequences of CUBIC population. Due to the large number of unmapped reads, we devided these sequences into several collections when using MaSuRCA 
 (v3.13, Zimin et al., 2013) software for the de novo assembly. After that cd-hit 
-(v4.6.5, Li and Godzik, 2006) software with default parameters was applied to clustering all contigs we obtained to remove redundancy sequences. Then, these non-redundant contigs set was blast to 
+(v4.6.5, Li and Godzik, 2006) software with default parameters was applied to clustering all contigs we obtained to remove redundancy sequences. Then, these non-redundant contigs set was BLAST to 
 B73 reference genome (v3.25), and alignments with concordance >= 90% and coverage >=50% was removed from future analysis. Additionally, these novel sequences were ﬁltered against EBI bacterial genome database 
 (EBI; http://www.ebi.ac.uk ) and B73 plastid genome sequences 
 (v3.25) using Basic local alignment search tool (BLAST) 
 (Altschul, 1990) requiring a minimum e-value of 1e-5, a minimum of 50% coverage and 85% identity. Also any sequences tend to be nonPlantae was removed from downstream analyses. Finally, about 600M novel sequences were obtained, including 464707 contigs.
                           </br>
 &nbsp;&nbsp;&nbsp;&nbsp;To evaluate the reliability of novel sequences, we compared them with the PAV tags in a study of maize pan-genome sequence anchors 
-(Lu et al., 2015), 148916 (32%) of our novel sequences was aligned to 818056 (71.3%) of the PAV tags with a minimum of 90% coverage and 85% identity. Also, the novel sequences were blast to a HZS genome 
+(Lu et al., 2015), 148916 (32%) of our novel sequences was aligned to 818056 (71.3%) of the PAV tags with a minimum of 90% coverage and 85% identity. Also, the novel sequences were BLAST to a HuangZaoSi (also called HZS) genome 
 (Li et al., 2019), nearly 17% (79000 among 464707) of novel sequences had above 85% identity. In brief, our novel sequences is pretty reliable and covers wider variation than previous studies.
                           </br>
                           <h3 class="title" style="color: #4381be">References</h3>
-                          1.	Altschul, S. F. (1990). Basic local alignment search tool (blast). <i>Journal of Molecular Biology, 215</i>(3), 403-410.
+                          1.	Altschul SF, Gish W, Miller W, Myers EW, Lipman DJ. (1990). Basic local alignment search tool. <i>Journal of Molecular Biology, 215</i>(3), 403-410.
                           </br>
                           </br>
-                          2.	Chunhui Li, Wei Song, Yingfeng Luo, Shenghan Gao, Ruyang Zhang, Zi Shi, Xiaqing Wang, Ronghuan Wang, Fengge Wang, Jidong Wang, Yanxin Zhao, Aiguo Su, Shuai Wang, Xin Li, Meijie Luo, Shuaishuai Wang, Yunxia Zhang, Jianrong Ge, Jiuran Zhao. (2019). The huangzaosi maize genome provides insights into genomic variation and improvement history of maize. <i>Molecular Plant </i>(3), 402-409.
+                          2.	Kurtz S, Phillippy A, Delcher AL, Smoot M, Shumway M, Antonescu C, Salzberg SL. (2004). Versatile and open software for comparing large genomes. <i>Genome biology, 5</i>(2): R12.
                           </br>
                           </br>
-                          3.	Hai-Jun Liu; Xiaqing Wang; Yingjie Xiao; Jingyun Luo; Feng Qiao; Wenyu Yang; Ruyang Zhang; Yijiang Meng; Jiamin Sun; Shijuan Yan; Yong Peng; Luyao Niu; Liumei Jian; Wei Song; Jiali Yan; Chunhui Li; Yanxin Zhao; Ya Liu; Marilyn L. Warburton; Jiuran Zhao; Jianbing Yan. (2020). An atlas of genetic architecture promises directed maize improvement
+                          3.	Layer RM, Chiang C, Quinlan AR, Hall IM. (2014). Lumpy: a probabilistic framework for structural variant discovery. <i>Genome Biology, 15</i>(6), R84.
                           </br>
                           </br>
-                          4.	Heng Li, & Richard Durbin. (2009). Fast and accurate short read alignment with burrows-wheeler transform. <i>Bioinformatics</i>.
+                          4.	Li C, Song W, Luo Y, Gao S, Zhang R, Shi Z, Wang X, Wang R, Wang F, Wang J, Zhao Y, Su A, Wang S, Li X, Luo M, Wang S, Zhang Y, Ge J, Tan X, Yuan Y, Bi X, He H, Yan J, Wang Y, Hu S, Zhao J. The HuangZaoSi Maize Genome Provides Insights into Genomic Variation and Improvement History of Maize. <i>Molecular Plant, 12</i>(3), 402-409.
                           </br>
                           </br>
-                          5.	Kurtz, S. , Phillippy, A. , Delcher, A. L. , & Michael Smoot…. (2004). Versatile and open software for comparing large genomes. <i>Genome biology, 5</i>(2).
+                          5.	Li H, Durbin R. (2009). Fast and accurate short read alignment with burrows-wheeler transform. <i>Bioinformatics, 25</i>(14):1754-60.
                           </br>
                           </br>
-                          6.	Layer, Ryan M, Chiang, Colby, Quinlan, Aaron R, & Hall, Ira M.(2014). Lumpy: a probabilistic framework for structural variant discovery. <i>Genome Biology, 15</i>(6), R84.
+                          6.	Lindberg MR, Hall IM, Quinlan AR. (2015). Population-based structural variation discovery with hydra-multi. <i>Bioinformatics, 31</i>(8), 1286-1289.
+                     	  </br>
+                     	  
+                          </br>
+                          7.	Liu H, Wang X, Xiao Y, Luo J, Qiao F, Yang W, Zhang R, Meng Y, Sun J, Yan S, Peng Y, Niu L, Jian L, Song W, Yan J, Li C, Zhao Y, Liu Y, Warburton ML, Zhao J, Yan J. (2020). CUBIC: an atlas of genetic architecture promises directed maize improvement. <i>Genome biology, 21</i>(1):20.
                           </br>
                           </br>
-                          7.	Li, W., & Godzik, A. (2006). Cd-hit: a fast program for clustering and comparing large sets of protein or nucleotide sequences. <i>Bioinformatics, 17</i>, 282-283
+                          8.	Li W, Godzik A. (2006). Cd-hit: a fast program for clustering and comparing large sets of protein or nucleotide sequences. <i>Bioinformatics, 17</i>, 282-283
                           </br>
+                          
                           </br>
-                          8.	Lindberg, M. R., Hall, I. M., & Quinlan, A. R.(2015) . Population-based structural variation discovery with hydra-multi. <i>Bioinformatics, 31</i>(8), 1286-1289.
+                     	  9.	Lu F, Romay MC, Glaubitz JC, Bradbury PJ, Elshire RJ, Wang T, Li Y, Li Y, Semagn K, Zhang X, Hernandez AG, Mikel MA, Soifer I, Barad O, Buckler ES. (2015). High-resolution genetic mapping of maize pan-genome sequence anchors. <i>Nature Communications, 6</i>, 6914.
                      	  </br>
                           </br>
-                     	  9.	Lu, F. , Romay, M. C. , Glaubitz, J. C. , Bradbury, P. J. , Elshire, R. J. , & Wang, T. , et al. (2015). High-resolution genetic mapping of maize pan-genome sequence anchors. <i>Nature Communications, 6</i>, 6914.
-                     	  </br>
-                          </br>
-                     	  10.	Zimin, A. V., Marcais, G., Puiu, D., Roberts, M., Salzberg, S. L., & Yorke, J. A.(2013) . The masurca genome assembler. <i>Bioinformatics, 29</i>(21), 2669-2677.
+                     	  10.	Zimin AV, Marçais G, Puiu D, Roberts M, Salzberg SL, Yorke JA. (2013) . The MaSuRCA genome assembler. <i>Bioinformatics, 29</i>(21), 2669-2677.
                         <br></div>
                     </div>
                 </div>

@@ -93,9 +93,9 @@
                                 Database:</span><select
 									name="database" id="database1" class="form-control"
 									>
-									<option style="width:150px" value="V3.25">V3.25</option>
-									<option style="width:150px" value="HZS">HZS</option>
-									<option style="width:150px" value="V4">V4</option>
+									<option style="width:150px" value="V3.25">B73 RefGen_v3</option>
+									<option style="width:150px" value="HZS">HuangZaoSi (HZS)</option>
+									<option style="width:150px" value="V4">B73 RefGen_v4</option>
 								</select>
 						</div>
                         </div>

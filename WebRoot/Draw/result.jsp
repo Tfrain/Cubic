@@ -178,7 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <%if((theChr.length!=1&&parent_allx.size()!=0)||(theChr.length==1)){%>
     
     <div class="describe">
-               <h3>Bin Map</h3>
+               <h3>Haplotype Bin Map</h3>
                <br/>
                <h4>The Visualisation of mosaic haplotypes for progenies in synthetic population, reflecting a high-resolution reshuffle across 24 founders genomes.</h4>
         </div>

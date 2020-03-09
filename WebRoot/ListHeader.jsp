@@ -25,8 +25,8 @@
                     </div>
 					
                     <div float="right;width:49%;height:300px;border:1px solid #000"><h4>Variation Map</h4>
-                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Draw/magic.jsp">稡in Map</a><br>
-                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/JBrowse/jbrowsetool.jsp">稸ariation Browser</a><br>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Draw/magic.jsp">* Haplotype Bin Map</a><br>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/JBrowse/jbrowsetool.jsp">Genome Browser</a><br>
                     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Magic/Step/step_newone.jsp">稸ariation Search</a>
                     <br>
                    		 <h4>GWAS Catalog</h4>

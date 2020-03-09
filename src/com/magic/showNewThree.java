@@ -58,7 +58,7 @@ public class showNewThree extends ActionSupport{
 			i++;
 			sql = sql + " Uploaded_variation = '"+variation+"'";
 		}
-		if(gene!=null&&!gene.equals("")) {
+		if(gene!=null && !gene.equals("")) {
 			if(i==0) {
 				sql = sql + " Gene = '"+gene+"'";
 			}
@@ -69,10 +69,10 @@ public class showNewThree extends ActionSupport{
 		}
 		if(feature!=null&&!feature.equals("")) {
 			if(i==0) {
-				sql = sql + " ((Consequence = '"+feature+"') OR ("+"Consequence LIKE '%"+feature+"') OR ("+"Consequence LIKE '"+feature+"%'))";
+				sql = sql + " Consequence = '"+feature+"'";
 			}
 			else {
-				sql = sql + " AND ((Consequence = '"+feature+"') OR ("+"Consequence LIKE '%"+feature+"') OR ("+"Consequence LIKE '"+feature+"%'))";
+				sql = sql + " AND Consequence = '"+feature+"'";
 			}
 			i++;
 		}
@@ -93,15 +93,15 @@ public class showNewThree extends ActionSupport{
 			sql = sql + " AND Location >= "+start+"";
 			}
 			i++;
-		} else {
-			if(i==0) {
-				sql = sql + " Location >= "+100+"";
-			}
-			else {
-			sql = sql + " AND Location >= "+100+"";
-			}
-			i++;
-		}
+		} else //{
+//			if(i==0) {
+//				sql = sql + " Location >= "+100+"";
+//			}
+//			else {
+//			sql = sql + " AND Location >= "+100+"";
+//			}
+//			i++;
+//		}
 		
 		if(end!=null&&!end.equals("")) {
 			if(i==0) {
@@ -111,15 +111,15 @@ public class showNewThree extends ActionSupport{
 			sql = sql + " AND Location <= "+end+"";
 			}
 			i++;
-		} else {
-			if(i==0) {
-				sql = sql + " Location <= "+4000+"";
-			}
-			else {
-			sql = sql + " AND Location <= "+4000+"";
-			}
-			i++;
-		}
+		} //else {
+//			if(i==0) {
+//				sql = sql + " Location <= "+4000+"";
+//			}
+//			else {
+//			sql = sql + " AND Location <= "+4000+"";
+//			}
+//			i++;
+//		}
 		if(effect!=null&&!effect.equals("")) {
 			if(i==0) {
 				sql = sql + " Extra LIKE 'IMPACT="+effect+"%'";
@@ -129,7 +129,7 @@ public class showNewThree extends ActionSupport{
 			}
 			i++;
 		}
-		
+		sql += " LIMIT " + 800;
 		//sql ="select * FROM test WHERE Gene = '"+gene+"' and Uploaded_variation LIKE '"+chr+"%'";
 		System.out.println(sql);
 

@@ -79,8 +79,8 @@
 			</div>
 			</div>
 
-		<div class="row">
-			<div class="col-md-3" style="top:10px;position:sticky;">
+		<div class="row" style="position: relative;">
+			<div class="col-md-3" style="top:10px;position:sticky;display: inline-block;min-width: 258px;max-width: 25%;">
 				<div class="panel panel-primary">
 					<div class="panel-heading">Navigation</div>
 					<div class="panel-body">
@@ -90,9 +90,9 @@
 							<a href="Dataintroduction/phenotypedata.jsp"
 								class="list-group-item" style="color:#333;text-align:center;">Phenotype Data</a>
 							<a href="Draw/magic.jsp" class="list-group-item"
-								style="color:#333;text-align:center;">Bin Map</a>
+								style="color:#333;text-align:center;">Haplotype Bin Map</a>
 							<a href="JBrowse/jbrowsetool.jsp" class="list-group-item"
-								style="color:#333;text-align:center;">Variation Browser</a>
+								style="color:#333;text-align:center;">Genome Browser</a>
 							<a href="/Magic/Step/step_newone.jsp" class="list-group-item"
 								style="color:#333;text-align:center;">Variation Search</a>
 							<a href="Step\step_one.jsp" class="list-group-item"
@@ -115,7 +115,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-9" style="text-align:justify;">
+			<div class="col-md-9" style="text-align:justify;display: inline-block; min-width: 776px; max-width: 75%; position: absolute;">
 				<div class="title" style="text-align: center;color:#4381be;margin-bottom:15px">
 					<h1>Welcome to Maize CUBIC Variation Database</h1>
 					<div class="title" style="color:#4381be;margin-bottom:15px">
@@ -132,9 +132,7 @@
 						    the integration of the diallel cross allows escape from arbitrary founder number 
 						    and saves time during subsequent population development.<p/>
 						<h2 style="color:#4381be;">Population design details of CUBIC</h2>
-						<p style="text-indent:2em;">The 24 founders were selected from four 
-						unrelated groups and have been widely 
-						used in Chinese breeding over the past century.<p/>
+						<p style="text-indent:2em;">The 24 founders were selected from four unrelated groups and have been widely used in Chinese breeding over the past century，which included 4 founders from LvDaHongGu germplasm (旅大红骨种质): LV28 (旅28), E28, DAN340 (丹340), and F349; 4 founders from ZI330 germplasm (自330亚群种质): ZI330 (自330), ZONG3 (综3), ZONG31 (综31), and HUANGC (黄C); 15 founders from SiPingTou germplasm (四平头种质): HZS (黄 早四), HYS (黄野四), TY4 (天涯4), YUANGFH (原辐 黄), CHANG7-2 (昌7-2), K12, XI502 (西502), LX9801, H21, SHUANG741 (双741), Q1261, JI853 (吉853), JI53 (冀53), 5237, and 81515; and 1 founder from Yugoslavia-improved germplasm (南斯拉夫群体选系): NX110 (农系110).<p/>
                         <div style="text-align:center">
 							<img alt="graph" src="images\graph.png"
 								style="margin:0 auto;width:700px"></img>
@@ -226,9 +224,7 @@
    -                        <p style="text-indent:2em;">Zhao H, Yao W, Ouyang Y, Yang W, Wang G, Lian X, Xing Y, Chen L, Xie W. 
    -                        <a href="https://academic.oup.com/nar/article/43/D1/D1018/2439488" style="color:#4381be;">RiceVarMap: a comprehensive database of rice genomic variations.</a>
    -                        Nucleic Acids Res, 2015, 43: D1018-1022</p>
-   --%><a href="http://www.maizego.org/Resources.html" target="_blank" style="text-indent:2em; color: #fc8e00">The promise of directed maize improvement: 
-   						an atlas of genetic architecture and breeding insights 
-   						obtained from the CUBIC population (Liu et al., submitted).</a>
+   --%><a href="http://www.maizego.org/Resources.html" target="_blank" style="text-indent:2em; color: #fc8e00">Liu H, Wang X, Xiao Y, Luo J, Qiao F, Yang W, Zhang R, Meng Y, Sun J, Yan S, Peng Y, Niu L, Jian L, Song W, Yan J, Li C, Zhao Y, Liu Y, Warburton ML, Zhao J, Yan J. (2020). CUBIC: an atlas of genetic architecture promises directed maize improvement. Genome biology, 21(1):20.</a>
 					</div>
 
 				</div>

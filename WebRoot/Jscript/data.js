@@ -80,15 +80,15 @@ var data = [
     },
     {
         "id": "ATI",
-        "name": "anthesis and tasseling interval"
+        "name": "Anthesis and tasseling interval"
     },
     {
         "id": "STI",
-        "name": "silking and tasseling interval"
+        "name": "Silking and tasseling interval"
     },
     {
         "id": "SAI",
-        "name": "silking and anthesis interval"
+        "name": "Silking and anthesis interval"
     }
 ]
 

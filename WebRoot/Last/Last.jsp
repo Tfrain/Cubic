@@ -149,9 +149,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="input-group input-lg"><!-- lv 7-11-10：01 change -->
                             <span class="input-group-addon">Database:</span><!-- lv 7-11-10：49 change -->
                             <select  class="form-control" name="database" id="Database" > 
-                                <option style="width:150px" value="HZS">HZS</option>
-                                <option style="width:150px" value="V3.25">V3.25</option>
-                                <option style="width:150px" value="V4">V4</option>
+                                <option style="width:150px" value="HZS">HuangZaoSi (HZS)</option>
+                                <option style="width:150px" value="V3.25">B73 RefGen_v3</option>
+                                <option style="width:150px" value="V4">B73 RefGen_v4</option>
                             </select>
                         </div>
                         </div>
