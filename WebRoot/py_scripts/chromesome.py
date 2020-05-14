@@ -25,6 +25,22 @@ def getTracks(c, start, end):
         res = res + "," + chr + "_" + str(i * 100000) + "_" + str((i + 1) * 100000)
     return res
 
+def getList(t) :
+    l = []
+    for e in t :
+        if(isinstance(e, tuple)) :
+            l.append(getList(e))
+        else :
+            l.append(e)
+
+    return l
+
+def getTuple(l) :
+    t = []
+    for e in l :
+        t.append(tuple(e))
+    return tuple(t)
+
 color_dict = {"CW": "#FF0000", "ED": "#87CEEB", "EL": "#6B8E23", "ELW": "#71C671", "KNPR": "#FF1493", "KWPE": "#7A7A7A", "LBT": "#218868", "PH": "#FFFF00", "LNAE": "#C7C7C7",
         "DTA":"#6A5ACD","DTS":"#DC143C","DTT":"#9400D3","EH":"#F08080","ELL":"#7FFF00","ERN":"#B03060","EW":"#00FF7F","LNBE":"#0000AA","TBN":"#191970","TL":"#228B22"
          ,"KNPE":"#DEB887","ATI":"#A52A2A","STI":"#D2691E","SAI":"#6495ED"
@@ -35,6 +51,7 @@ column_dict = {
     'chr':1,
     'pos':2,
     'trait':3,
+    'full_name': 7,
     'snp':4,
     'p':5,
     'annotation':6
@@ -43,6 +60,33 @@ column_dict = {
 my_dict = {'x':[],
            'y':[],
            'color':[]}
+
+name_dict = {
+    "CW": "Cob weight",
+    "DTA": "Date to anthesis",
+    "DTS": "Date to silking",
+    "DTT": "Date to tasseling",
+    "ED": "Ear diameter",
+    "EH": "Ear height",
+    "EL": "Ear length",
+    "ELL": "Ear leaf length",
+    "ELW": "Ear leaf width",
+    "ERN": "Ear row number",
+    "EW": "Ear weight",
+    "KNPE": "Kernel number per ear",
+    "KNPR": "Kernel number per row",
+    "KWPE": "Kernel weight per ear",
+    "LBT": "Length of barren tip",
+    "LNAE": "Leaf number above ear",
+    "LNBE": "Leaf number below ear",
+    "PH": "Plant height",
+    "TBN": "Tassel branch number",
+    "TL": "Tassel length",
+    "ATI": "Anthesis and tasseling interval",
+    "STI": "Silking and tasseling interval",
+    "SAI": "Silking and anthesis interval"
+}
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='draw graph')
@@ -58,7 +102,7 @@ if __name__ == "__main__":
     trait = args.trait
     # path = str(args.path)
     # print(path)
-    db = mysql.connect("localhost", "root", "", "magic")
+    db = mysql.connect("localhost", "root", "654321", "magic")
     cursor = db.cursor()
     # cursor.execute("select * from magic_all_sig_snp where pos BETWEEN "
     #                + start + " and " + end)
@@ -71,9 +115,16 @@ if __name__ == "__main__":
           + " and chr = " + chr + " and ( " + trait + "')"
     cursor.execute(sql
     )
-    # print(sql)
+    print(sql)
     data = cursor.fetchall()
     # print("data:", data)
+
+    list = getList(data)
+    for i in range(len(data)) :
+        list[i] += [ name_dict[list[i][3]] ]
+    data = getTuple(list)
+    print("data:", data)
+
     start = int(start)
     end = int(end)
     # print(len(data))
@@ -82,7 +133,6 @@ if __name__ == "__main__":
         minp = 10000;
         maxp = -10000;
         # fromkey will make all the keys point to a object
-        # 方便添加新的键值对，将column_dict中的键值对都动态地添加进去
         for k in column_dict.keys():
             my_dict.update({k:[]})
         # print(my_dict)
@@ -107,7 +157,6 @@ if __name__ == "__main__":
                     my_dict[k].append("no_annotation")
                 else:
                     my_dict[k].append(data[i][column_dict[k]])
-
         # my_dict.update({'chrn':[], 's':[], 'e':[], 'ps':[], 'pe':[]})
         my_dict.update({'param':[]})
         for i in range(length):
@@ -174,6 +223,7 @@ if __name__ == "__main__":
         #     windown.location.href ="http://localhost:8080/Magic/JBrowse/jbrowse.jsp?loc=" + chrn + "%3A" + start + ".." + end + "&tracks=" + chr + "_" + (p - 1000) + "_" + (p + 1000) + "%2CDNA&highlight=";
         #     """)
         # print(save(gridplot((p,), plot_width=1400,plot_height=600), resources=output_file("chrome.html" , "chrome", mode="relative", root_dir=path)))
+        print(my_dict)
         output_file("chrome.html" , "chrome")
         save_path = save(p)
         # print(save_path)

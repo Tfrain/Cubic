@@ -91,11 +91,15 @@
 			<p>
 				<font size="3">Single-variant-based GWAS and haplotype-based GWAS results of 23 agronomic traits for poplulation were available in this section. And detailed information of significant SNPs(p&lt;2.79x10-8) for you interested traits can be queried by limiting genomic coordinate or gene ID.</font>
 			</p>
-			<p>
-				<font size="3">Search the significant SNPs (2.79x10-8) in
-					GWAS results in a number of ways, including by trait, SNP
-					identifier, study and gene.</font>
-			</p>
+			<!-- 
+   						<a href="https://1479696753-my.sharepoint.com/personal/weicc_hechuan_ooo/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly8xNDc5Njk2NzUzLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL3dlaWNjX2hlY2h1YW5fb29vL0VuTVI3MW1IRHc5UHROSlNTWTBsUHlVQm5XclUtNUJfaVdGNDgzUEI1ZTdzc3c%5FcnRpbWU9ZUsxcFNYalIxMGc&id=%2Fpersonal%2Fweicc%5Fhechuan%5Fooo%2FDocuments%2F%E5%85%B1%E4%BA%AB%2Fcubic%2FQTL" target="_blank" style="text-indent:2em; color: #fc8e00">[Summary of QTL regions for CUBIC]
+   						</a>
+   			 -->
+   			<span> The GWAS QTL regions have been deposited in the figshare database
+   				</span>
+   				<br>
+   				<span>（DOI:10.6084/m9.figshare.12220367; https://figshare.com/)
+   				</span>
 		</div>
 		<form action="showThree" method="post" onsubmit="return check();">
             <div class="row">
@@ -130,7 +134,7 @@ table, table tr th, table tr td {
 			<br> <br> <input type="hidden" id="sead" name="trait" />
 			<div class="col-md-6">
 			<div class="search">
-				<style>
+<style>
 .col-md-9, .col-xs-9, col-md-9{
     padding:10px 10px
 }

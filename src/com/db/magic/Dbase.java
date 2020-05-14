@@ -50,6 +50,30 @@ public class Dbase {
 		System.out.println("step in getChr");
 		Map<String,Object> map = new HashMap<String,Object> ();
 		Map<String,ArrayList<String>> map1 = new HashMap<String,ArrayList<String>> ();
+		Map<String, String> map3 = new HashMap<String, String>();
+		map3.put("CW", "Cob weight");
+		map3.put("DTA", "Date to anthesis");
+		map3.put("DTS", "Date to silking");
+		map3.put("DTT", "Date to tasseling");
+		map3.put("ED", "Ear diameter");
+		map3.put("EH", "Ear height");
+		map3.put("EL", "Ear length");
+		map3.put("ELL", "Ear leaf length");
+		map3.put("ELW", "Ear leaf width");
+		map3.put("ERN", "Ear row number");
+		map3.put("KNPE", "Kernel number per ear");
+		map3.put("KNPR", "Kernel number per row");
+		map3.put("KWPE", "Kernel weight per ear");
+		map3.put("LBT", "Length of barren tip");
+		map3.put("LNAE", "Leaf number above ear");
+		map3.put("LNBE", "Leaf number below ear");
+		map3.put("PH", "Plant height");
+		map3.put("TBN", "Tassel branch number");
+		map3.put("TL", "Tassel length");
+		map3.put("ATI", "Anthesis and tasseling interval");
+		map3.put("STI", "Silking and tasseling interval");
+		map3.put("SAI", "Silking and anthesis interval");
+		
 		try {
 			rs = stmt.executeQuery(sql);//用于执行SELECT查询。它返回ResultSet的对象。
 		    int i = 1;
@@ -68,7 +92,14 @@ public class Dbase {
 			    list.add(rs.getString(10));*/
 			    while(j<=rs.getMetaData().getColumnCount()){
 			    	//System.out.println(j);
-			    	list.add(rs.getString(j));
+			    	if(j == 1) {
+			    		list.add(rs.getString(j));
+			    		//System.out.println(rs.getString(j));	
+			    		list.add(map3.get(rs.getString(j)));
+			    		//System.out.println(list);
+			    	} else {
+				    	list.add(rs.getString(j));
+			    	}
 			    	j++;
 			    }
 			    System.out.println(list);
@@ -83,6 +114,35 @@ public class Dbase {
 		int len = map1.size();
 		map.put("len", len);
         System.out.println("getChr: query sucessfully length = " + len);
+		return map;
+	}
+	public Map<String,Object> getNew(String sql){
+		System.out.println("step in getNew");
+		Map<String,Object> map = new HashMap<String,Object> ();
+		Map<String,ArrayList<String>> map1 = new HashMap<String,ArrayList<String>> ();
+		try {
+			rs = stmt.executeQuery(sql);//用于执行SELECT查询。它返回ResultSet的对象。
+		    int i = 1;
+			while(rs.next()){
+			    int j = 1;
+				ArrayList<String> list = new ArrayList<String>();
+			    while(j<=rs.getMetaData().getColumnCount()){
+			    	//System.out.println(j);
+			    	list.add(rs.getString(j));
+			    	j++;
+			    }
+			    System.out.println(list);
+			    map1.put(Integer.toString(i), list);
+			    i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		map.put("data", map1);
+		int len = map1.size();
+		map.put("len", len);
+        System.out.println("getNew: query sucessfully length = " + len);
 		return map;
 	}
 	

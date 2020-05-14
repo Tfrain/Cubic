@@ -577,6 +577,7 @@ public class Blast2 extends ActionSupport{
 //            			System.out.print("revend="+revend);
 //            			System.out.println("revlity="+revlity);
                 }
+            		
             		read.close();
             	}else{
             		System.out.println("找不到指定的文件");

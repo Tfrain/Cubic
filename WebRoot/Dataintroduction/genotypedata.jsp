@@ -55,15 +55,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             all progenies were re-sequenced with ~1x coverage, and the 24 founders with 11x coverage; 194 lines were further genotyped 
                             using a maize200K array to cross-validate variant discovery. Briefly, approximately 5 Tb of raw sequencing data were assembled, 
                             and popular pipelines were employed to characterize over 14 million high-quality SNPs and 43K InDels.
-                           </br> 
-                           <a href="http://bigd.big.ac.cn/search?dbId=bioproject&q=CRA000171&page=1" target="_blank" style="text-indent:2em; color: #fc8e00">[Downloading raw sequencing reads] 
-   						</a>
    						</br>
+   						<!-- 
    						<a href="https://pan.baidu.com/s/1AsPJLTe--gU5EN8aFTMYPA#list/path=%2F" target="_blank" style="text-indent:2em; color: #fc8e00">[Downloading SNPs in PLINK formats] 
    						</a>
    						</br>
-   						<a href="https://pan.baidu.com/s/1AsPJLTe--gU5EN8aFTMYPA#list/path=%2F" target="_blank" style="text-indent:2em; color: #fc8e00">[Downloading InDels vcf]
+   						<a href="https://1479696753-my.sharepoint.com/personal/weicc_hechuan_ooo/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly8xNDc5Njk2NzUzLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL3dlaWNjX2hlY2h1YW5fb29vL0VuTVI3MW1IRHc5UHROSlNTWTBsUHlVQm5XclUtNUJfaVdGNDgzUEI1ZTdzc3c%5FcnRpbWU9ZUsxcFNYalIxMGc&id=%2Fpersonal%2Fweicc%5Fhechuan%5Fooo%2FDocuments%2F%E5%85%B1%E4%BA%AB%2Fcubic%2FIndel" target="_blank" style="text-indent:2em; color: #fc8e00">[Downloading InDels vcf]
    						</a>
+   						-->
+   				<span> The genomic variation data have been deposited in the figshare database
+   				</span>
+   				<br>
+   				<span>（DOI:10.6084/m9.figshare.12220349; https://figshare.com/)
+   				</span>
                              <div class="lefttool" style="width:100%;height:580px;text-align:center;margin-bottom:20px;">
                                   <image src="images/genotype2.png" width="700px"/>
                              </div>  

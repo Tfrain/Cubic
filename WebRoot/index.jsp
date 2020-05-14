@@ -42,11 +42,11 @@
         $(function(){$("#mycarousel").carousel('cycle');});
 </script>
     
-</head>
-<body>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"50615",secure:"50605"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-41" data-genuitec-path="/Magic/WebRoot/index.jsp">
 	<%@ include file="../ListHeader.jsp"%>
 
-	<div class="container" style="1400px;height:2300px;margin-top:20px;">
+	<div class="container" style="1400px;height:2320px;margin-top:20px;" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-41" data-genuitec-path="/Magic/WebRoot/index.jsp">
         <div class="row" style="margin-top:5px;">
 		<div id="mycarousel" class="carousel slide" >
 					<!--这里是1234小图标-->
@@ -59,19 +59,19 @@
                     <div class="item active">
 					<a href="/Magic/Dataintroduction/genotypedata.jsp" target="_blank">
 						<!--ie浏览器解析图片的时候有时会默认给它加一个边框-->
-                        <image class="img" alt="First slide" src="images/index1.png" style="width:100%;max-width:none;height:430px;"
+                        <image class="img" alt="First slide" src="images/index1.jpg" style="width:100%;max-width:none;height:430px;"
                                  />
 					</a>
                     </div>
                     <div class="item">
 					<a href="/Magic/Dataintroduction/phenotypedata.jsp" target="_blank" >
-                    <image class="img" alt="Second slide" src="images/index2.png" style="width:100%;max-width:none;height:430px;"
+                    <image class="img" alt="Second slide" src="images/index2.jpg" style="width:100%;max-width:none;height:430px;"
                              />
 					</a>
                     </div>
                     <div class="item">
 					<a href="/Magic/contact.jsp" target="_blank">
-                        <image class="img" alt="Third slide" src="images/index3.png" style="width:100%;max-width:none;height:430px;"
+                        <image class="img" alt="Third slide" src="images/index3.jpg" style="width:100%;max-width:none;height:430px;"
                                  />
 					</a>
                     </div>
@@ -95,10 +95,13 @@
 								style="color:#333;text-align:center;">Genome Browser</a>
 							<a href="/Magic/Step/step_newone.jsp" class="list-group-item"
 								style="color:#333;text-align:center;">Variation Search</a>
-							<a href="Step\step_one.jsp" class="list-group-item"
-								style="color:#333;text-align:center;">GWAS Search</a>
+							<a href="/Magic/Step/step_new.jsp" class="list-group-item"
+								style="color:#333;text-align:center;">Gene Expression Search</a>
 							<a href="genetree\gene_tree.jsp" class="list-group-item"
 								style="color:#333;text-align:center;">GWAS Diagram</a>
+							<a href="Step\step_one.jsp" class="list-group-item"
+								style="color:#333;text-align:center;">GWAS Search</a>
+							
 							<a href="Last\Last.jsp" class="list-group-item"
 								style="color:#333;text-align:center;">BLAST/Primer-BLAST</a>
 							<a href="Primer\Primersearch2.jsp" class="list-group-item"
@@ -123,9 +126,9 @@
 				</div>
 				<div class="panel-body">
 					<div class="my-panel">
-						<p style="text-indent:2em;">The CUBIC (Complete-diallel plus Unbalanced Breeding-like Inter-Cross)
+						<p style="text-indent:2em;">The CUBIC
 						 population consists of 1404 progenies descended from 24 Chinese elite inbred
-						  lines (Liu et al., submitted). Generally, CUBIC descends from the traditional 
+						  lines. Generally, CUBIC descends from the traditional 
 						  MAGIC design with the integration of the diallel cross to incorporate information
 						   from phenotypic selection. Since the conventional MAGIC design requires 2^N founder
 						    lines with at least N generations for initial inter-cross of all founders, 
@@ -224,7 +227,7 @@
    -                        <p style="text-indent:2em;">Zhao H, Yao W, Ouyang Y, Yang W, Wang G, Lian X, Xing Y, Chen L, Xie W. 
    -                        <a href="https://academic.oup.com/nar/article/43/D1/D1018/2439488" style="color:#4381be;">RiceVarMap: a comprehensive database of rice genomic variations.</a>
    -                        Nucleic Acids Res, 2015, 43: D1018-1022</p>
-   --%><a href="http://www.maizego.org/Resources.html" target="_blank" style="text-indent:2em; color: #fc8e00">Liu H, Wang X, Xiao Y, Luo J, Qiao F, Yang W, Zhang R, Meng Y, Sun J, Yan S, Peng Y, Niu L, Jian L, Song W, Yan J, Li C, Zhao Y, Liu Y, Warburton ML, Zhao J, Yan J. (2020). CUBIC: an atlas of genetic architecture promises directed maize improvement. Genome biology, 21(1):20.</a>
+   --%><a href="http://www.maizego.org/Publication.html" target="_blank" style="text-indent:2em; color: #fc8e00">Liu H, Wang X, Xiao Y, Luo J, Qiao F, Yang W, Zhang R, Meng Y, Sun J, Yan S, Peng Y, Niu L, Jian L, Song W, Yan J, Li C, Zhao Y, Liu Y, Warburton ML, Zhao J, Yan J. (2020). CUBIC: an atlas of genetic architecture promises directed maize improvement. Genome biology, 21(1):20.</a>
 					</div>
 
 				</div>

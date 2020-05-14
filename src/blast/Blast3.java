@@ -208,6 +208,7 @@ public class Blast3 extends ActionSupport{
 			 String textpath=filePath+"file/primerexample.input";//parameter.input路径
 			 textpath=textpath.substring(1);
 			 textpath=textpath.replaceAll("\\/","\\\\");
+			 // 第一个输出
 			 System.out.println(textpath);
 			 File writer = new File(textpath);
 
@@ -276,6 +277,7 @@ public class Blast3 extends ActionSupport{
 
            //System.out.println("cmd /c "+"cd E: & cd E:\\Magic\\primer3 & primer3_core.exe <"+filePath+"p3.input");
            //cmd /c "+"F: & cd F:\\primer\\src & primer3_core.exe
+           // 第二个输出
            System.out.println("cmd /c "+"cd "+primer3_core_path+" < "+filePath);
            BufferedReader input3 = new BufferedReader(new InputStreamReader(pr3.getInputStream(), "GBK"));
            String line = null;
@@ -307,6 +309,7 @@ public class Blast3 extends ActionSupport{
             Process pr1 = rt1.exec("cmd /c "+"copy/y "+primerexample_path+name+".for "+filePath); // cmd /c calc
             //Process pr1 = rt1.exec("cmd /c "+"copy C:\\Users\\xinwang\\Desktop\\work\\primer\\primerexample.for "+filePath); // cmd /c calc
 
+            // 第三个输出
             System.out.println("cmd /c "+"copy/y "+primerexample_path+name+".for "+filePath);
             //System.out.println("copy C:\\Users\\xinwang\\Desktop\\work\\primer\\primerexample.for "+filePath);
 
@@ -328,6 +331,7 @@ public class Blast3 extends ActionSupport{
             Runtime rt1 = Runtime.getRuntime();
             //Process pr1 = rt1.exec("cmd /c "+"copy/y C:\\Users\\xinwang\\Desktop\\work\\primer\\primerexample.int "+filePath); // cmd /c calc
             Process pr1 = rt1.exec("cmd /c "+"copy/y "+primerexample_path+name+".int "+filePath); // cmd /c calc
+            // 第四个输出
             System.out.println("cmd /c "+"copy/y "+primerexample_path+name+".int "+filePath);
 
 
@@ -350,6 +354,7 @@ public class Blast3 extends ActionSupport{
             //Process pr1 = rt1.exec("cmd /c "+"copy C:\\Users\\xinwang\\Desktop\\work\\primer\\primerexample.rev "+filePath); // cmd /c calc
             Process pr1 = rt1.exec("cmd /c "+"copy/y "+primerexample_path+name+".rev "+filePath); // cmd /c calc
 
+            // 第五个输出
             System.out.println("cmd /c "+"copy/y "+primerexample_path+name+".rev "+filePath);
 
             int exitVal = pr1.waitFor();
@@ -364,6 +369,7 @@ public class Blast3 extends ActionSupport{
             String filePath=getWebRoot();
             filePath = filePath+"file/"+name+".for";//for件路径
             filePath = filePath.substring(1,filePath.length());
+            //第六个输出
             System.out.println(filePath);
             File file=new File(filePath);
             	if(file.isFile() && file.exists()){ //判断文件是否存在

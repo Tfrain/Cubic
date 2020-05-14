@@ -57,7 +57,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      line-height:0.4;
      }
   </style>
+  
+  
+  
+  <%!
+  
+    //根据value值获取到对应的一个key值
+    String getKey (Map<String,String> map, String value) {
+        String key = null;
+        //Map,HashMap并没有实现Iteratable接口.不能用于增强for循环.
+        for(String getKey: map.keySet()){
+            if(map.get(getKey).equals(value)){
+                key = getKey;
+            }
+        }
+        return key;
+        //这个key肯定是最后一个满足该条件的key.
+    }
+ %>
+ 
 <%
+    
 	Map attribute = ActionContext.getContext().getSession();
 	String queryid=(String)attribute.get("queryid");
 	String programe=(String)attribute.get("programe");
@@ -66,6 +86,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String blastdatabase=(String)attribute.get("blastdatabase");
 	String evalue=(String)attribute.get("evalue");
 	String identity=(String)attribute.get("identity");
+	// 添加
+	String positive=(String)attribute.get("positive");
+	
 	String gap=(String)attribute.get("gap");
 	String score=(String)attribute.get("score");
 	String blastprograme=(String)attribute.get("blastprograme");
@@ -93,6 +116,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	Map<String, String> identitymap=new HashMap<String, String>();
 	identitymap=(Map<String, String>)attribute.get("identitymap");
+	// 添加
+	Map<String, String> positivemap=new HashMap<String, String>();
+	positivemap=(Map<String, String>)attribute.get("positivemap");
 	
 	Map<String, String> chrmap=new HashMap<String, String>();
 	String chrvalue=null;
@@ -215,24 +241,37 @@ function check1()
    							float totalscore=Float.parseFloat(totalscorevalue);
    							float querycover=maxscore/totalscore;
    							
+   							//identity=identitymap.get(getKey(chrmap,chrkey));
+   							
    							identity=identitymap.get(chrkey);
-                        	
                         	float identityfloat=Float.parseFloat(identity);
+                        	
+                        	// 添加
+                        	positive=positivemap.get(chrkey);
+                        	float positivefloat=Float.parseFloat(positive);
+                        	
                         	float querylenfloat=Float.parseFloat(querylength);
-                      	    float identities=(identityfloat/querylenfloat)*100;
+                        	
+                      	    //float identities=(identityfloat/querylenfloat)*100;
+                      	    //添加
+                      	    float identities=(positivefloat/identityfloat)*100;
+                      	    //之前有value 如下：value = http://modem.hzau.edu.cn/Magic/JBrowse/jbrowse.jsp?loc=1:883&tracks=cubic_merge,GFF3,DNA&highlight=
+                      	    //modem.hzau.edu.cn/Magic/JBrowse/jbrowse.jsp?loc=1%3A847..918&tracks=cubic_merge%2CGFF3%2CDNA&highlight
+                      	    String value = "http://modem.hzau.edu.cn/Magic/JBrowse/jbrowse.jsp?loc=" + chrvalue.charAt(3)+"%3A"+ hitfrommap.get(getKey(chrmap,chrvalue)) + "&tracks=cubic_merge%2CGFF3%2CDNA&highlight=";
+                      	    System.out.println(value);
                         %>
                         	<tr>
                         	
                         	<td align="left"><font color=blue><%=chrvalue %></font></td>
                         	
-                        	<td align="left"><%=scorevalue %></td><td align="left"><%=totalscorevalue %></td><td align="left"><%=querycover %></td><td align="left"><%=evaluevalue %></td><td align="left"><%=identities %>%</td>
+                        	<td align="left"><%=scorevalue %></td><td align="left"><%=totalscorevalue %></td><td align="left"><%=querycover %></td><td align="left"><%=evaluevalue %></td><td align="left"><%=identities %></td><td align="left"><%=identity%></td><td align="left"><%=value %></td>
                         	</tr>
                             <%}} %>
                         
                     </table>
                     </div>
                     <div class="left2">
-                     <h4>Please choose chromosome  (If you do not choose, the following section will not be shown)</h4>
+                     <h4>Please choose the hit (If you do not choose, the following section will not be shown)</h4>
                     <form action="blast" method="post" onsubmit="return check1()">
                     <select class="select" name="trait" id="trait1" style="width: 145px; height: 40px;border-radius:4px;border:1px solid #2392ff;color:#0078e8;" > 
 				          
@@ -253,7 +292,7 @@ function check1()
                     <table class="table blast-table"   style="height: auto; width:1200px">
                         
                         <tr>
-                       	<td style="width: 250px; height: 45px">Score<td style="width: 250px; height: 45px">Expect<td style="width: 250px; height: 45px">Identities<td style="width: 250px;height: 45px ">Gaps</td>   <td style="width: 250px;height: 45px ">Query From-To</td>  <td style="width: 250px;height: 45px ">Hit From-To</td>  
+                       	<td style="width: 250px; height: 45px">Score<td style="width: 250px; height: 45px">Expect<td style="width: 450px; height: 45px">Alignment length percentage<td style="width: 250px;height: 45px ">Gaps</td>   <td style="width: 250px;height: 45px ">Query From-To</td>  <td style="width: 250px;height: 45px ">Hit From-To</td>  
                         </tr>
                         <tr>
                         <%
@@ -265,8 +304,14 @@ function check1()
                         String queryto1=null;
                         String queryfrom1=null;
                         String hitfrom1=null;
+                        
                         if(trait!=null)
                         {
+                        //add
+                        	trait = getKey(chrmap, trait);
+                        	System.out.println( "trait" +trait);
+                        	
+							
                         	queryfrom1=queryfrommap.get(trait);
                         	queryto1=querytomap.get(trait);
                         	hitfrom1=hitfrommap.get(trait);
@@ -274,10 +319,18 @@ function check1()
                         	score=scoremap.get(trait);
                         	gap1=gapmap.get(trait);
                         	identity=identitymap.get(trait);
+                        	// 添加
+                        	positive=positivemap.get(trait);
+                        	float positivefloat=Float.parseFloat(positive);
+                        	
                         	evaluevalue=evaluemap.get(trait);
                         	float identityfloat=Float.parseFloat(identity);
+                        	
                         	float querylenfloat=Float.parseFloat(querylength);
-                      	    float identities=(identityfloat/querylenfloat)*100;
+                        	
+                      	    //float identities=(identityfloat/querylenfloat)*100;
+                      	    //添加
+                      	     float identities=(positivefloat/identityfloat)*100;
                         	 %>
                         <td align="left" style="padding-top: 0px;"><%=score%></td>
                         <td align="left" style="padding-top: 0px;"><%=evaluevalue %></td>
@@ -306,18 +359,25 @@ function check1()
                			<%
                			if(trait!=null)
                			{
+               			
                			 String chr1=trait;
+               			 
+               			 //chr1 = getKey(chrmap, trait);
+               			 //System.out.println( "chr" +chr1);
+						 //System.out.println(qseqmap.get(chr1));
+						 
                			 qseq=qseqmap.get(chr1);
   						 hseq=hseqmap.get(chr1);
   						 midline=midlinemap.get(chr1);
   						 
+						 
   						 qseq2= qseq.toCharArray();
   						 midline1= midline.toCharArray();
   						 hseq1=hseq.toCharArray();
                			 int qseqlen=qseq.length();
   						 int midlinelen=midline.length();
   						 int hseqlen=hseq.length();%>
-                    	<h3><%=chr1 %>:</h3>
+                    	<h3><%=chrmap.get(chr1) %>:</h3>
                     	<br>
                     	<%while(t1<qseqlen-1&&t2<midlinelen-1&&t3<hseqlen-1) {%>
                    		
@@ -384,6 +444,9 @@ function check1()
         method: 'GET',                      //请求方式（*）
        	striped: true,                      //是否显示行间隔色
        	pagination: true,
+       	sortName: 'Max score',
+		sortable: true,                     //是否启用排序
+		sortOrder: "desc",
        	pageSize: 6,
        	smartDisplay:false,
        	search: true,
@@ -391,8 +454,8 @@ function check1()
         buttonsAlign:"left",
         exportTypes:['csv','excel'], 
 		 columns: [{//修改为所用表的信息 field填数据库中的 对应的标题，title为要显示的名称
-        field: 'Description',
-        title: 'Description',
+        field: 'Hit_position',
+        title: 'Hit_position',
         sortable:true
     }, {
         field: 'Max score',
@@ -411,10 +474,25 @@ function check1()
         title: 'E value',
         sortable:true
     },{
-        field: 'Ident',
-        title: 'Ident',
+        field: 'Alignment length percentage',
+        title: 'Alignment length percentage',
+        sortable:true    
+    },{
+        field: 'Identity',
+        title: 'Identity',
+        sortable:true    
+    },{
+        field: 'Action',
+        title: 'Action',
+        formatter:function(value,row,index){
+        //之前有value 如下：value = http://modem.hzau.edu.cn/Magic/JBrowse/jbrowse.jsp?loc=1:883&tracks=cubic_merge,GFF3,DNA&highlight=
+          var textR='<p><a href="'+ value +'" target="_blank" style="color:red">JBrowse</a></p>';
+          return textR;
+     	},
+     	
         sortable:true    
     }],  
+    
  		});
  		});
 </script>

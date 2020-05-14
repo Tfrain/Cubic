@@ -56,16 +56,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="media">
 
                         <div class="media-body" style="text-align:justify;">
-                           &nbsp;&nbsp;&nbsp;&nbsp;   ATo aid functional gene identification, a subset of 391 progenies were randomly selected from the CUBIC population for RNA-sequencing. These lines and the founder parents were grown at the Hainan field station in the winter of 2016. At the V9 stage (the stage with the fastest leaf tissue growth), total RNA was extracted from the tissue of the 11th leaf. A 150-bp paired end Illumina sequencing was performed using the HiSeq X-Ten protocols. Each sample had on average ~20 million raw reads. The reads with high sequencing quality were remained and mapped onto the B73 AGPv3.25 reference using STAR (Dobin et al., 2013); only those uniquely mapped reads were used to quantify gene expression levels with HTSeq (Anders et al., 2015). The expression for each gene was normalized using the software Deseq2 (Love et al., 2014) and only genes expressed in more than 60% of the lines were retained in eQTL mapping. Top 10 PEER (Stegle et al., 2012) factors, together with the top ten genotypic PCs, were utilized to account for covariates to perform eQTL mapping under EMMAX (Kang et al., 2010).
-                           </br> 
-                           <a href="https://bigd.big.ac.cn/search?dbId=gsa&q=CRA001241&page=1" target="_blank" style="text-indent:2em; color: #fc8e00">[Downloading raw RNA-seq reads] 
+                           &nbsp;&nbsp;&nbsp;&nbsp;   To aid functional gene identification, a subset of 391 progenies were randomly selected from the CUBIC population for RNA-sequencing. These lines and the founder parents were grown at the Hainan field station in the winter of 2016. At the V9 stage (the stage with the fastest leaf tissue growth), total RNA was extracted from the tissue of the 11th leaf. A 150-bp paired end Illumina sequencing was performed using the HiSeq X-Ten protocols. Each sample had on average ~20 million raw reads. The reads with high sequencing quality were remained and mapped onto the B73 AGPv3.25 reference using STAR (Dobin et al., 2013); only those uniquely mapped reads were used to quantify gene expression levels with HTSeq (Anders et al., 2015). The expression for each gene was normalized using the software Deseq2 (Love et al., 2014) and only genes expressed in more than 60% of the lines were retained in eQTL mapping. Top 10 PEER (Stegle et al., 2012) factors, together with the top ten genotypic PCs, were utilized to account for covariates to perform eQTL mapping under EMMAX (Kang et al., 2010).
+                           
+   						</br>
+   						<!-- 
+   						<a href="https://1479696753-my.sharepoint.com/personal/weicc_hechuan_ooo/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly8xNDc5Njk2NzUzLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL3dlaWNjX2hlY2h1YW5fb29vL0VuTVI3MW1IRHc5UHROSlNTWTBsUHlVQm5XclUtNUJfaVdGNDgzUEI1ZTdzc3c%5FcnRpbWU9ZUsxcFNYalIxMGc&id=%2Fpersonal%2Fweicc%5Fhechuan%5Fooo%2FDocuments%2F%E5%85%B1%E4%BA%AB%2Fcubic%2Fgene%20expression%20%26%20eQTL" target="_blank" style="text-indent:2em; color: #fc8e00"> [Downloading expression quantifications]
    						</a>
    						</br>
-   						<a href="https://pan.baidu.com/s/1Po9a-f13ZTz4dAtcmSOmLw#list/path=%2F" target="_blank" style="text-indent:2em; color: #fc8e00"> [Downloading expression quantifications]
+   						<a href="https://1479696753-my.sharepoint.com/personal/weicc_hechuan_ooo/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly8xNDc5Njk2NzUzLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL3dlaWNjX2hlY2h1YW5fb29vL0VuTVI3MW1IRHc5UHROSlNTWTBsUHlVQm5XclUtNUJfaVdGNDgzUEI1ZTdzc3c%5FcnRpbWU9ZUsxcFNYalIxMGc&id=%2Fpersonal%2Fweicc%5Fhechuan%5Fooo%2FDocuments%2F%E5%85%B1%E4%BA%AB%2Fcubic%2Fgene%20expression%20%26%20eQTL" target="_blank" style="text-indent:2em; color: #fc8e00">[Downloading eQTL results]
    						</a>
-   						</br>
-   						<a href="https://pan.baidu.com/s/1TKKOZOxTDuDw1ODN1VMTMg#list/path=%2F" target="_blank" style="text-indent:2em; color: #fc8e00">[Downloading eQTL results]
-   						</a>
+   						 -->
+   				<span> The gene expression data have been deposited in the figshare database
+   				</span>
+   				<br>
+   				<span>（DOI:10.6084/m9.figshare.12220226; https://figshare.com/)
+   				</span>
                         <br></div>
                     </div>
                 </div>

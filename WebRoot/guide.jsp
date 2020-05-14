@@ -30,11 +30,11 @@
 <script type="text/JavaScript" src="Jscript/bootstrap-table-export.js"></script>
 <script type="text/JavaScript" src="Jscript/echarts.js"></script>
 <script src="Jscript/china.js"></script>
-</head>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"50615",secure:"50605"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
 
-<body>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-42" data-genuitec-path="/Magic/WebRoot/guide.jsp">
 	<%@ include file="../ListHeader.jsp"%>
-    <div class="container">
+    <div class="container" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-42" data-genuitec-path="/Magic/WebRoot/guide.jsp">
 <style>
 span.dot{
     color:#5b9bd5;
@@ -94,7 +94,7 @@ p{
                      parental genomes. And to further exploring the genotype–phenotype relationships
                      , two different methods of GWAS results was provided for dissecting genetic 
             mechanisms 23 agronomic traits. All these data can be accessed through the following 
-            analytical tools, as well as download directly from our FTP site.</p>
+            analytical tools, as well as download directly.</p>
         <div style="text-align:center">
             <img src="images\1.png"></img>
         </div>
@@ -106,7 +106,7 @@ p{
                 <div class="title">
                 <h3>Features list and examples to realize it step-by-step</h3>
                 </div>
-            <p> MaizeCUBIC is free and open to the public with user-friendly tools for data analysis, visualization, and download. The tools can be grouped into three general classes according to its related information: Variation Map (Variation Browser, Bin Map), GWAS Catalog (GWAS Search, GWAS Diagram), Variation Application (BLAST/Primer-BLAST, General Primer Design, Primer Design by Region, Primer Design by Variation ID).</p>
+            <p> MaizeCUBIC is free and open to the public with user-friendly tools for data analysis, visualization, and download. The tools can be grouped into three general classes according to its related information: Variation Map (Haplotype Bin Map, Genome Browser, Variation Search，Gene Expression Search), GWAS Catalog (GWAS Search, GWAS Diagram), Variation Application (BLAST/Primer-BLAST, General Primer Design, Primer Design by Region, Primer Design by Variation ID).</p>
         <div style="text-align:center">
             <img src="images\2.png"></img>
         </div>
@@ -116,7 +116,8 @@ p{
         <div class="col-md-12">
             <div class="my-panel">
                 <div class="title">
-                    <span class="dot"></span><span class="title">Bin Map</span>
+                <h3>Haplotype Bin Map</h3>
+                    <!--  <span class="dot"></span><span class="title">Haplotype Bin Map</span>-->
                 </div>
             <p>Based on variations, we display the mosaic structure for progenies in the population, reflecting a high-resolution reshuffle across parental genomes. You can search detailed haplotype information through choosing or entering accession names and selecting the corresponding genomic region.</p>
         <div style="text-align:center">
@@ -143,9 +144,9 @@ p{
         <div class="col-md-12">
             <div class="my-panel">
                 <div class="title">
-                <h3>Variation Browser</h3>
+                <h3>Genome Browser</h3>
                 </div>
-            <p> Variation Browser is a utility to easy browse sequences, genes, and genetic variations in various regions of maize genome.</p>
+            <p> Genome Browser is a utility to easy browse sequences, genes, and genetic variations in various regions of maize genome.</p>
             <p>STEP ONE : choose a region or gene you want to look for, and submit</p>
         <div style="text-align:center">
             <img src="images\guide_browser1.png"></img>
@@ -196,6 +197,20 @@ p{
         </div>
     </div>
 
+	<div class="col-md-12">
+            <div class="my-panel">
+                <div class="title">
+                    <span class="dot"></span><span class="title">Gene Expression Search</span>
+                </div>
+            <p>The expression values by RPKM normalization can be searched and displayed via this tool. Just select the sample list and input the gene list.</p>
+        <div style="text-align:center">
+            <img src="images\gene_search.png"></img>
+        </div>
+        
+        <p>The results will be display in a table and can be download directly.</p>
+        </div>
+    </div>
+
 
         <div class="col-md-12">
             <div class="my-panel">
@@ -207,7 +222,9 @@ p{
         <div style="text-align:center">
             <img src="images\gwas_search_column.PNG"></img>
             <img src="images\gwas_dot.PNG"></img>
-            <img src="images\gwas_table.PNG"></img>
+            <img src="images\gwas_table1.PNG"></img>
+            <img src="images\gwas_table2.PNG"></img>
+            <img src="images\gwas_table3.PNG"></img>
         </div>
         </div>
     </div>

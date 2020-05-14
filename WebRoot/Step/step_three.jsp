@@ -145,6 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td><%=data2.get(Integer.toString(i)).get(5)%></td>
                     <td><%=data2.get(Integer.toString(i)).get(6)%></td>
                     <td><%=data2.get(Integer.toString(i)).get(7)%></td>
+                    <td><%=data2.get(Integer.toString(i)).get(8)%></td>
                     <%--<td><%=data2.get(Integer.toString(i)).get(8)%></td>--%>
                     <%--<td><%=data2.get(Integer.toString(i)).get(9)%></td>--%>
                     <%--<td><%=data2.get(Integer.toString(i)).get(10)%></td>--%>
@@ -181,6 +182,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td><%=data.get(Integer.toString(i)).get(2)%></td>
                     <td><%=data.get(Integer.toString(i)).get(3)%></td>
                     <td><%=data.get(Integer.toString(i)).get(4)%></td>
+                    <td><%=data.get(Integer.toString(i)).get(5)%></td>
                     <%--<td><%=data.get(Integer.toString(i)).get(5)%></td>--%>
                 </tr>	
            <%} %>
@@ -254,6 +256,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td><%=data2.get(Integer.toString(i)).get(5)%></td>
                     <td><%=data2.get(Integer.toString(i)).get(6)%></td>
                     <td><%=data2.get(Integer.toString(i)).get(7)%></td>
+                    <td><%=data2.get(Integer.toString(i)).get(8)%></td>
                     <%--<td><%=data2.get(Integer.toString(i)).get(8)%></td>--%>
                     <%--<td><%=data2.get(Integer.toString(i)).get(9)%></td>--%>
                     <%--<td><%=data2.get(Integer.toString(i)).get(10)%></td>--%>
@@ -291,6 +294,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td><%=data.get(Integer.toString(i)).get(2)%></td>
                     <td><%=data.get(Integer.toString(i)).get(3)%></td>
                     <td><%=data.get(Integer.toString(i)).get(4)%></td>
+                    <td><%=data.get(Integer.toString(i)).get(5)%></td>
                     <%--<td><%=data.get(Integer.toString(i)).get(5)%></td>            --%>
                 </tr>	
             
@@ -364,6 +368,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        	pagination: true,
        	smartDisplay:false,
        	pageSize: 5,
+       	sortName: 'Interval',
+		sortable: true,                     //是否启用排序
+		sortOrder: "desc",             //排序方式
        	search: true,
         showExport: true,  
         buttonsAlign:"left",
@@ -377,6 +384,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         columns: [{//修改为所用表的信息 field填数据库中的 对应的标题，title为要显示的名称
         field: 'Trait',
         title: 'Trait',
+        sortable:true
+    }, {
+        field: 'Full name',
+        title: 'Full name',
         sortable:true
     }, {
         field: 'Peak bin',
@@ -452,6 +463,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         title: 'Trait',
         sortable:true
     }, {
+        field: 'Full name',
+        title: 'Full name',
+        sortable:true
+    },{
         field: 'Peak bin',
         title: 'Peak bin',
         sortable:true
@@ -467,7 +482,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         field: 'End',
         title: 'End',
         sortable:true
-    },,{
+    },{
         field: 'LRT',
         title: 'LRT',
         sortable:true    
@@ -525,6 +540,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         title: 'Trait',
         sortable:true
     },{
+        field: 'Full name',
+        title: 'Full name',
+        sortable:true
+    },{
         field: 'Marker',
         title: 'Marker',
         sortable:true
@@ -571,6 +590,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         columns: [ {
         field: 'Trait',
         title: 'Trait',
+        sortable:true
+    }, {
+        field: 'Full name',
+        title: 'Full name',
         sortable:true
     },{
         field: 'Marker',

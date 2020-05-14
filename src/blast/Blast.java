@@ -50,6 +50,8 @@ public class Blast extends ActionSupport{
 	String gap,gap1;
 	String qseq,qseq1;
 	String hseq,hseq1;
+	//  Ìí¼Ó 
+	String positive,positive1;
 	String midline,midline1;
 	String queryid,queryid1;
 	String chr,chr1,trait;
@@ -75,6 +77,7 @@ public class Blast extends ActionSupport{
     Map<String,String>  querytomap=new HashMap<String, String>();
     Map<String,String>  hitfrommap=new HashMap<String, String>();
     Map<String,String>  hittomap=new HashMap<String, String>();
+    Map<String,String>  positivemap=new HashMap<String, String>();
 
     public String getTrait() {
 		return trait;
@@ -312,9 +315,12 @@ public class Blast extends ActionSupport{
             				if(chr!=null&&hitnum!=null&&hspnum!=null&&totalscore!=null)
                 			{
                 				totalscoremap.put(chr+"."+hitnum+"."+hspnum,totalscore);
-                				chrmap.put(chr+"."+hitnum+"."+hspnum,chr+"."+hitnum+"."+hspnum);
+                				
+                				//chrmap.put(chr+"."+hitnum+"."+hspnum, chr+"."+hitfrom+"."+hitto);
+                				//chrmap.put(chr+"."+hitnum+"."+hspnum, chr+"."+hitnum+"."+hspnum);
+                				
                 				System.out.println("totalscoreput:"+chr+"."+hitnum+"."+hspnum+"  "+totalscore);
-                				System.out.println("chrput:"+chr+"."+hitnum+"."+hspnum+"  "+chr+"."+hitnum+"."+hspnum);
+                				//System.out.println("chrput:"+chr+"."+hitnum+"."+hspnum+"  "+chr+"."+hitnum+"."+hspnum);
                 			}
             				//System.out.println("score="+score);
             			}
@@ -366,6 +372,8 @@ public class Blast extends ActionSupport{
                 				if(chr!=null&&hitnum!=null&&hspnum!=null&&hitto!=null)
                     			{
                 					hittomap.put(chr+"."+hitnum+"."+hspnum,hitto);
+                					chrmap.put(chr+"."+hitnum+"."+hspnum, chr+"_"+hitfrom+"_"+hitto);
+                					//System.out.println("chrmap" + chrmap.get(chr+"."+hitnum+"."+hspnum));
                     				System.out.println("querytoput:"+chr+"."+hitnum+"."+hspnum+"  "+hitto);
                     			}
                 				//System.out.println("score="+score);
@@ -406,6 +414,17 @@ public class Blast extends ActionSupport{
                 				System.out.println("identityput:"+chr+"."+hitnum+"."+hspnum+"  "+identity);
                 			}
             				//System.out.println("identity="+identity);
+            			}
+            			else if(lineTxt.indexOf("<Hsp_positive>")!=-1)
+            			{
+            				positive=lineTxt.replace("<Hsp_positive>","");
+            				positive=positive.replace("</Hsp_positive>","");
+            				positive1=positive;
+            				if(chr!=null&&hitnum!=null&&hspnum!=null&&positive!=null)
+                			{
+            					positivemap.put(chr+"."+hitnum+"."+hspnum,identity);
+                				System.out.println("positiveput:"+chr+"."+hitnum+"."+hspnum+"  "+positive);
+                			}
             			}
 
             			else if(lineTxt.indexOf("<Hsp_gaps>")!=-1)
@@ -494,6 +513,18 @@ public class Blast extends ActionSupport{
 //                    		System.out.println("hitfrom="+hitfrom1);
 //                    		System.out.println("hitto="+hitto);
 
+            				//if (lineTxt.indexOf("<Hsp_hit-from>")!=-1 && lineTxt.indexOf("<Hsp_hit-to>")!=-1) {
+            				//	hitfrom=lineTxt.replace("<Hsp_hit-from>","");
+                			//	hitfrom=hitfrom.replace("</Hsp_hit-from>","");
+                			//	hitfrom1=hitfrom;
+                			//	hitto=lineTxt.replace("<Hsp_hit-to>","");
+             				 //   hitto=hitto.replace("</Hsp_hit-to>","");
+                 			//	hitto1=hitto;
+                 			//	if(chr!=null&&hitnum!=null&&hspnum!=null&&totalscore!=null&&hitfrom!=null&&hitto!=null) {
+                 			//		chrmap.put(chr+"."+hitnum+"."+hspnum, chr+"."+hitfrom+"."+hitto);
+                 			//	}
+                				
+            				//}
 
             				hitfrom=null;
             				hitto=null;
@@ -550,6 +581,9 @@ public class Blast extends ActionSupport{
 		attribute.put("score",score1);
 		attribute.put("evalue",evalue1);
 		attribute.put("identity",identity1);
+		// Ìí¼Ó
+		attribute.put("positive",positive1);
+		
 		attribute.put("gap",gap1);
 		attribute.put("qseq",qseq1);
 		attribute.put("midline",midline1);
@@ -562,6 +596,9 @@ public class Blast extends ActionSupport{
 		attribute.put("totalscoremap",totalscoremap);
 		attribute.put("chrmap",chrmap);
 		attribute.put("identitymap",identitymap);
+		// Ìí¼Ó
+		attribute.put("positivemap",positivemap);
+		
 		attribute.put("gapmap",gapmap);
 		attribute.put("queryfrommap", queryfrommap);
 		attribute.put("querytomap", querytomap);

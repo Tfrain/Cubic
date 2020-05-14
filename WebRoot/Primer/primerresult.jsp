@@ -144,6 +144,13 @@
                         String num=Integer.toString(sum);
                         sum++;
                         String[] str=formap.get(num);
+                        
+                        //Arrays.sort(str, new Comparator<String> (){
+        				//	public int compare(String o1, String o2) {
+            			//		return (o1 + o2).compareTo(o2 + o1);
+        				//	}
+    					//});
+    					
                         String snum=str[0];
                         String sseq=str[1];
                         String sstart=str[2];
@@ -250,8 +257,6 @@
                         String sany=str[7];
                         String send=str[8];
                         String slity=str[9];
-
-
                 %>
                 <tr>
 
@@ -280,6 +285,9 @@
        	striped: true,                      //是否显示行间隔色
        	pagination: true,
        	pageSize: 5,
+       	sortName: 'quality',
+		sortable: true,                     //是否启用排序
+		sortOrder: "desc",  
        	smartDisplay:false,
        	search: true,
         showExport: true,
@@ -343,6 +351,9 @@
        	striped: true,                      //是否显示行间隔色
        	pagination: true,
        	pageSize: 5,
+       	       	sortName: 'quality',
+		sortable: true,                     //是否启用排序
+		sortOrder: "desc",  
        	search: true,
        	smartDisplay:false,
         showExport: true,
@@ -406,6 +417,9 @@
        	striped: true,                      //是否显示行间隔色
        	pagination: true,
        	pageSize: 5,
+       	       	sortName: 'quality',
+		sortable: true,                     //是否启用排序
+		sortOrder: "desc",  
        	search: true,
        	smartDisplay:false,
         showExport: true,

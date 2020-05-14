@@ -13,6 +13,9 @@
 		<action name="showNewThree" class="com.magic.showNewThree">
 			<result name="success">/Step/step_newthree.jsp</result>
 		</action>
+		<action name="showNew" class="com.magic.showNew">
+			<result name="success">/Step/step_newr.jsp</result>
+		</action>
 	<!-- Draw -->	
 		<action name="findMaterial" class="com.draw.findMaterial">
 		</action>

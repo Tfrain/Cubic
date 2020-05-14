@@ -50,6 +50,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <h3>Haplotype Bin Map</h3>
                <br/>
                <h4>A IBD map was constructed of contributions from the twenty-four founders onto the 1,404 progeny lines using a hidden Markov model (HMM) with several modifications on the study of Mott et al., (2000). In the modified HMM model, the hidden states are the progenitor IBD states, and the observed states are the SNP genotypic calls, which can be used undoubtedly to other multi-parental populations.</h4>
+   			<!-- <a href="https://1479696753-my.sharepoint.com/personal/weicc_hechuan_ooo/_layouts/15/onedrive.aspx?originalPath=aHR0cHM6Ly8xNDc5Njk2NzUzLW15LnNoYXJlcG9pbnQuY29tLzpmOi9nL3BlcnNvbmFsL3dlaWNjX2hlY2h1YW5fb29vL0VuTVI3MW1IRHc5UHROSlNTWTBsUHlVQm5XclUtNUJfaVdGNDgzUEI1ZTdzc3c%5FcnRpbWU9ZUsxcFNYalIxMGc&id=%2Fpersonal%2Fweicc%5Fhechuan%5Fooo%2FDocuments%2F%E5%85%B1%E4%BA%AB%2Fcubic%2Fgermplasm" target="_blank" style="text-indent:2em; color: #fc8e00">[see germplasm list and grouping information for population]
+   		</a>
+   		 -->
+   				<span> The grouping information for population have been deposited in the figshare database 
+   				</span>
+   				
+   				<br>
+   				<span>（DOI:10.6084/m9.figshare.12220127; https://figshare.com/）
+   				</span>
         </div>
         <div class="inputs" style="width:100%;height:100%;position:relative;">
         	<form method = "post" action ="picture" style="width:1130px;height:500px;margin:0;position:relative;"onsubmit="return check();">
